@@ -1,6 +1,7 @@
 ---
-title: "{ggcirclepack} Global Human Day featurette"
-subtitle: "package is in initial stages"
+title: "#TidyTuesday 'Global Human Day' featurette"
+subtitle: "featuring [{ggcirclepack}](https://github.com/EvaMaeRey/ggcirclepack) which is experimental"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 author: ""
 output:
   xaringan::moon_reader:
@@ -36,16 +37,33 @@ read_csv(tt_url) %>%
   aes(id = as_factor(Subcategory)) + 
   geom_polygon_circlepack() + 
   coord_equal() +
-  aes(area = hoursPerDay) + 
   aes(fill = hoursPerDay) + 
-  scale_fill_viridis_c(end = .8, ) +
-  geom_text_circlepack(color = "white")+ 
+  geom_text_circlepack(color = "white") + 
+  aes(area = hoursPerDay) + 
+  scale_fill_viridis_c(end = .8) +
   scale_size_continuous(range = c(0, 6)) + 
   theme_void() + 
   theme(legend.position = "none") +
   labs(title = "Time spent in a 'Global Human Day'") + 
-  labs(subtitle = "using {packcircles} under the hood")
+  theme(text = element_text(size = 18))
 ```
 
+
+---
+
+
+### try it (highly experimental)
+
+```{r}
+remotes::install_github("EvaMaeRey/ggcirclepack")
+```
+
+### Contribute/report issues/comment
+
+- https://github.com/EvaMaeRey/ggcirclepack/issues/
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
 
 

@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 
   
 
-The goal of featurette is to feature projects.
+The goal of featurette is to feature and test out development projects. 
 
 
 

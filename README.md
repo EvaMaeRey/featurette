@@ -7,7 +7,7 @@
 
 <!-- badges: end -->
 
-The goal of featurette is to feature projects.
+The goal of featurette is to feature and test out development projects.
 
   - [2023-09-13-global\_human\_day/global\_human\_day.html](https://evamaerey.github.io/featurette/2023-09-13-global_human_day/global_human_day.html)
 
