@@ -1,0 +1,68 @@
+---
+title: "{ggcirclepack} 'Global Human Day' featurette"
+subtitle: "package is experimental"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+# remotes::install_github("EvaMaeRey/ggcirclepack")
+```
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center'}
+tt_url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv" 
+library(tidyverse)
+library(ggcirclepack)
+
+read_csv(tt_url) %>% 
+  ggplot() + 
+  aes(id = as_factor(Subcategory)) + 
+  geom_polygon_circlepack() + 
+  coord_equal() +
+  aes(fill = hoursPerDay) + 
+  geom_text_circlepack(color = "white") + 
+  aes(area = hoursPerDay) + 
+  scale_fill_viridis_c(end = .8) +
+  scale_size_continuous(range = c(0, 6)) + 
+  theme_void() + 
+  theme(legend.position = "none") +
+  labs(title = "Time spent in a 'Global Human Day'") + 
+  theme(text = element_text(size = 18))
+```
+
+
+---
+
+
+### try it (highly experimental)
+
+```{r}
+remotes::install_github("EvaMaeRey/ggcirclepack")
+```
+
+### Contribute/report issues/comment
+
+- https://github.com/EvaMaeRey/ggcirclepack/issues/
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+
