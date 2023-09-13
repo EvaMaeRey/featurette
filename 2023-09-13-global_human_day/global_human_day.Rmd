@@ -52,7 +52,7 @@ read_csv(tt_url) %>%
 ---
 
 
-### try it (highly experimental)
+### try {ggcirclepack} (experimental; subject to change)
 
 ```{r}
 remotes::install_github("EvaMaeRey/ggcirclepack")
