@@ -1,6 +1,7 @@
 ---
-title: "{ggcirclepack} 'Global Human Day' featurette"
-subtitle: "package is experimental"
+title: "#TidyTuesday 'Global Human Day' featurette"
+subtitle: "featuring [{ggcirclepack}](https://github.com/EvaMaeRey/ggcirclepack) which is experimental"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 author: ""
 output:
   xaringan::moon_reader:

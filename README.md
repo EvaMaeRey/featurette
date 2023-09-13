@@ -9,16 +9,22 @@
 
 The goal of featurette is to feature projects.
 
-  - [](https://evamaerey.github.io/featurette/)
+  - [2023-09-13-global\_human\_day/global\_human\_day.html](https://evamaerey.github.io/featurette/2023-09-13-global_human_day/global_human_day.html)
 
-<!-- end list -->
+-----
+
+# code to write new featurette
 
 ``` r
 new_experiment <- function(name){
   
-  dir.create(paste0(Sys.Date(),"-", name))
+  dir <- paste0(Sys.Date(),"-", name)
+  
+  dir.create(dir)
+  readLines("template.Rmd") |>
+    writeLines(con = paste0(dir,"/", name, ".Rmd"))
   
 } 
 
-new_experiment("spam_email")
+new_experiment("global_human_day")
 ```

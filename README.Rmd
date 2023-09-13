@@ -31,7 +31,7 @@ The goal of featurette is to feature projects.
 library(magrittr)
 webpages <- fs::dir_ls(type = "file", recurse = T, glob = "*.html") %>% rev()
        
-webpages %>%     
+webpages %>% .[2:length(webpages)] %>% 
   paste0("- [",
          . ,
          "]",
@@ -39,6 +39,9 @@ webpages %>%
   cat()     
 ```
 
+---
+
+# code to write new featurette
 
 ```{r, eval=FALSE}
 new_experiment <- function(name){
@@ -51,5 +54,7 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment("spam_email")
+new_experiment("global_human_day")
 ```
+
+
