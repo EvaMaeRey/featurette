@@ -1,5 +1,5 @@
 ---
-title: "#TidyTuesday 'Global Human Day' featurette"
+title: "#'Global Human Day' featurette"
 subtitle: "featuring [{ggcirclepack}](https://github.com/EvaMaeRey/ggcirclepack) which is experimental"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 author: ""
@@ -12,6 +12,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+    seal: false
 ---
 
 
@@ -22,12 +23,24 @@ knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
 # remotes::install_github("EvaMaeRey/ggcirclepack")
 ```
 
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJhbGxvb25zfGVufDB8fDB8fHww)
+background-size: cover
+# .Large[#'Global Human Day' featurette]
+## .small[featuring [{ggcirclepack}](https://github.com/EvaMaeRey/ggcirclepack) which is experimental]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Gaelle Marcel, Upsplash]
+???
+Title 
+
+---
+
 
 `r flipbookr::chunk_reveal("feature", widths = c(1,1))`
 
 ---
 
-```{r feature, echo = F, out.width="70%", fig.align='center'}
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+# tidytuesday data
 tt_url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv" 
 library(tidyverse)
 library(ggcirclepack)
@@ -35,10 +48,10 @@ library(ggcirclepack)
 read_csv(tt_url) %>% 
   ggplot() + 
   aes(id = as_factor(Subcategory)) + 
-  geom_polygon_circlepack() + 
+  geom_circlepack() + 
   coord_equal() +
   aes(fill = hoursPerDay) + 
-  geom_text_circlepack(color = "white") + 
+  geom_circlepack_text(color = "white") + 
   aes(area = hoursPerDay) + 
   scale_fill_viridis_c(end = .8) +
   scale_size_continuous(range = c(0, 6)) + 
@@ -51,19 +64,28 @@ read_csv(tt_url) %>%
 
 ---
 
+### Contribute
 
-### try it (highly experimental)
+- https://github.com/EvaMaeRey/ggcirclepack
 
-```{r}
-remotes::install_github("EvaMaeRey/ggcirclepack")
-```
+---
 
-### Contribute/report issues/comment
 
-- https://github.com/EvaMaeRey/ggcirclepack/issues/
 
 ### Check out {packcircles} which does the computation in ggcirclepack
 
 - https://github.com/mbedward/packcircles
 
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion:  https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
 

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>#‘Global Human Day’ featurette</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <meta name="date" content="2023-10-26" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1479118013749-9f79d55a28d0?auto=format&amp;fit=crop&amp;q=60&amp;w=500&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBpYW5vfGVufDB8fDB8fHww)
+background-size: cover
+# .Large[#'tswift keys' featurette]
+## .small[featuring [{ggbarlabs}](https://github.com/everyday_analytics/ggbarlabs) which is experimental]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Markus Gjengaar, Upsplash]
+???
+Title 
+
+---
+
+
+# What keys does Taylor Swift write in the most?
+
+---
+
+--
+
+**key**: The estimated overall key of the track. Integers map to pitches using standard Pitch Class notation . E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on. If no key was detected, the value is -1.
+
+
+---
+
+
+```r
+library(tidyverse)
+taylor_album_songs &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-10-17/taylor_album_songs.csv')
+```
+
+---
+class: inverse, middle, center
+
+# featured: ggbarlabs:::geom_barlab_count_percent
+
+
+---
+
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+*taylor_album_songs
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 194 × 29
+##    album_name   ep    album_release track_number track_name     artist featuring
+##    &lt;chr&gt;        &lt;lgl&gt; &lt;date&gt;               &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;    
+##  1 Taylor Swift FALSE 2006-10-24               1 Tim McGraw     Taylo… &lt;NA&gt;     
+##  2 Taylor Swift FALSE 2006-10-24               2 Picture To Bu… Taylo… &lt;NA&gt;     
+##  3 Taylor Swift FALSE 2006-10-24               3 Teardrops On … Taylo… &lt;NA&gt;     
+##  4 Taylor Swift FALSE 2006-10-24               4 A Place In Th… Taylo… &lt;NA&gt;     
+##  5 Taylor Swift FALSE 2006-10-24               5 Cold As You    Taylo… &lt;NA&gt;     
+##  6 Taylor Swift FALSE 2006-10-24               6 The Outside    Taylo… &lt;NA&gt;     
+##  7 Taylor Swift FALSE 2006-10-24               7 Tied Together… Taylo… &lt;NA&gt;     
+##  8 Taylor Swift FALSE 2006-10-24               8 Stay Beautiful Taylo… &lt;NA&gt;     
+##  9 Taylor Swift FALSE 2006-10-24               9 Should've Sai… Taylo… &lt;NA&gt;     
+## 10 Taylor Swift FALSE 2006-10-24              10 Mary's Song (… Taylo… &lt;NA&gt;     
+## # ℹ 184 more rows
+## # ℹ 22 more variables: bonus_track &lt;lgl&gt;, promotional_release &lt;date&gt;,
+## #   single_release &lt;date&gt;, track_release &lt;date&gt;, danceability &lt;dbl&gt;,
+## #   energy &lt;dbl&gt;, key &lt;dbl&gt;, loudness &lt;dbl&gt;, mode &lt;dbl&gt;, speechiness &lt;dbl&gt;,
+## #   acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;, liveness &lt;dbl&gt;, valence &lt;dbl&gt;,
+## #   tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;, duration_ms &lt;dbl&gt;, explicit &lt;lgl&gt;,
+## #   key_name &lt;chr&gt;, mode_name &lt;chr&gt;, key_mode &lt;chr&gt;, lyrics &lt;lgl&gt;
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+* mutate(key_name = ifelse(mode, key_name, tolower(key_name)))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 194 × 29
+##    album_name   ep    album_release track_number track_name     artist featuring
+##    &lt;chr&gt;        &lt;lgl&gt; &lt;date&gt;               &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;    
+##  1 Taylor Swift FALSE 2006-10-24               1 Tim McGraw     Taylo… &lt;NA&gt;     
+##  2 Taylor Swift FALSE 2006-10-24               2 Picture To Bu… Taylo… &lt;NA&gt;     
+##  3 Taylor Swift FALSE 2006-10-24               3 Teardrops On … Taylo… &lt;NA&gt;     
+##  4 Taylor Swift FALSE 2006-10-24               4 A Place In Th… Taylo… &lt;NA&gt;     
+##  5 Taylor Swift FALSE 2006-10-24               5 Cold As You    Taylo… &lt;NA&gt;     
+##  6 Taylor Swift FALSE 2006-10-24               6 The Outside    Taylo… &lt;NA&gt;     
+##  7 Taylor Swift FALSE 2006-10-24               7 Tied Together… Taylo… &lt;NA&gt;     
+##  8 Taylor Swift FALSE 2006-10-24               8 Stay Beautiful Taylo… &lt;NA&gt;     
+##  9 Taylor Swift FALSE 2006-10-24               9 Should've Sai… Taylo… &lt;NA&gt;     
+## 10 Taylor Swift FALSE 2006-10-24              10 Mary's Song (… Taylo… &lt;NA&gt;     
+## # ℹ 184 more rows
+## # ℹ 22 more variables: bonus_track &lt;lgl&gt;, promotional_release &lt;date&gt;,
+## #   single_release &lt;date&gt;, track_release &lt;date&gt;, danceability &lt;dbl&gt;,
+## #   energy &lt;dbl&gt;, key &lt;dbl&gt;, loudness &lt;dbl&gt;, mode &lt;dbl&gt;, speechiness &lt;dbl&gt;,
+## #   acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;, liveness &lt;dbl&gt;, valence &lt;dbl&gt;,
+## #   tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;, duration_ms &lt;dbl&gt;, explicit &lt;lgl&gt;,
+## #   key_name &lt;chr&gt;, mode_name &lt;chr&gt;, key_mode &lt;chr&gt;, lyrics &lt;lgl&gt;
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+* filter(!is.na(key_mode))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 191 × 29
+##    album_name   ep    album_release track_number track_name     artist featuring
+##    &lt;chr&gt;        &lt;lgl&gt; &lt;date&gt;               &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;    
+##  1 Taylor Swift FALSE 2006-10-24               1 Tim McGraw     Taylo… &lt;NA&gt;     
+##  2 Taylor Swift FALSE 2006-10-24               2 Picture To Bu… Taylo… &lt;NA&gt;     
+##  3 Taylor Swift FALSE 2006-10-24               3 Teardrops On … Taylo… &lt;NA&gt;     
+##  4 Taylor Swift FALSE 2006-10-24               4 A Place In Th… Taylo… &lt;NA&gt;     
+##  5 Taylor Swift FALSE 2006-10-24               5 Cold As You    Taylo… &lt;NA&gt;     
+##  6 Taylor Swift FALSE 2006-10-24               6 The Outside    Taylo… &lt;NA&gt;     
+##  7 Taylor Swift FALSE 2006-10-24               7 Tied Together… Taylo… &lt;NA&gt;     
+##  8 Taylor Swift FALSE 2006-10-24               8 Stay Beautiful Taylo… &lt;NA&gt;     
+##  9 Taylor Swift FALSE 2006-10-24               9 Should've Sai… Taylo… &lt;NA&gt;     
+## 10 Taylor Swift FALSE 2006-10-24              10 Mary's Song (… Taylo… &lt;NA&gt;     
+## # ℹ 181 more rows
+## # ℹ 22 more variables: bonus_track &lt;lgl&gt;, promotional_release &lt;date&gt;,
+## #   single_release &lt;date&gt;, track_release &lt;date&gt;, danceability &lt;dbl&gt;,
+## #   energy &lt;dbl&gt;, key &lt;dbl&gt;, loudness &lt;dbl&gt;, mode &lt;dbl&gt;, speechiness &lt;dbl&gt;,
+## #   acousticness &lt;dbl&gt;, instrumentalness &lt;dbl&gt;, liveness &lt;dbl&gt;, valence &lt;dbl&gt;,
+## #   tempo &lt;dbl&gt;, time_signature &lt;dbl&gt;, duration_ms &lt;dbl&gt;, explicit &lt;lgl&gt;,
+## #   key_name &lt;chr&gt;, mode_name &lt;chr&gt;, key_mode &lt;chr&gt;, lyrics &lt;lgl&gt;
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+* ggplot()
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_04_output-1.png" width="80%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+  ggplot() +
+* aes(x = fct_infreq(key_name))
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_05_output-1.png" width="80%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+  ggplot() +
+  aes(x = fct_infreq(key_name)) +
+* geom_bar(aes(fill = ifelse(mode, "major", "minor")),
+*          alpha = .8)
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_06_output-1.png" width="80%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+  ggplot() +
+  aes(x = fct_infreq(key_name)) +
+  geom_bar(aes(fill = ifelse(mode, "major", "minor")),
+           alpha = .8) +
+* ggbarlabs::geom_barlab_count_percent(size = 3)
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_07_output-1.png" width="80%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+  ggplot() +
+  aes(x = fct_infreq(key_name)) +
+  geom_bar(aes(fill = ifelse(mode, "major", "minor")),
+           alpha = .8) +
+  ggbarlabs::geom_barlab_count_percent(size = 3) +
+* labs(title = "What Keys are Taylor Swift's Songs in?",
+*      caption = "In #tidytuesday's 2023-10-17/taylor_album_songs.csv",
+*      subtitle = "Number of Songs in keys from album songs by key")
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_08_output-1.png" width="80%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+  ggplot() +
+  aes(x = fct_infreq(key_name)) +
+  geom_bar(aes(fill = ifelse(mode, "major", "minor")),
+           alpha = .8) +
+  ggbarlabs::geom_barlab_count_percent(size = 3) +
+  labs(title = "What Keys are Taylor Swift's Songs in?",
+       caption = "In #tidytuesday's 2023-10-17/taylor_album_songs.csv",
+       subtitle = "Number of Songs in keys from album songs by key") +
+* ggbarlabs::defaults_ggbarlabs()
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_09_output-1.png" width="80%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+  ggplot() +
+  aes(x = fct_infreq(key_name)) +
+  geom_bar(aes(fill = ifelse(mode, "major", "minor")),
+           alpha = .8) +
+  ggbarlabs::geom_barlab_count_percent(size = 3) +
+  labs(title = "What Keys are Taylor Swift's Songs in?",
+       caption = "In #tidytuesday's 2023-10-17/taylor_album_songs.csv",
+       subtitle = "Number of Songs in keys from album songs by key") +
+  ggbarlabs::defaults_ggbarlabs() +
+* labs(x = NULL)
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_10_output-1.png" width="80%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+  ggplot() +
+  aes(x = fct_infreq(key_name)) +
+  geom_bar(aes(fill = ifelse(mode, "major", "minor")),
+           alpha = .8) +
+  ggbarlabs::geom_barlab_count_percent(size = 3) +
+  labs(title = "What Keys are Taylor Swift's Songs in?",
+       caption = "In #tidytuesday's 2023-10-17/taylor_album_songs.csv",
+       subtitle = "Number of Songs in keys from album songs by key") +
+  ggbarlabs::defaults_ggbarlabs() +
+  labs(x = NULL) +
+* scale_fill_manual(values = c("midnightblue", "magenta"))
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_11_output-1.png" width="80%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+taylor_album_songs %&gt;%
+  mutate(key_name = ifelse(mode, key_name, tolower(key_name))) %&gt;%
+  filter(!is.na(key_mode)) %&gt;%
+  ggplot() +
+  aes(x = fct_infreq(key_name)) +
+  geom_bar(aes(fill = ifelse(mode, "major", "minor")),
+           alpha = .8) +
+  ggbarlabs::geom_barlab_count_percent(size = 3) +
+  labs(title = "What Keys are Taylor Swift's Songs in?",
+       caption = "In #tidytuesday's 2023-10-17/taylor_album_songs.csv",
+       subtitle = "Number of Songs in keys from album songs by key") +
+  ggbarlabs::defaults_ggbarlabs() +
+  labs(x = NULL) +
+  scale_fill_manual(values = c("midnightblue", "magenta")) +
+* labs(fill = NULL)
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="tswift-keys_files/figure-html/feature_auto_12_output-1.png" width="80%" /&gt;
+]
+
+&lt;style&gt;
+.panel1-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-feature-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+&lt;img src="tswift-keys_files/figure-html/feature-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion:  https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

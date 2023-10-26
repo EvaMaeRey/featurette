@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>{ggcirclepack} Global Human Day featurette</title>
+    <title>#‘Global Human Day’ featurette</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
+    <meta name="date" content="2023-10-25" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
-class: center, middle, inverse, title-slide
 
-.title[
-# {ggcirclepack} Global Human Day featurette
-]
-.subtitle[
-## package is in initial stages
-]
+
+
+
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&amp;fit=crop&amp;q=60&amp;w=500&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJhbGxvb25zfGVufDB8fDB8fHww)
+background-size: cover
+# .Large[#'Global Human Day' featurette]
+## .small[featuring [{ggcirclepack}](https://github.com/EvaMaeRey/ggcirclepack) which is experimental]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Gaelle Marcel, Upsplash]
+???
+Title 
 
 ---
-
-
-
-
-
-
 
 
 count: false
@@ -34,6 +36,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 *tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 ```
 ]
@@ -49,6 +52,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 *library(tidyverse)
 ```
@@ -65,6 +69,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 *library(ggcirclepack)
@@ -82,6 +87,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -106,7 +112,7 @@ library(ggcirclepack)
 ##  8 Food processing                 0.07        0.01
 ##  9 Health care                     0.2         0.2 
 ## 10 Human transportation            0.9         0.22
-## # … with 14 more rows
+## # ℹ 14 more rows
 ```
 ]
 
@@ -117,6 +123,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -137,6 +144,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -158,6 +166,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -165,7 +174,7 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-* geom_polygon_circlepack()
+* geom_circlepack()
 ```
 ]
  
@@ -180,6 +189,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -187,7 +197,7 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
 * coord_equal()
 ```
 ]
@@ -203,6 +213,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -210,9 +221,9 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-* aes(area = hoursPerDay)
+* aes(fill = hoursPerDay)
 ```
 ]
  
@@ -227,6 +238,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -234,10 +246,10 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-  aes(area = hoursPerDay) +
-* aes(fill = hoursPerDay)
+  aes(fill = hoursPerDay) +
+* geom_circlepack_text(color = "white")
 ```
 ]
  
@@ -252,6 +264,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -259,11 +272,11 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-  aes(area = hoursPerDay) +
   aes(fill = hoursPerDay) +
-* scale_fill_viridis_c(end = .8, )
+  geom_circlepack_text(color = "white") +
+* aes(area = hoursPerDay)
 ```
 ]
  
@@ -278,6 +291,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -285,12 +299,12 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-  aes(area = hoursPerDay) +
   aes(fill = hoursPerDay) +
-  scale_fill_viridis_c(end = .8, ) +
-* geom_text_circlepack(color = "white")
+  geom_circlepack_text(color = "white") +
+  aes(area = hoursPerDay) +
+* scale_fill_viridis_c(end = .8)
 ```
 ]
  
@@ -305,6 +319,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -312,12 +327,12 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-  aes(area = hoursPerDay) +
   aes(fill = hoursPerDay) +
-  scale_fill_viridis_c(end = .8, ) +
-  geom_text_circlepack(color = "white")+
+  geom_circlepack_text(color = "white") +
+  aes(area = hoursPerDay) +
+  scale_fill_viridis_c(end = .8) +
 * scale_size_continuous(range = c(0, 6))
 ```
 ]
@@ -333,6 +348,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -340,12 +356,12 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-  aes(area = hoursPerDay) +
   aes(fill = hoursPerDay) +
-  scale_fill_viridis_c(end = .8, ) +
-  geom_text_circlepack(color = "white")+
+  geom_circlepack_text(color = "white") +
+  aes(area = hoursPerDay) +
+  scale_fill_viridis_c(end = .8) +
   scale_size_continuous(range = c(0, 6)) +
 * theme_void()
 ```
@@ -362,6 +378,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -369,12 +386,12 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-  aes(area = hoursPerDay) +
   aes(fill = hoursPerDay) +
-  scale_fill_viridis_c(end = .8, ) +
-  geom_text_circlepack(color = "white")+
+  geom_circlepack_text(color = "white") +
+  aes(area = hoursPerDay) +
+  scale_fill_viridis_c(end = .8) +
   scale_size_continuous(range = c(0, 6)) +
   theme_void() +
 * theme(legend.position = "none")
@@ -392,6 +409,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -399,12 +417,12 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-  aes(area = hoursPerDay) +
   aes(fill = hoursPerDay) +
-  scale_fill_viridis_c(end = .8, ) +
-  geom_text_circlepack(color = "white")+
+  geom_circlepack_text(color = "white") +
+  aes(area = hoursPerDay) +
+  scale_fill_viridis_c(end = .8) +
   scale_size_continuous(range = c(0, 6)) +
   theme_void() +
   theme(legend.position = "none") +
@@ -423,6 +441,7 @@ count: false
 .panel1-feature-auto[
 
 ```r
+# tidytuesday data
 tt_url &lt;- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-12/global_human_day.csv"
 library(tidyverse)
 library(ggcirclepack)
@@ -430,17 +449,17 @@ library(ggcirclepack)
 read_csv(tt_url) %&gt;%
   ggplot() +
   aes(id = as_factor(Subcategory)) +
-  geom_polygon_circlepack() +
+  geom_circlepack() +
   coord_equal() +
-  aes(area = hoursPerDay) +
   aes(fill = hoursPerDay) +
-  scale_fill_viridis_c(end = .8, ) +
-  geom_text_circlepack(color = "white")+
+  geom_circlepack_text(color = "white") +
+  aes(area = hoursPerDay) +
+  scale_fill_viridis_c(end = .8) +
   scale_size_continuous(range = c(0, 6)) +
   theme_void() +
   theme(legend.position = "none") +
   labs(title = "Time spent in a 'Global Human Day'") +
-* labs(subtitle = "using {packcircles} under the hood")
+* theme(text = element_text(size = 18))
 ```
 ]
  
@@ -479,7 +498,35 @@ read_csv(tt_url) %&gt;%
 
 ---
 
-&lt;img src="template_files/figure-html/feature-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion:  https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
