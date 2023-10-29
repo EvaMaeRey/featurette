@@ -1,0 +1,95 @@
+---
+title: "#'ggplot2::diamonds' featurette"
+subtitle: "featuring [{ggcirclepack}](https://github.com/EvaMaeRey/ggcirclepack) which is experimental"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+# remotes::install_github("EvaMaeRey/ggcirclepack")
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1631013636761-c533d81e96a4?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZGlhbW9uZHN8ZW58MHx8MHx8fDA%3D)
+background-size: cover
+# .Large[# ggplot2::diamonds bar chart featurette]
+## .small[featuring ggplot2::stat_count()]
+#### .tiny[Gina Reynolds | 2023-10-28 |Image credit: Tahlia Doyle, Upsplash]
+???
+Title 
+
+
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1.5,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+library(tidyverse)
+ggplot2::diamonds %>%
+  ggplot() +
+  aes(y = cut) +
+  geom_bar(width = .5, 
+           color = alpha("black", 0 )) + # 
+  aes(fill = after_stat(count == max(count))) +
+  scale_fill_manual(values = 
+                      c("darkgrey", "midnightblue")) + 
+  stat_count(geom = "text",
+             aes(label = after_stat(count)),
+             size = 6) +
+  aes(hjust = 
+        after_stat(
+          ifelse(count/sum(count) > .05, 1.2, -.2))) + 
+  aes(color = after_stat(count/sum(count) > .05)) +
+  scale_color_manual(values = c("grey25",
+                                "grey95")) +
+  stat_count(geom = "text",
+             aes(label = cut),
+             x = 0, 
+             color = "black", 
+             size = 7,
+             hjust = 0, 
+             vjust = -2.25) +
+  theme_void() +
+  theme(legend.position = "none") 
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/everyday-analytics/ggbarlabs
+
+
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+

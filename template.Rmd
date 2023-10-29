@@ -81,7 +81,7 @@ read_csv(tt_url) %>%
 ### Check out flipbookr, used to build this featurette
 
 - https://github.com/EvaMaeRey/flipbookr
-- discussion:  https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
 
 ---
 
