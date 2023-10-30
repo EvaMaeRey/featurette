@@ -24,11 +24,11 @@ knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, out.width = "80%")
 ```
 
 class: inverse, left, bottom
-background-image: url(https://images.unsplash.com/photo-1479118013749-9f79d55a28d0?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHBpYW5vfGVufDB8fDB8fHww)
+background-image: url(https://images.unsplash.com/photo-1601312378427-822b2b41da35?auto=format&fit=crop&q=80&w=1548&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
 # .Large[#'tswift keys' featurette]
 ## .small[featuring [{ggbarlabs}](https://github.com/everyday_analytics/ggbarlabs) which is experimental]
-#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Markus Gjengaar, Upsplash]
+#### .tiny[Gina Reynolds | 2023-10-26 |Image credit: David Pisnoy, Upsplash]
 ???
 Title 
 
@@ -69,15 +69,15 @@ taylor_album_songs %>%
   filter(!is.na(key_mode)) %>% 
   ggplot() + 
   aes(x = fct_infreq(key_name)) + 
-  geom_bar(aes(fill = ifelse(mode, "major", "minor")), 
-           alpha = .8) + 
+  geom_bar(alpha = .8) + 
+  aes(fill = ifelse(mode, "major", "minor")) +
+  scale_fill_manual(values = c("midnightblue", "magenta")) + 
   ggbarlabs::geom_barlab_count_percent(size = 3) +
   labs(title = "What Keys are Taylor Swift's Songs in?",
        caption = "In #tidytuesday's 2023-10-17/taylor_album_songs.csv",
        subtitle = "Number of Songs in keys from album songs by key") +
   ggbarlabs::defaults_ggbarlabs() + 
   labs(x = NULL) + 
-  scale_fill_manual(values = c("midnightblue", "magenta")) + 
   labs(fill = NULL)
 ```
 
@@ -88,15 +88,9 @@ taylor_album_songs %>%
 
 ### Contribute
 
-- https://github.com/EvaMaeRey/ggcirclepack
-
----
+- https://github.com/everyday-analytics/ggbarlabs
 
 
-
-### Check out {packcircles} which does the computation in ggcirclepack
-
-- https://github.com/mbedward/packcircles
 
 ---
 

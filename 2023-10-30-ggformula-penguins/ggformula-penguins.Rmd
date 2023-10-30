@@ -1,0 +1,77 @@
+---
+title: "featurette"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+# remotes::install_github("EvaMaeRey/ggcirclepack")
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1598439210625-5067c578f3f6?auto=format&fit=crop&q=80&w=1472&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[#'penguins ggformula' featurette]
+## .small[featuring [Project MOSAIC's {ggformula}](https://github.com/ProjectMOSAIC/ggformula)]
+#### .tiny[Gina Reynolds | 2023-10-30 |Image credit: Cornelius Ventures, Upsplash]
+???
+Title 
+
+
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+library(ggformula)
+palmerpenguins::penguins %>% 
+  set_variable_labels(
+    bill_length_mm = "bill length (mm)",
+    bill_depth_mm = "bill depth (mm)"
+  ) %>%
+  gf_jitter(bill_length_mm ~ bill_depth_mm | # y x
+            island ~ sex, # row col facets
+            color = ~ species, 
+            width = 0.05, 
+            height = 0.05, 
+            size = 0.5, 
+            alpha = 0.6) %>%
+  gf_density2d(alpha = 0.3) %>% 
+  gf_labs(title = "Palmer Penguins",
+          caption = "Data available in palmerpenguins package"
+  ) %>%
+  gf_refine(scale_color_brewer(type = "qual")) %>%
+  gf_theme(theme_bw()) %>%
+  gf_theme(
+    legend.position = 'top',
+    text = element_text(colour = "navy", 
+                        face = "italic")
+  )
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/ProjectMOSAIC/ggformula
+
+---

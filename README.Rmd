@@ -54,7 +54,7 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment("ggformula")
+new_experiment("stat-smooth-mtcars")
 ```
 
 
