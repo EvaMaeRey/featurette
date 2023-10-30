@@ -9,6 +9,7 @@
 
 The goal of featurette is to feature and test out development projects.
 
+  - [2023-10-30-ggformula/ggformula.html](https://evamaerey.github.io/featurette/2023-10-30-ggformula/ggformula.html)
   - [2023-10-28-diamonds-barlabs/diamonds-barlabs.html](https://evamaerey.github.io/featurette/2023-10-28-diamonds-barlabs/diamonds-barlabs.html)
   - [2023-10-26-tswift-keys/tswift-keys.html](https://evamaerey.github.io/featurette/2023-10-26-tswift-keys/tswift-keys.html)
   - [2023-10-26-horror-articles/horror-articles.html](https://evamaerey.github.io/featurette/2023-10-26-horror-articles/horror-articles.html)
@@ -30,5 +31,5 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment("diamonds-barlabs")
+new_experiment("ggformula")
 ```
