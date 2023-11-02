@@ -9,6 +9,7 @@
 
 The goal of featurette is to feature and test out development projects.
 
+  - [2023-11-02-help-quote-mtcars/help-quote-mtcars.html](https://evamaerey.github.io/featurette/2023-11-02-help-quote-mtcars/help-quote-mtcars.html)
   - [2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.html](https://evamaerey.github.io/featurette/2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.html)
   - [2023-10-30-ggformula-penguins/ggformula-penguins.html](https://evamaerey.github.io/featurette/2023-10-30-ggformula-penguins/ggformula-penguins.html)
   - [2023-10-28-diamonds-barlabs/diamonds-barlabs.html](https://evamaerey.github.io/featurette/2023-10-28-diamonds-barlabs/diamonds-barlabs.html)
@@ -31,5 +32,5 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment("stat-smooth-mtcars")
+new_experiment("help-quote-mtcars")
 ```

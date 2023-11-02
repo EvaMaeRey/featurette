@@ -40,7 +40,7 @@ webpages %>% .[2:length(webpages)] %>%
 ```
 
 ---
-
+ 
 # code to write new featurette
 
 ```{r, eval=FALSE}
@@ -54,7 +54,7 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment("stat-smooth-mtcars")
+new_experiment("help-quote-mtcars")
 ```
 
 
