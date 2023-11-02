@@ -56,6 +56,9 @@ pandoc::pandoc_convert(file = tmp,
   md
 ```
 
+---
+
+Also: possible alternative route https://yihui.org/rd2roxygen/
 
 ---
 
