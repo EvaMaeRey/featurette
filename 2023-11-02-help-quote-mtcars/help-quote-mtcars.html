@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>featurette</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <meta name="date" content="2023-11-02" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1502740479091-635887520276?auto=format&amp;fit=crop&amp;q=80&amp;w=1469&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# A featurette: How do you retrieve R help file as text?]
+## .small[Featuring baptnz@vis.social's R help retrieval]
+#### .tiny[Gina Reynolds | 2023-11-02 |Image credit: Zhen H, Upsplash]
+???
+Title 
+
+---
+
+
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+# tidytuesday data
+*library(magrittr)
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+# tidytuesday data
+library(magrittr)
+
+*tmp &lt;- tempfile()
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+# tidytuesday data
+library(magrittr)
+
+tmp &lt;- tempfile()
+
+*help(mtcars, package = datasets)
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+# tidytuesday data
+library(magrittr)
+
+tmp &lt;- tempfile()
+
+help(mtcars, package = datasets) %&gt;%
+* as.character()
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## [1] "/Library/Frameworks/R.framework/Resources/library/datasets/help/mtcars"
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+# tidytuesday data
+library(magrittr)
+
+tmp &lt;- tempfile()
+
+help(mtcars, package = datasets) %&gt;%
+  as.character() %&gt;%
+* utils:::.getHelpFile()
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## \title{Motor Trend Car Road Tests}\name{mtcars}\alias{mtcars}\keyword{datasets}\description{
+##   The data was extracted from the 1974 \emph{Motor Trend} US magazine,
+##   and comprises fuel consumption and 10 aspects of
+##   automobile design and performance for 32 automobiles (1973--74
+##   models).
+## }\usage{mtcars}\format{
+##   A data frame with 32 observations on 11 (numeric) variables.
+##   \tabular{rll}{
+##     [, 1] \tab mpg  \tab Miles/(US) gallon \cr
+##     [, 2] \tab cyl  \tab Number of cylinders \cr
+##     [, 3] \tab disp \tab Displacement (cu.in.) \cr
+##     [, 4] \tab hp   \tab Gross horsepower \cr
+##     [, 5] \tab drat \tab Rear axle ratio \cr
+##     [, 6] \tab wt   \tab Weight (1000 lbs) \cr
+##     [, 7] \tab qsec \tab 1/4 mile time \cr
+##     [, 8] \tab vs   \tab Engine (0 = V-shaped, 1 = straight) \cr
+##     [, 9] \tab am   \tab Transmission (0 = automatic, 1 = manual) \cr
+##     [,10] \tab gear \tab Number of forward gears \cr
+##     [,11] \tab carb \tab Number of carburetors
+##   }
+## }\note{
+##   Henderson and Velleman (1981) comment in a footnote to Table 1:
+##   \sQuote{Hocking [original transcriber]'s noncrucial coding of the
+##     Mazda's rotary engine as a straight six-cylinder engine and the
+##     Porsche's flat engine as a V engine, as well as the inclusion of the
+##     diesel Mercedes 240D, have been retained to enable direct comparisons
+##     to be made with previous analyses.}
+## }\source{
+##   Henderson and Velleman (1981),
+##   Building multiple regression models interactively.
+##   \emph{Biometrics}, \bold{37}, 391--411.
+## }\examples{
+## require(graphics)
+## pairs(mtcars, main = "mtcars data", gap = 1/4)
+## coplot(mpg ~ disp | as.factor(cyl), data = mtcars,
+##        panel = panel.smooth, rows = 1)
+## ## possibly more meaningful, e.g., for summary() or bivariate plots:
+## mtcars2 &lt;- within(mtcars, {
+##    vs &lt;- factor(vs, labels = c("V", "S"))
+##    am &lt;- factor(am, labels = c("automatic", "manual"))
+##    cyl  &lt;- ordered(cyl)
+##    gear &lt;- ordered(gear)
+##    carb &lt;- ordered(carb)
+## })
+## summary(mtcars2)
+## }
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+# tidytuesday data
+library(magrittr)
+
+tmp &lt;- tempfile()
+
+help(mtcars, package = datasets) %&gt;%
+  as.character() %&gt;%
+  utils:::.getHelpFile() %&gt;%
+* tools:::Rd2latex(Rd = ., out = tmp)
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+# tidytuesday data
+library(magrittr)
+
+tmp &lt;- tempfile()
+
+help(mtcars, package = datasets) %&gt;%
+  as.character() %&gt;%
+  utils:::.getHelpFile() %&gt;%
+  tools:::Rd2latex(Rd = ., out = tmp)
+
+*pandoc::pandoc_convert(file = tmp,
+*                      from = "latex",
+*                      to = 'markdown')
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## The data was extracted from the 1974 *Motor Trend* US magazine, and
+## comprises fuel consumption and 10 aspects of automobile design and
+## performance for 32 automobiles (1973--74 models).
+## 
+##     mtcars
+## 
+## A data frame with 32 observations on 11 (numeric) variables.
+## 
+## Henderson and Velleman (1981) comment in a footnote to Table 1: 'Hocking
+## \[original transcriber\]'s noncrucial coding of the Mazda's rotary
+## engine as a straight six-cylinder engine and the Porsche's flat engine
+## as a V engine, as well as the inclusion of the diesel Mercedes 240D,
+## have been retained to enable direct comparisons to be made with previous
+## analyses.'
+## 
+## Henderson and Velleman (1981), Building multiple regression models
+## interactively. *Biometrics*, , 391--411.
+## 
+## require(graphics) pairs(mtcars, main = \"mtcars data\", gap = 1/4)
+## coplot(mpg   disp \| as.factor(cyl), data = mtcars, panel =
+## panel.smooth, rows = 1) \#\# possibly more meaningful, e.g., for
+## summary() or bivariate plots: mtcars2 \&lt;- within(mtcars, vs \&lt;-
+## factor(vs, labels = c(\"V\", \"S\")) am \&lt;- factor(am, labels =
+## c(\"automatic\", \"manual\")) cyl \&lt;- ordered(cyl) gear \&lt;-
+## ordered(gear) carb \&lt;- ordered(carb) ) summary(mtcars2)
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+# tidytuesday data
+library(magrittr)
+
+tmp &lt;- tempfile()
+
+help(mtcars, package = datasets) %&gt;%
+  as.character() %&gt;%
+  utils:::.getHelpFile() %&gt;%
+  tools:::Rd2latex(Rd = ., out = tmp)
+
+pandoc::pandoc_convert(file = tmp,
+                       from = "latex",
+                       to = 'markdown') -&gt;
+* md
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+&lt;style&gt;
+.panel1-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-feature-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
