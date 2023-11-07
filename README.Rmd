@@ -31,16 +31,12 @@ Repo: https://github.com/EvaMaeRey/featurette
 
 ```{r, results='asis', echo = F}
 library(magrittr)
-    
-
-
-
-
+  
 webpages <- fs::dir_ls(type = "file", recurse = T, glob = "*.html|*.pdf") %>% rev()
 file_name_wo_extension <- webpages %>% stringr::str_remove(".html|.pdf")
 
 webpages %>%    
-  paste0("1. [",
+  paste0("0. [",
          . ,
          "]",
          "(https://evamaerey.github.io/featurette/", ., 
