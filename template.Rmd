@@ -20,7 +20,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
-# remotes::install_github("EvaMaeRey/ggcirclepack")
+options(tidyverse.quiet = TRUE)
 ```
 
 class: inverse, left, bottom
