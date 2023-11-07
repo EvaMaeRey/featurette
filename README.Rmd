@@ -23,19 +23,30 @@ knitr::opts_chunk$set(
 
   
 
-The goal of featurette is to feature and test out development projects. 
+The goal of featurette is to feature and test out projects and packages! 
+
+Repo: https://github.com/EvaMaeRey/featurette
 
 
 
 ```{r, results='asis', echo = F}
 library(magrittr)
-webpages <- fs::dir_ls(type = "file", recurse = T, glob = "*.html") %>% rev()
-       
-webpages %>% .[2:length(webpages)] %>% 
-  paste0("- [",
+    
+
+
+
+
+webpages <- fs::dir_ls(type = "file", recurse = T, glob = "*.html|*.pdf") %>% rev()
+file_name_wo_extension <- webpages %>% stringr::str_remove(".html|.pdf")
+
+webpages %>%    
+  paste0("1. [",
          . ,
          "]",
-         "(https://evamaerey.github.io/featurette/", ., ")\n") %>% 
+         "(https://evamaerey.github.io/featurette/", ., 
+         ") **[source](https://github.com/evamaerey/featurette/blob/master/",
+         file_name_wo_extension,".Rmd",
+         ")**\n") %>% 
   cat()     
 ```
 
