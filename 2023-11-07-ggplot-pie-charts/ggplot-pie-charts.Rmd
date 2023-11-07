@@ -51,8 +51,11 @@ ggplot() +
   stat_count(position = "fill", 
              geom = "text", 
              color = "white",
-             aes(label = after_stat(count*100/sum(count)) |> 
-                   round(1) |> paste0("%"))) ->
+             size = 8,
+             aes(label = 
+                   after_stat(count*100/sum(count)) |> 
+                      round(1) |>   
+                      paste0("%"))) ->
   classic_pie
 ```
 
@@ -65,6 +68,7 @@ classic_pie +
     stat_count(position = "fill", 
              geom = "text", 
              color = "white",
+             size = 8,
              aes(label = 
                    after_stat(count*100/
                                 sum(count)) |> 
@@ -136,4 +140,6 @@ tidytitanic %>%
 ### Check out more featurettes
 
 - https://EvaMaeRey.github.io/featurette
+
+
 

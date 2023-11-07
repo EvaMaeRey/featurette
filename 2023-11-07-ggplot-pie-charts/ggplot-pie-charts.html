@@ -22,7 +22,7 @@ class: inverse, left, bottom
 background-image: url(https://images.unsplash.com/photo-1603779702200-95b2785f2083?q=80&amp;w=1587&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
 # .Large[# Making pies in ggplot2]
-## .small[featuring `coord_polar(theta = "y")` and `geom_bar(position = "fill")`]]
+## .small[featuring `coord_polar(theta = "y")` and `geom_bar(position = "fill")`]
 #### .tiny[Gina Reynolds | 2023-10-25 |Image credit: RAPHAEL MAKSIAN, Upsplash]
 ???
 Title 
@@ -195,8 +195,11 @@ ggplot() +
 * stat_count(position = "fill",
 *            geom = "text",
 *            color = "white",
-*            aes(label = after_stat(count*100/sum(count)) |&gt;
-*                  round(1) |&gt; paste0("%")))
+*            size = 8,
+*            aes(label =
+*                  after_stat(count*100/sum(count)) |&gt;
+*                     round(1) |&gt;
+*                     paste0("%")))
 ```
 ]
  
@@ -222,8 +225,11 @@ ggplot() +
   stat_count(position = "fill",
              geom = "text",
              color = "white",
-             aes(label = after_stat(count*100/sum(count)) |&gt;
-                   round(1) |&gt; paste0("%"))) -&gt;
+             size = 8,
+             aes(label =
+                   after_stat(count*100/sum(count)) |&gt;
+                      round(1) |&gt;
+                      paste0("%"))) -&gt;
 * classic_pie
 ```
 ]
@@ -275,6 +281,7 @@ classic_pie +
     stat_count(position = "fill", 
              geom = "text", 
              color = "white",
+             size = 8,
              aes(label = 
                    after_stat(count*100/
                                 sum(count)) |&gt; 
@@ -324,11 +331,11 @@ ggtrace::layer_after_scale(classic_pie, i = 2, verbose = T) %&gt;% data.frame()
 ## 4 #5DC863FF 25.6% 0.6552095 13791    1 0   0.9       FALSE     1     4
 ## 5 #FDE725FF   40% 0.3995365 21551    1 0   0.9       FALSE     1     5
 ##        ymax xmin xmax      ymin colour size angle hjust vjust alpha family
-## 1 1.0000000    0    0 0.9701520  white 3.88     0   0.5   0.5    NA       
-## 2 0.9701520    0    0 0.8791991  white 3.88     0   0.5   0.5    NA       
-## 3 0.8791991    0    0 0.6552095  white 3.88     0   0.5   0.5    NA       
-## 4 0.6552095    0    0 0.3995365  white 3.88     0   0.5   0.5    NA       
-## 5 0.3995365    0    0 0.0000000  white 3.88     0   0.5   0.5    NA       
+## 1 1.0000000    0    0 0.9701520  white    8     0   0.5   0.5    NA       
+## 2 0.9701520    0    0 0.8791991  white    8     0   0.5   0.5    NA       
+## 3 0.8791991    0    0 0.6552095  white    8     0   0.5   0.5    NA       
+## 4 0.6552095    0    0 0.3995365  white    8     0   0.5   0.5    NA       
+## 5 0.3995365    0    0 0.0000000  white    8     0   0.5   0.5    NA       
 ##   fontface lineheight
 ## 1        1        1.2
 ## 2        1        1.2
