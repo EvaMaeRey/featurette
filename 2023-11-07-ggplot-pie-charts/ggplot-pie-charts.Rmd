@@ -44,8 +44,9 @@ library(tidyverse)
 
 diamonds %>%
 ggplot() + 
-  aes(x = 0, fill = cut) + 
+  aes(x = 0) + 
   geom_bar(position = "fill") + 
+  aes(fill = cut) +
   coord_polar(theta = "y") + 
   theme_void() + 
   stat_count(position = "fill", 

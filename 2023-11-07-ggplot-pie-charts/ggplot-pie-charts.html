@@ -106,7 +106,7 @@ library(tidyverse)
 
 diamonds %&gt;%
 ggplot() +
-* aes(x = 0, fill = cut)
+* aes(x = 0)
 ```
 ]
  
@@ -125,7 +125,7 @@ library(tidyverse)
 
 diamonds %&gt;%
 ggplot() +
-  aes(x = 0, fill = cut) +
+  aes(x = 0) +
 * geom_bar(position = "fill")
 ```
 ]
@@ -145,9 +145,9 @@ library(tidyverse)
 
 diamonds %&gt;%
 ggplot() +
-  aes(x = 0, fill = cut) +
+  aes(x = 0) +
   geom_bar(position = "fill") +
-* coord_polar(theta = "y")
+* aes(fill = cut)
 ```
 ]
  
@@ -166,10 +166,10 @@ library(tidyverse)
 
 diamonds %&gt;%
 ggplot() +
-  aes(x = 0, fill = cut) +
+  aes(x = 0) +
   geom_bar(position = "fill") +
-  coord_polar(theta = "y") +
-* theme_void()
+  aes(fill = cut) +
+* coord_polar(theta = "y")
 ```
 ]
  
@@ -188,18 +188,11 @@ library(tidyverse)
 
 diamonds %&gt;%
 ggplot() +
-  aes(x = 0, fill = cut) +
+  aes(x = 0) +
   geom_bar(position = "fill") +
+  aes(fill = cut) +
   coord_polar(theta = "y") +
-  theme_void() +
-* stat_count(position = "fill",
-*            geom = "text",
-*            color = "white",
-*            size = 8,
-*            aes(label =
-*                  after_stat(count*100/sum(count)) |&gt;
-*                     round(1) |&gt;
-*                     paste0("%")))
+* theme_void()
 ```
 ]
  
@@ -218,8 +211,40 @@ library(tidyverse)
 
 diamonds %&gt;%
 ggplot() +
-  aes(x = 0, fill = cut) +
+  aes(x = 0) +
   geom_bar(position = "fill") +
+  aes(fill = cut) +
+  coord_polar(theta = "y") +
+  theme_void() +
+* stat_count(position = "fill",
+*            geom = "text",
+*            color = "white",
+*            size = 8,
+*            aes(label =
+*                  after_stat(count*100/sum(count)) |&gt;
+*                     round(1) |&gt;
+*                     paste0("%")))
+```
+]
+ 
+.panel2-feature-auto[
+![](ggplot-pie-charts_files/figure-html/feature_auto_09_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+
+diamonds %&gt;%
+ggplot() +
+  aes(x = 0) +
+  geom_bar(position = "fill") +
+  aes(fill = cut) +
   coord_polar(theta = "y") +
   theme_void() +
   stat_count(position = "fill",
