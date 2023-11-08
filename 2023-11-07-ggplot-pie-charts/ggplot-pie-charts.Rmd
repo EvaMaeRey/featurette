@@ -27,7 +27,7 @@ class: inverse, left, bottom
 background-image: url(https://images.unsplash.com/photo-1603779702200-95b2785f2083?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
 # .Large[# Making pies with ggplot2]
-## .small[featuring `coord_polar(theta = "y")` and `geom_bar(position = "fill")`]
+## .small[featuring `coord_polar(theta = "y")`, `geom_bar(position = "fill")`, `stage()`, and {ggtrace}]
 #### .tiny[Gina Reynolds | 2023-10-25 |Image credit: 
 Nathan Dumlao, Upsplash]
 ???
@@ -62,58 +62,44 @@ ggplot() +
                   after_scale = (ymin + 
                                    ymax)/2)) +
   coord_polar(theta = "y") + 
-  theme_void()
+  theme_void() ->
+classic_pie
 ```
 
 
 ---
 
-# can ggtrace help clarify strategy? 
+# ggtrace may help clarify strategy? 
 
 ```{r}
-ggtrace::layer_after_stat(classic_pie,i = 2, verbose = T)
-ggtrace::layer_after_scale(classic_pie, i = 2, verbose = T) %>% data.frame()
+ggtrace::layer_before_stat(classic_pie, i = 2)
 ```
 
 
-
 ---
-class: inverse, center, middle
 
-# And a little ggpie preview... 
+# ggtrace may help clarify strategy? 
 
 ```{r}
-Titanic %>% 
-  data.frame() %>% 
-  uncount(Freq) ->
-tidytitanic
-
-```
-
----
-
-
-`r flipbookr::chunk_reveal("feature2", widths = c(1,1))`
-
-
-```{r feature2, echo = F, out.width="70%", fig.align='center', include = F}
-library(ggpie)
-tidytitanic %>%
-  ggpie() + 
-   geom_wedge() + 
-   aes(fill = Sex) + 
-  facet_wrap(~ Sex) + 
-  aes(fill = Class) + 
-  facet_grid(Sex ~ Class) + 
-  aes(fill = Survived)
+ggtrace::layer_after_stat(classic_pie,i = 2)
 ```
 
 
 ---
 
-### Contribute
+# ggtrace may help clarify strategy? 
 
-- https://github.com/EvaMaeRey/ggpie (may become ggwedge)
+```{r}
+ggtrace::layer_after_scale(classic_pie, i = 2) %>% data.frame()
+```
+
+
+
+---
+
+### Learn more:
+
+- https://yjunechoe.github.io/ggtrace/
 
 
 ---

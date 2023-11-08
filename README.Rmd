@@ -61,7 +61,7 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment("ggplot-pie-charts")
+new_experiment("ggpie-titanic")
 ```
 
 

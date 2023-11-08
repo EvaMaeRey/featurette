@@ -1,0 +1,92 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80&w=1548&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# My featurette]
+## .small[featuring [{}]() ...]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+
+
+
+---
+class: inverse, center, middle
+
+# And a little ggpie preview... (this will probably move to to it's own)
+
+```{r}
+library(tidyverse)
+Titanic %>% 
+  data.frame() %>% 
+  uncount(Freq) ->
+tidytitanic
+
+```
+
+---
+
+
+`r flipbookr::chunk_reveal("feature2", widths = c(1,1))`
+
+
+```{r feature2, echo = F, out.width="70%", fig.align='center', include = F}
+library(ggpie)
+tidytitanic %>%
+  ggpie() + 
+   geom_wedge() + 
+   aes(fill = Sex) + 
+  facet_wrap(~ Sex) + 
+  aes(fill = Class) + 
+  facet_grid(Sex ~ Class) + 
+  aes(fill = Survived)
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggpie (may become ggwedge)
+
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
