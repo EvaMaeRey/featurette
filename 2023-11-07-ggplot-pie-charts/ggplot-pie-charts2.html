@@ -21,7 +21,7 @@
 class: inverse, left, bottom
 background-image: url(https://images.unsplash.com/photo-1603779702200-95b2785f2083?q=80&amp;w=1587&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
-# .Large[# Making pies with ggplot2]
+# .Large[# Making pies in ggplot2]
 ## .small[featuring `coord_polar(theta = "y")` and `geom_bar(position = "fill")`]
 #### .tiny[Gina Reynolds | 2023-10-25 |Image credit: 
 Nathan Dumlao, Upsplash]
@@ -93,7 +93,7 @@ diamonds %&gt;%
 ]
  
 .panel2-feature-auto[
-![](ggplot-pie-charts_files/figure-html/feature_auto_03_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -112,7 +112,7 @@ ggplot() +
 ]
  
 .panel2-feature-auto[
-![](ggplot-pie-charts_files/figure-html/feature_auto_04_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -132,7 +132,7 @@ ggplot() +
 ]
  
 .panel2-feature-auto[
-![](ggplot-pie-charts_files/figure-html/feature_auto_05_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -153,7 +153,7 @@ ggplot() +
 ]
  
 .panel2-feature-auto[
-![](ggplot-pie-charts_files/figure-html/feature_auto_06_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -170,6 +170,53 @@ ggplot() +
   aes(x = 0) +
   geom_bar(position = "fill") +
   aes(fill = cut) +
+* coord_polar(theta = "y")
+```
+]
+ 
+.panel2-feature-auto[
+![](ggplot-pie-charts2_files/figure-html/feature_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+
+diamonds %&gt;%
+ggplot() +
+  aes(x = 0) +
+  geom_bar(position = "fill") +
+  aes(fill = cut) +
+  coord_polar(theta = "y") +
+* theme_void()
+```
+]
+ 
+.panel2-feature-auto[
+![](ggplot-pie-charts2_files/figure-html/feature_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+
+diamonds %&gt;%
+ggplot() +
+  aes(x = 0) +
+  geom_bar(position = "fill") +
+  aes(fill = cut) +
+  coord_polar(theta = "y") +
+  theme_void() +
 * stat_count(
 *   geom = "text", position = "fill",
 *   color = "white", size = 8,
@@ -177,117 +224,16 @@ ggplot() +
 *       label = after_stat(
 *         count*100/sum(count)) |&gt;
 *         round(1) |&gt;
-*         paste0("%")))
-```
-]
- 
-.panel2-feature-auto[
-![](ggplot-pie-charts_files/figure-html/feature_auto_07_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-
-diamonds %&gt;%
-ggplot() +
-  aes(x = 0) +
-  geom_bar(position = "fill") +
-  aes(fill = cut) +
-  stat_count(
-    geom = "text", position = "fill",
-    color = "white", size = 8,
-    aes(x = .25,
-        label = after_stat(
-          count*100/sum(count)) |&gt;
-          round(1) |&gt;
-          paste0("%"))) +
-# usually would include this in above function
-* aes(y = stage(start = NULL,
+*         paste0("%"),
+*       y = stage(start = NULL,
 *                 after_stat = count,
 *                 after_scale = (ymin +
-*                                  ymax)/2))
+*                                  ymax)/2)))
 ```
 ]
  
 .panel2-feature-auto[
-![](ggplot-pie-charts_files/figure-html/feature_auto_08_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-
-diamonds %&gt;%
-ggplot() +
-  aes(x = 0) +
-  geom_bar(position = "fill") +
-  aes(fill = cut) +
-  stat_count(
-    geom = "text", position = "fill",
-    color = "white", size = 8,
-    aes(x = .25,
-        label = after_stat(
-          count*100/sum(count)) |&gt;
-          round(1) |&gt;
-          paste0("%"))) +
-# usually would include this in above function
-  aes(y = stage(start = NULL,
-                  after_stat = count,
-                  after_scale = (ymin +
-                                   ymax)/2)) +
-* coord_polar(theta = "y")
-```
-]
- 
-.panel2-feature-auto[
-![](ggplot-pie-charts_files/figure-html/feature_auto_09_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-
-diamonds %&gt;%
-ggplot() +
-  aes(x = 0) +
-  geom_bar(position = "fill") +
-  aes(fill = cut) +
-  stat_count(
-    geom = "text", position = "fill",
-    color = "white", size = 8,
-    aes(x = .25,
-        label = after_stat(
-          count*100/sum(count)) |&gt;
-          round(1) |&gt;
-          paste0("%"))) +
-# usually would include this in above function
-  aes(y = stage(start = NULL,
-                  after_stat = count,
-                  after_scale = (ymin +
-                                   ymax)/2)) +
-  coord_polar(theta = "y") +
-* theme_void()
-```
-]
- 
-.panel2-feature-auto[
-![](ggplot-pie-charts_files/figure-html/feature_auto_10_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature_auto_09_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
@@ -323,10 +269,23 @@ ggplot() +
 
 
 
+---
+
+# First attempt at moving labels to wedge centers *fails*
+
+
+```r
+classic_pie 
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'classic_pie' not found
+```
+
 
 ---
 
-# can ggtrace help clarify strategy? 
+# can ggtrace help? 
 
 
 ```r
@@ -2611,7 +2570,7 @@ tidytitanic %&gt;%
 ]
  
 .panel2-feature2-auto[
-![](ggplot-pie-charts_files/figure-html/feature2_auto_03_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature2_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -2629,7 +2588,7 @@ tidytitanic %&gt;%
 ]
  
 .panel2-feature2-auto[
-![](ggplot-pie-charts_files/figure-html/feature2_auto_04_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature2_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -2648,7 +2607,7 @@ tidytitanic %&gt;%
 ]
  
 .panel2-feature2-auto[
-![](ggplot-pie-charts_files/figure-html/feature2_auto_05_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature2_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -2663,12 +2622,12 @@ tidytitanic %&gt;%
   ggpie() +
    geom_wedge() +
    aes(fill = Sex) +
-* facet_wrap(~ Sex)
+* facet_wrap(~Sex)
 ```
 ]
  
 .panel2-feature2-auto[
-![](ggplot-pie-charts_files/figure-html/feature2_auto_06_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature2_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -2683,13 +2642,13 @@ tidytitanic %&gt;%
   ggpie() +
    geom_wedge() +
    aes(fill = Sex) +
-  facet_wrap(~ Sex) +
+  facet_wrap(~Sex) +
 * aes(fill = Class)
 ```
 ]
  
 .panel2-feature2-auto[
-![](ggplot-pie-charts_files/figure-html/feature2_auto_07_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature2_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -2704,14 +2663,14 @@ tidytitanic %&gt;%
   ggpie() +
    geom_wedge() +
    aes(fill = Sex) +
-  facet_wrap(~ Sex) +
+  facet_wrap(~Sex) +
   aes(fill = Class) +
 * facet_grid(Sex ~ Class)
 ```
 ]
  
 .panel2-feature2-auto[
-![](ggplot-pie-charts_files/figure-html/feature2_auto_08_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature2_auto_08_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -2726,7 +2685,7 @@ tidytitanic %&gt;%
   ggpie() +
    geom_wedge() +
    aes(fill = Sex) +
-  facet_wrap(~ Sex) +
+  facet_wrap(~Sex) +
   aes(fill = Class) +
   facet_grid(Sex ~ Class) +
 * aes(fill = Survived)
@@ -2734,7 +2693,7 @@ tidytitanic %&gt;%
 ]
  
 .panel2-feature2-auto[
-![](ggplot-pie-charts_files/figure-html/feature2_auto_09_output-1.png)&lt;!-- --&gt;
+![](ggplot-pie-charts2_files/figure-html/feature2_auto_09_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;

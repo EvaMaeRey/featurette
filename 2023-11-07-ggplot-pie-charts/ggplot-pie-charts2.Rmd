@@ -26,7 +26,7 @@ options(tidyverse.quiet = TRUE)
 class: inverse, left, bottom
 background-image: url(https://images.unsplash.com/photo-1603779702200-95b2785f2083?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
-# .Large[# Making pies with ggplot2]
+# .Large[# Making pies in ggplot2]
 ## .small[featuring `coord_polar(theta = "y")` and `geom_bar(position = "fill")`]
 #### .tiny[Gina Reynolds | 2023-10-25 |Image credit: 
 Nathan Dumlao, Upsplash]
@@ -48,6 +48,8 @@ ggplot() +
   aes(x = 0) + 
   geom_bar(position = "fill") + 
   aes(fill = cut) +
+  coord_polar(theta = "y") + 
+  theme_void() + 
   stat_count(
     geom = "text", position = "fill", 
     color = "white", size = 8,
@@ -55,20 +57,25 @@ ggplot() +
         label = after_stat(
           count*100/sum(count)) |> 
           round(1) |> 
-          paste0("%"))) +  
-  # usually would include this in above function
-  aes(y = stage(start = NULL, 
+          paste0("%"),
+        y = stage(start = NULL, 
                   after_stat = count,
                   after_scale = (ymin + 
-                                   ymax)/2)) +
-  coord_polar(theta = "y") + 
-  theme_void()
+                                   ymax)/2)))
+```
+
+---
+
+# First attempt at moving labels to wedge centers *fails*
+
+```{r, error = T}
+classic_pie 
 ```
 
 
 ---
 
-# can ggtrace help clarify strategy? 
+# can ggtrace help? 
 
 ```{r}
 ggtrace::layer_after_stat(classic_pie,i = 2, verbose = T)
@@ -102,7 +109,7 @@ tidytitanic %>%
   ggpie() + 
    geom_wedge() + 
    aes(fill = Sex) + 
-  facet_wrap(~ Sex) + 
+  facet_wrap(~Sex) + 
   aes(fill = Class) + 
   facet_grid(Sex ~ Class) + 
   aes(fill = Survived)
