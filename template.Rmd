@@ -89,3 +89,15 @@ read_csv(tt_url) %>%
 
 - https://EvaMaeRey.github.io/featurette
 
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+

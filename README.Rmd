@@ -61,7 +61,25 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment("ggpie-titanic")
+new_experiment(name = "ggedgelist-gg-cran-extenders")
+
+
+
+build_mp4 <- function(name){
+  
+  # create list of htmls
+  webpages <- fs::dir_ls(type = "file", recurse = T, glob = "*.html") %>% rev()
+  
+  # grab target html
+  target_html <- webpages[grep(name, webpages)][1]
+  
+  # build mp4
+  xaringanBuilder::build_mp4(input = target_html)
+  
+} 
+
+build_mp4("ggplot-pie-charts")
+
 ```
 
 

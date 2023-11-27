@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>featurette</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <meta name="date" content="2023-11-27" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1699100329878-7f28bb780787?q=80&amp;w=1632&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# Who are the CRAN ggplot2 extenders]
+## .small[featuring [{ggedgelist}](https://github.com/EvaMaeRey/ggedgelist)]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Jigar Panchal, Upsplash]
+???
+Title 
+
+
+
+
+---
+
+# get data...
+
+
+```r
+cran_20230905 &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-19/cran_20230905.csv')
+package_authors &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-19/package_authors.csv')
+```
+
+
+---
+
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+*library(tidyverse)
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+*library(ggedgelist)  # development pkg experimental
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+*library(ggraph)
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+*cran_20230905
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 19,838 × 67
+##    Package  Version Priority Depends Imports LinkingTo Suggests Enhances License
+##    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
+##  1 A3       1.0.0   &lt;NA&gt;     R (&gt;= … &lt;NA&gt;    &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…
+##  2 AalenJo… 1.0     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL (&gt;…
+##  3 AATtools 0.0.2   &lt;NA&gt;     R (&gt;= … magrit… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  
+##  4 ABACUS   1.0.0   &lt;NA&gt;     R (&gt;= … ggplot… &lt;NA&gt;      rmarkdo… &lt;NA&gt;     GPL-3  
+##  5 abasequ… 0.1.0   &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  
+##  6 abbrevi… 0.1     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      testtha… &lt;NA&gt;     GPL-3  
+##  7 abbyyR   0.5.5   &lt;NA&gt;     R (&gt;= … httr, … &lt;NA&gt;      testtha… &lt;NA&gt;     MIT + …
+##  8 abc      2.2.1   &lt;NA&gt;     R (&gt;= … &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL (&gt;…
+##  9 abc.data 1.0     &lt;NA&gt;     R (&gt;= … &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL (&gt;…
+## 10 ABC.RAP  0.9.0   &lt;NA&gt;     R (&gt;= … graphi… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  
+## # ℹ 19,828 more rows
+## # ℹ 58 more variables: License_is_FOSS &lt;lgl&gt;, License_restricts_use &lt;lgl&gt;,
+## #   OS_type &lt;chr&gt;, Archs &lt;chr&gt;, MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;,
+## #   Additional_repositories &lt;chr&gt;, Author &lt;chr&gt;, `Authors@R` &lt;chr&gt;,
+## #   Biarch &lt;chr&gt;, BugReports &lt;chr&gt;, BuildKeepEmpty &lt;lgl&gt;, BuildManual &lt;lgl&gt;,
+## #   BuildResaveData &lt;chr&gt;, BuildVignettes &lt;chr&gt;, Built &lt;lgl&gt;,
+## #   ByteCompile &lt;chr&gt;, `Classification/ACM` &lt;lgl&gt;, …
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+cran_20230905 %&gt;%
+* filter(Package %&gt;%
+*          str_detect("^gg"))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 194 × 67
+##    Package  Version Priority Depends Imports LinkingTo Suggests Enhances License
+##    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
+##  1 gg.gap   1.3     &lt;NA&gt;     &lt;NA&gt;    "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+##  2 ggalign… 0.1     &lt;NA&gt;     &lt;NA&gt;    "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+##  3 ggalign… 1.0.1   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "rmarkd… &lt;NA&gt;     MIT + …
+##  4 ggallin  0.1.1   &lt;NA&gt;     ggplot… "scale… &lt;NA&gt;      "knitr,… &lt;NA&gt;     LGPL-3 
+##  5 ggalluv… 0.12.5  &lt;NA&gt;     R (&gt;= … "stats… &lt;NA&gt;      "grid, … &lt;NA&gt;     GPL-3  
+##  6 ggalt    0.4.0   &lt;NA&gt;     R (&gt;= … "utils… &lt;NA&gt;      "testth… &lt;NA&gt;     AGPL +…
+##  7 ggamma   1.0.1   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      "testth… &lt;NA&gt;     MIT + …
+##  8 gganima… 1.0.8   &lt;NA&gt;     ggplot… "strin… &lt;NA&gt;      "magick… &lt;NA&gt;     MIT + …
+##  9 ggarche… 0.4.2   &lt;NA&gt;     R (&gt;= … "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+## 10 ggasym   0.1.6   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "knitr,… &lt;NA&gt;     GPL-3  
+## # ℹ 184 more rows
+## # ℹ 58 more variables: License_is_FOSS &lt;lgl&gt;, License_restricts_use &lt;lgl&gt;,
+## #   OS_type &lt;chr&gt;, Archs &lt;chr&gt;, MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;,
+## #   Additional_repositories &lt;chr&gt;, Author &lt;chr&gt;, `Authors@R` &lt;chr&gt;,
+## #   Biarch &lt;chr&gt;, BugReports &lt;chr&gt;, BuildKeepEmpty &lt;lgl&gt;, BuildManual &lt;lgl&gt;,
+## #   BuildResaveData &lt;chr&gt;, BuildVignettes &lt;chr&gt;, Built &lt;lgl&gt;,
+## #   ByteCompile &lt;chr&gt;, `Classification/ACM` &lt;lgl&gt;, …
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+cran_20230905 %&gt;%
+  filter(Package %&gt;%
+           str_detect("^gg")) %&gt;%
+* filter(Imports %&gt;%
+*          str_detect("ggplot2")|
+*        Depends %&gt;% str_detect("ggplot2"))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 181 × 67
+##    Package  Version Priority Depends Imports LinkingTo Suggests Enhances License
+##    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
+##  1 gg.gap   1.3     &lt;NA&gt;     &lt;NA&gt;    "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+##  2 ggalign… 0.1     &lt;NA&gt;     &lt;NA&gt;    "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+##  3 ggalign… 1.0.1   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "rmarkd… &lt;NA&gt;     MIT + …
+##  4 ggallin  0.1.1   &lt;NA&gt;     ggplot… "scale… &lt;NA&gt;      "knitr,… &lt;NA&gt;     LGPL-3 
+##  5 ggalluv… 0.12.5  &lt;NA&gt;     R (&gt;= … "stats… &lt;NA&gt;      "grid, … &lt;NA&gt;     GPL-3  
+##  6 ggalt    0.4.0   &lt;NA&gt;     R (&gt;= … "utils… &lt;NA&gt;      "testth… &lt;NA&gt;     AGPL +…
+##  7 gganima… 1.0.8   &lt;NA&gt;     ggplot… "strin… &lt;NA&gt;      "magick… &lt;NA&gt;     MIT + …
+##  8 ggarche… 0.4.2   &lt;NA&gt;     R (&gt;= … "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+##  9 ggasym   0.1.6   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "knitr,… &lt;NA&gt;     GPL-3  
+## 10 ggautom… 0.3.2   &lt;NA&gt;     R (&gt;= … "carto… &lt;NA&gt;      "ggrepe… &lt;NA&gt;     MIT + …
+## # ℹ 171 more rows
+## # ℹ 58 more variables: License_is_FOSS &lt;lgl&gt;, License_restricts_use &lt;lgl&gt;,
+## #   OS_type &lt;chr&gt;, Archs &lt;chr&gt;, MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;,
+## #   Additional_repositories &lt;chr&gt;, Author &lt;chr&gt;, `Authors@R` &lt;chr&gt;,
+## #   Biarch &lt;chr&gt;, BugReports &lt;chr&gt;, BuildKeepEmpty &lt;lgl&gt;, BuildManual &lt;lgl&gt;,
+## #   BuildResaveData &lt;chr&gt;, BuildVignettes &lt;chr&gt;, Built &lt;lgl&gt;,
+## #   ByteCompile &lt;chr&gt;, `Classification/ACM` &lt;lgl&gt;, …
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+cran_20230905 %&gt;%
+  filter(Package %&gt;%
+           str_detect("^gg")) %&gt;%
+  filter(Imports %&gt;%
+           str_detect("ggplot2")|
+         Depends %&gt;% str_detect("ggplot2")) %&gt;%
+* select(Package)
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 181 × 1
+##    Package    
+##    &lt;chr&gt;      
+##  1 gg.gap     
+##  2 ggaligner  
+##  3 ggalignment
+##  4 ggallin    
+##  5 ggalluvial 
+##  6 ggalt      
+##  7 gganimate  
+##  8 ggarchery  
+##  9 ggasym     
+## 10 ggautomap  
+## # ℹ 171 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+cran_20230905 %&gt;%
+  filter(Package %&gt;%
+           str_detect("^gg")) %&gt;%
+  filter(Imports %&gt;%
+           str_detect("ggplot2")|
+         Depends %&gt;% str_detect("ggplot2")) %&gt;%
+  select(Package) %&gt;%
+* left_join(package_authors %&gt;%
+*             mutate(authorsR = authorsR %&gt;%
+*                      str_replace(" ", "\n")))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 399 × 2
+##    Package     authorsR             
+##    &lt;chr&gt;       &lt;chr&gt;                
+##  1 gg.gap      "Jiacheng\nLou"      
+##  2 gg.gap      "Jing\nZhang"        
+##  3 gg.gap      "Yizhu\nLvy"         
+##  4 gg.gap      "Zhi\nJin"           
+##  5 ggaligner   "Mohamed\nSoudy"     
+##  6 ggalignment "Afton\nCoombs"      
+##  7 ggalignment "Tan\nHo"            
+##  8 ggallin     "Steven\nE. Pav"     
+##  9 ggalluvial  "Jason\nCory Brunson"
+## 10 ggalluvial  "Quentin\nD. Read"   
+## # ℹ 389 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+cran_20230905 %&gt;%
+  filter(Package %&gt;%
+           str_detect("^gg")) %&gt;%
+  filter(Imports %&gt;%
+           str_detect("ggplot2")|
+         Depends %&gt;% str_detect("ggplot2")) %&gt;%
+  select(Package) %&gt;%
+  left_join(package_authors %&gt;%
+              mutate(authorsR = authorsR %&gt;%
+                       str_replace(" ", "\n"))) %&gt;%
+* ggedgelist:::ggedgelist_quick(layout = "fr",
+*                  include_names = T)
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="ggedgelist-gg-cran-extenders_files/figure-html/feature_auto_09_output-1.png" width="90%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+cran_20230905 %&gt;%
+  filter(Package %&gt;%
+           str_detect("^gg")) %&gt;%
+  filter(Imports %&gt;%
+           str_detect("ggplot2")|
+         Depends %&gt;% str_detect("ggplot2")) %&gt;%
+  select(Package) %&gt;%
+  left_join(package_authors %&gt;%
+              mutate(authorsR = authorsR %&gt;%
+                       str_replace(" ", "\n"))) %&gt;%
+  ggedgelist:::ggedgelist_quick(layout = "fr",
+                   include_names = T) +
+* labs(title = "Who are the authors of the\nggplot2 extension packages on CRAN?")
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="ggedgelist-gg-cran-extenders_files/figure-html/feature_auto_10_output-1.png" width="90%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+cran_20230905 %&gt;%
+  filter(Package %&gt;%
+           str_detect("^gg")) %&gt;%
+  filter(Imports %&gt;%
+           str_detect("ggplot2")|
+         Depends %&gt;% str_detect("ggplot2")) %&gt;%
+  select(Package) %&gt;%
+  left_join(package_authors %&gt;%
+              mutate(authorsR = authorsR %&gt;%
+                       str_replace(" ", "\n"))) %&gt;%
+  ggedgelist:::ggedgelist_quick(layout = "fr",
+                   include_names = T) +
+  labs(title = "Who are the authors of the\nggplot2 extension packages on CRAN?") +
+* theme_void(base_size = 50)
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="ggedgelist-gg-cran-extenders_files/figure-html/feature_auto_11_output-1.png" width="90%" /&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+library(ggedgelist)  # development pkg experimental
+library(ggraph)
+
+cran_20230905 %&gt;%
+  filter(Package %&gt;%
+           str_detect("^gg")) %&gt;%
+  filter(Imports %&gt;%
+           str_detect("ggplot2")|
+         Depends %&gt;% str_detect("ggplot2")) %&gt;%
+  select(Package) %&gt;%
+  left_join(package_authors %&gt;%
+              mutate(authorsR = authorsR %&gt;%
+                       str_replace(" ", "\n"))) %&gt;%
+  ggedgelist:::ggedgelist_quick(layout = "fr",
+                   include_names = T) +
+  labs(title = "Who are the authors of the\nggplot2 extension packages on CRAN?") +
+  theme_void(base_size = 50) +
+* labs(caption = "Graph includes the subset of '^gg' packages from #TidyTuesday '2023-09-19/cran_20230905.csv' which list ggplot2 in Depends or Imports.  Authors are from #TidyTuesday '2023-09-19/package_authors.csv'" %&gt;% str_wrap(80))
+```
+]
+ 
+.panel2-feature-auto[
+&lt;img src="ggedgelist-gg-cran-extenders_files/figure-html/feature_auto_12_output-1.png" width="90%" /&gt;
+]
+
+&lt;style&gt;
+.panel1-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-feature-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+&lt;img src="ggedgelist-gg-cran-extenders_files/figure-html/feature-1.png" width="120%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggedgelist
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+&lt;/style&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

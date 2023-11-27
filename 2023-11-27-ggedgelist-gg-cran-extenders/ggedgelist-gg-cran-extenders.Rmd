@@ -1,0 +1,107 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, cache = T, fig.height = 30, fig.width = 24, out.width = "90%")
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1699100329878-7f28bb780787?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# Who are the CRAN ggplot2 extenders]
+## .small[featuring [{ggedgelist}](https://github.com/EvaMaeRey/ggedgelist)]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Jigar Panchal, Upsplash]
+???
+Title 
+
+
+
+
+---
+
+# get data...
+
+```{r}
+cran_20230905 <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-19/cran_20230905.csv')
+package_authors <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-09-19/package_authors.csv')
+```
+
+
+---
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="120%", fig.align='center', include = T, fig.width=32, fig.height=20}
+library(tidyverse)
+library(ggedgelist) # development pkg experimental
+library(ggraph)
+
+cran_20230905 %>% 
+  filter(Package %>% 
+           str_detect("^gg")) %>% 
+  filter(Imports %>% 
+           str_detect("ggplot2")|
+         Depends %>% str_detect("ggplot2")) %>% 
+  select(Package) %>% 
+  left_join(package_authors %>% 
+              mutate(authorsR = authorsR %>% 
+                       str_replace(" ", "\n"))) %>% 
+  ggedgelist:::ggedgelist_quick(layout = "fr", 
+                   include_names = T) + 
+  labs(title = "Who are the authors of the\nggplot2 extension packages on CRAN?") + 
+  theme_void(base_size = 50) +
+  labs(caption = "Graph includes the subset of '^gg' packages from #TidyTuesday '2023-09-19/cran_20230905.csv' which list ggplot2 in Depends or Imports.  Authors are from #TidyTuesday '2023-09-19/package_authors.csv'" %>% str_wrap(80)) 
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggedgelist
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+
