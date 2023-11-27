@@ -58,7 +58,7 @@ library(ggraph)
 
 cran_20230905 %>% 
   filter(Package %>% 
-           str_detect("^gg")) %>% 
+           str_detect("^gg|^GG")) %>% 
   filter(Imports %>% 
            str_detect("ggplot2")|
          Depends %>% str_detect("ggplot2")) %>% 
@@ -70,7 +70,7 @@ cran_20230905 %>%
                    include_names = T) + 
   labs(title = "Who are the authors of the\nggplot2 extension packages on CRAN?") + 
   theme_void(base_size = 50) +
-  labs(caption = "Graph includes the subset of '^gg' packages from #TidyTuesday '2023-09-19/cran_20230905.csv' which list ggplot2 in Depends or Imports.  Authors are from #TidyTuesday '2023-09-19/package_authors.csv'" %>% str_wrap(80)) 
+  labs(caption = "Graph includes the subset of '^gg|^GG' packages from #TidyTuesday '2023-09-19/cran_20230905.csv' which list ggplot2 in Depends or Imports.  Authors are from #TidyTuesday '2023-09-19/package_authors.csv'" %>% str_wrap(80)) 
 ```
 
 
@@ -81,6 +81,16 @@ cran_20230905 %>%
 - https://github.com/EvaMaeRey/ggedgelist
 
 ---
+
+### See ggraph and tidygraph
+
+- https://github.com/thomasp85/ggraph
+
+
+
+
+---
+
 
 ### Check out flipbookr, used to build this featurette
 

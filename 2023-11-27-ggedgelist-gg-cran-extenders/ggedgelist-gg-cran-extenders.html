@@ -144,14 +144,14 @@ library(ggraph)
 
 cran_20230905 %&gt;%
 * filter(Package %&gt;%
-*          str_detect("^gg"))
+*          str_detect("^gg|^GG"))
 ```
 ]
  
 .panel2-feature-auto[
 
 ```
-## # A tibble: 194 × 67
+## # A tibble: 206 × 67
 ##    Package  Version Priority Depends Imports LinkingTo Suggests Enhances License
 ##    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
 ##  1 gg.gap   1.3     &lt;NA&gt;     &lt;NA&gt;    "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
@@ -159,12 +159,12 @@ cran_20230905 %&gt;%
 ##  3 ggalign… 1.0.1   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "rmarkd… &lt;NA&gt;     MIT + …
 ##  4 ggallin  0.1.1   &lt;NA&gt;     ggplot… "scale… &lt;NA&gt;      "knitr,… &lt;NA&gt;     LGPL-3 
 ##  5 ggalluv… 0.12.5  &lt;NA&gt;     R (&gt;= … "stats… &lt;NA&gt;      "grid, … &lt;NA&gt;     GPL-3  
-##  6 ggalt    0.4.0   &lt;NA&gt;     R (&gt;= … "utils… &lt;NA&gt;      "testth… &lt;NA&gt;     AGPL +…
-##  7 ggamma   1.0.1   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      "testth… &lt;NA&gt;     MIT + …
-##  8 gganima… 1.0.8   &lt;NA&gt;     ggplot… "strin… &lt;NA&gt;      "magick… &lt;NA&gt;     MIT + …
-##  9 ggarche… 0.4.2   &lt;NA&gt;     R (&gt;= … "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
-## 10 ggasym   0.1.6   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "knitr,… &lt;NA&gt;     GPL-3  
-## # ℹ 184 more rows
+##  6 GGally   2.1.2   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "broom … &lt;NA&gt;     GPL (&gt;…
+##  7 ggalt    0.4.0   &lt;NA&gt;     R (&gt;= … "utils… &lt;NA&gt;      "testth… &lt;NA&gt;     AGPL +…
+##  8 ggamma   1.0.1   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      "testth… &lt;NA&gt;     MIT + …
+##  9 gganima… 1.0.8   &lt;NA&gt;     ggplot… "strin… &lt;NA&gt;      "magick… &lt;NA&gt;     MIT + …
+## 10 ggarche… 0.4.2   &lt;NA&gt;     R (&gt;= … "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+## # ℹ 196 more rows
 ## # ℹ 58 more variables: License_is_FOSS &lt;lgl&gt;, License_restricts_use &lt;lgl&gt;,
 ## #   OS_type &lt;chr&gt;, Archs &lt;chr&gt;, MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;,
 ## #   Additional_repositories &lt;chr&gt;, Author &lt;chr&gt;, `Authors@R` &lt;chr&gt;,
@@ -187,7 +187,7 @@ library(ggraph)
 
 cran_20230905 %&gt;%
   filter(Package %&gt;%
-           str_detect("^gg")) %&gt;%
+           str_detect("^gg|^GG")) %&gt;%
 * filter(Imports %&gt;%
 *          str_detect("ggplot2")|
 *        Depends %&gt;% str_detect("ggplot2"))
@@ -197,7 +197,7 @@ cran_20230905 %&gt;%
 .panel2-feature-auto[
 
 ```
-## # A tibble: 181 × 67
+## # A tibble: 185 × 67
 ##    Package  Version Priority Depends Imports LinkingTo Suggests Enhances License
 ##    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
 ##  1 gg.gap   1.3     &lt;NA&gt;     &lt;NA&gt;    "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
@@ -205,12 +205,12 @@ cran_20230905 %&gt;%
 ##  3 ggalign… 1.0.1   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "rmarkd… &lt;NA&gt;     MIT + …
 ##  4 ggallin  0.1.1   &lt;NA&gt;     ggplot… "scale… &lt;NA&gt;      "knitr,… &lt;NA&gt;     LGPL-3 
 ##  5 ggalluv… 0.12.5  &lt;NA&gt;     R (&gt;= … "stats… &lt;NA&gt;      "grid, … &lt;NA&gt;     GPL-3  
-##  6 ggalt    0.4.0   &lt;NA&gt;     R (&gt;= … "utils… &lt;NA&gt;      "testth… &lt;NA&gt;     AGPL +…
-##  7 gganima… 1.0.8   &lt;NA&gt;     ggplot… "strin… &lt;NA&gt;      "magick… &lt;NA&gt;     MIT + …
-##  8 ggarche… 0.4.2   &lt;NA&gt;     R (&gt;= … "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
-##  9 ggasym   0.1.6   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "knitr,… &lt;NA&gt;     GPL-3  
-## 10 ggautom… 0.3.2   &lt;NA&gt;     R (&gt;= … "carto… &lt;NA&gt;      "ggrepe… &lt;NA&gt;     MIT + …
-## # ℹ 171 more rows
+##  6 GGally   2.1.2   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "broom … &lt;NA&gt;     GPL (&gt;…
+##  7 ggalt    0.4.0   &lt;NA&gt;     R (&gt;= … "utils… &lt;NA&gt;      "testth… &lt;NA&gt;     AGPL +…
+##  8 gganima… 1.0.8   &lt;NA&gt;     ggplot… "strin… &lt;NA&gt;      "magick… &lt;NA&gt;     MIT + …
+##  9 ggarche… 0.4.2   &lt;NA&gt;     R (&gt;= … "ggplo… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+## 10 ggasym   0.1.6   &lt;NA&gt;     R (&gt;= … "dplyr… &lt;NA&gt;      "knitr,… &lt;NA&gt;     GPL-3  
+## # ℹ 175 more rows
 ## # ℹ 58 more variables: License_is_FOSS &lt;lgl&gt;, License_restricts_use &lt;lgl&gt;,
 ## #   OS_type &lt;chr&gt;, Archs &lt;chr&gt;, MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;,
 ## #   Additional_repositories &lt;chr&gt;, Author &lt;chr&gt;, `Authors@R` &lt;chr&gt;,
@@ -233,7 +233,7 @@ library(ggraph)
 
 cran_20230905 %&gt;%
   filter(Package %&gt;%
-           str_detect("^gg")) %&gt;%
+           str_detect("^gg|^GG")) %&gt;%
   filter(Imports %&gt;%
            str_detect("ggplot2")|
          Depends %&gt;% str_detect("ggplot2")) %&gt;%
@@ -244,7 +244,7 @@ cran_20230905 %&gt;%
 .panel2-feature-auto[
 
 ```
-## # A tibble: 181 × 1
+## # A tibble: 185 × 1
 ##    Package    
 ##    &lt;chr&gt;      
 ##  1 gg.gap     
@@ -252,12 +252,12 @@ cran_20230905 %&gt;%
 ##  3 ggalignment
 ##  4 ggallin    
 ##  5 ggalluvial 
-##  6 ggalt      
-##  7 gganimate  
-##  8 ggarchery  
-##  9 ggasym     
-## 10 ggautomap  
-## # ℹ 171 more rows
+##  6 GGally     
+##  7 ggalt      
+##  8 gganimate  
+##  9 ggarchery  
+## 10 ggasym     
+## # ℹ 175 more rows
 ```
 ]
 
@@ -274,7 +274,7 @@ library(ggraph)
 
 cran_20230905 %&gt;%
   filter(Package %&gt;%
-           str_detect("^gg")) %&gt;%
+           str_detect("^gg|^GG")) %&gt;%
   filter(Imports %&gt;%
            str_detect("ggplot2")|
          Depends %&gt;% str_detect("ggplot2")) %&gt;%
@@ -288,7 +288,7 @@ cran_20230905 %&gt;%
 .panel2-feature-auto[
 
 ```
-## # A tibble: 399 × 2
+## # A tibble: 415 × 2
 ##    Package     authorsR             
 ##    &lt;chr&gt;       &lt;chr&gt;                
 ##  1 gg.gap      "Jiacheng\nLou"      
@@ -301,7 +301,7 @@ cran_20230905 %&gt;%
 ##  8 ggallin     "Steven\nE. Pav"     
 ##  9 ggalluvial  "Jason\nCory Brunson"
 ## 10 ggalluvial  "Quentin\nD. Read"   
-## # ℹ 389 more rows
+## # ℹ 405 more rows
 ```
 ]
 
@@ -318,7 +318,7 @@ library(ggraph)
 
 cran_20230905 %&gt;%
   filter(Package %&gt;%
-           str_detect("^gg")) %&gt;%
+           str_detect("^gg|^GG")) %&gt;%
   filter(Imports %&gt;%
            str_detect("ggplot2")|
          Depends %&gt;% str_detect("ggplot2")) %&gt;%
@@ -348,7 +348,7 @@ library(ggraph)
 
 cran_20230905 %&gt;%
   filter(Package %&gt;%
-           str_detect("^gg")) %&gt;%
+           str_detect("^gg|^GG")) %&gt;%
   filter(Imports %&gt;%
            str_detect("ggplot2")|
          Depends %&gt;% str_detect("ggplot2")) %&gt;%
@@ -379,7 +379,7 @@ library(ggraph)
 
 cran_20230905 %&gt;%
   filter(Package %&gt;%
-           str_detect("^gg")) %&gt;%
+           str_detect("^gg|^GG")) %&gt;%
   filter(Imports %&gt;%
            str_detect("ggplot2")|
          Depends %&gt;% str_detect("ggplot2")) %&gt;%
@@ -411,7 +411,7 @@ library(ggraph)
 
 cran_20230905 %&gt;%
   filter(Package %&gt;%
-           str_detect("^gg")) %&gt;%
+           str_detect("^gg|^GG")) %&gt;%
   filter(Imports %&gt;%
            str_detect("ggplot2")|
          Depends %&gt;% str_detect("ggplot2")) %&gt;%
@@ -423,7 +423,7 @@ cran_20230905 %&gt;%
                    include_names = T) +
   labs(title = "Who are the authors of the\nggplot2 extension packages on CRAN?") +
   theme_void(base_size = 50) +
-* labs(caption = "Graph includes the subset of '^gg' packages from #TidyTuesday '2023-09-19/cran_20230905.csv' which list ggplot2 in Depends or Imports.  Authors are from #TidyTuesday '2023-09-19/package_authors.csv'" %&gt;% str_wrap(80))
+* labs(caption = "Graph includes the subset of '^gg|^GG' packages from #TidyTuesday '2023-09-19/cran_20230905.csv' which list ggplot2 in Depends or Imports.  Authors are from #TidyTuesday '2023-09-19/package_authors.csv'" %&gt;% str_wrap(80))
 ```
 ]
  
@@ -472,6 +472,16 @@ cran_20230905 %&gt;%
 - https://github.com/EvaMaeRey/ggedgelist
 
 ---
+
+### See ggraph and tidygraph
+
+- https://github.com/thomasp85/ggraph
+
+
+
+
+---
+
 
 ### Check out flipbookr, used to build this featurette
 
