@@ -51,7 +51,7 @@ package_authors <- readr::read_csv('https://raw.githubusercontent.com/rfordatasc
 
 ---
 
-```{r feature, echo = F, out.width="120%", fig.align='center', include = T, fig.width=32, fig.height=20}
+```{r feature, echo = F, out.width="45%", fig.align='center', include = T}
 library(tidyverse)
 library(ggedgelist) # development pkg experimental
 library(ggraph)
