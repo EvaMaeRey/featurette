@@ -61,7 +61,7 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment(name = "ggedgelist-gg-cran-extenders")
+new_experiment(name = "ggwedge-geom-pie")
 
 
 
@@ -78,7 +78,7 @@ build_mp4 <- function(name){
   
 } 
 
-build_mp4("ggplot-pie-charts")
+build_mp4("ggedgelist-gg-cran-extenders")
 
 ```
 

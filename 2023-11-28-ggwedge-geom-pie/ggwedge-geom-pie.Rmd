@@ -1,0 +1,124 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1621634890180-0b93f32e10bb?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# Pie Charts w/ experimental ggwedge]
+## .small[featuring [{ggwedge}](https://github.com/everyday-analytics/ggwedge) ...]
+#### .small[Gina Reynolds | 2023-11-28 |Image credit: Kelly Visel, Upsplash]
+???
+Title 
+
+---
+
+## Data
+
+```{r}
+# tidytuesday data
+rladies_chapters <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-21/rladies_chapters.csv')
+```
+
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+library(tidyverse)
+library(ggwedge)
+rladies_chapters  %>% 
+  filter(year == 2020) %>% 
+  ggplot() + 
+  aes(fill = location) + 
+  ggwedge:::geom_pie(color = "snow", linewidth = .25) + 
+  ggwedge:::geom_pie_label(r_prop = 1.2, 
+                           color = "gray20",
+                           size = 2) +
+  coord_polar() +
+  facet_wrap(~month(date, label = T, abbr = T), 
+             nrow = 2) + 
+  theme(legend.position = "none",
+        legend.justification = 0) +
+  aes(r = 1) + 
+  aes(r = NULL) + 
+  scale_fill_manual(values = c("Plum3", "Magenta")) +
+  labs(title = "RLadies moved from in person to mostly online in 2020") +
+  theme(plot.title.position = "plot") + 
+  labs(title = "R-Ladies meetings in 2020 moved from mostly <span style = 'color:Plum3;'>in person</span> to mostly <span style = 'color:Magenta;'>online</span>.") +
+  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
+  theme_void() +
+  theme(
+    plot.title = ggtext::element_textbox_simple(
+      size = 14, lineheight = 1, padding = margin(0, 0, 5, 0)
+    )
+  ) + 
+  theme(text = element_text(color = "grey55")) + 
+  theme(legend.position = "none")
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/everyday-analytics/ggwedge
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+
