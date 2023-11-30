@@ -4,7 +4,7 @@
     <title>featurette</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <meta name="date" content="2023-11-28" />
+    <meta name="date" content="2023-11-30" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
@@ -22,14 +22,615 @@ class: inverse, left, bottom
 background-image: url(https://images.unsplash.com/photo-1621634890180-0b93f32e10bb?q=80&amp;w=1480&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
 # .Large[# Pie Charts w/ experimental ggwedge]
-## .small[featuring [{ggwedge}](https://github.com/everyday-analytics/ggwedge) ...]
+## .small[featuring [{ggwedge}] (https://github.com/everyday-analytics/ggwedge)]
 #### .small[Gina Reynolds | 2023-11-28 |Image credit: Kelly Visel, Upsplash]
 ???
 Title 
 
 ---
 
-## Data
+ggwedge::geom_pie() sell points
+
+
+- dynamic pie chart creation (counts rows of data (w/ optional weight))
+- area of chart is meaningful.  Defaults to 
+- required aesthetics make sense (you don't need a "x" or "y" aesthetic, just fill (or alpha, or whatever))
+- xy directions don't need to be coordinated (either geom_bar() or coord_polar defaults need to be adjusted to get a pie), since geom_pie anticipates that you'll use the geom w/ polar coordinates.
+- labeling is relatively easy; positioning can be adjusted with r_prop (recommended) or r_nudge
+
+
+
+---
+
+
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+*library(tidyverse)
+```
+]
+ 
+.panel2-test-auto[
+
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+*library(ggwedge)
+```
+]
+ 
+.panel2-test-auto[
+
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+*ggplot2::diamonds
+```
+]
+ 
+.panel2-test-auto[
+
+```
+## # A tibble: 53,940 × 10
+##    carat cut       color clarity depth table price     x     y     z
+##    &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+##  2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+##  3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+##  4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+##  5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+##  6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+##  7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+##  8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+##  9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+## 10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
+## # ℹ 53,930 more rows
+```
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+* ggplot()
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+* ggwedge:::geom_pie()
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+* coord_polar()
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+* theme_void()
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+  theme_void() +
+* aes(fill = color)
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+  theme_void() +
+  aes(fill = color) +
+* ggwedge:::geom_pie_label(r_prop = 1.2)
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_09_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+  theme_void() +
+  aes(fill = color) +
+  ggwedge:::geom_pie_label(r_prop = 1.2) +
+* facet_wrap(~cut)
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_10_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+  theme_void() +
+  aes(fill = color) +
+  ggwedge:::geom_pie_label(r_prop = 1.2) +
+  facet_wrap(~cut) +
+* aes(alpha = color)
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_11_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+  theme_void() +
+  aes(fill = color) +
+  ggwedge:::geom_pie_label(r_prop = 1.2) +
+  facet_wrap(~cut) +
+  aes(alpha = color) +
+* aes(alpha = NULL)
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_12_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+  theme_void() +
+  aes(fill = color) +
+  ggwedge:::geom_pie_label(r_prop = 1.2) +
+  facet_wrap(~cut) +
+  aes(alpha = color) +
+  aes(alpha = NULL) +
+* aes(r = 1)
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_13_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+  theme_void() +
+  aes(fill = color) +
+  ggwedge:::geom_pie_label(r_prop = 1.2) +
+  facet_wrap(~cut) +
+  aes(alpha = color) +
+  aes(alpha = NULL) +
+  aes(r = 1) +
+* facet_null()
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_14_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 1: ggplot2 calcs under the hood
+.panel1-test-auto[
+
+```r
+library(tidyverse)
+library(ggwedge)
+ggplot2::diamonds %&gt;%
+  ggplot() +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+  theme_void() +
+  aes(fill = color) +
+  ggwedge:::geom_pie_label(r_prop = 1.2) +
+  facet_wrap(~cut) +
+  aes(alpha = color) +
+  aes(alpha = NULL) +
+  aes(r = 1) +
+  facet_null() +
+* ggwedge:::geom_pie_label(
+*   aes(label = after_stat(weight),
+*       angle = after_stat(c(0,0,0,0,0,0,-85)),
+*       color = after_scale(c(rep("white",6),"black"))),
+*   r_prop = .7)
+```
+]
+ 
+.panel2-test-auto[
+![](ggwedge-geom-pie_files/figure-html/test_auto_15_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-test-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-test-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-test-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+
+---
+
+# DIY aggregation: aggregate before entering plot space
+
+
+---
+
+count: false
+ 
+### Example 2: do your own aggregations
+.panel1-count_yourself-auto[
+
+```r
+*ggplot2::diamonds
+```
+]
+ 
+.panel2-count_yourself-auto[
+
+```
+## # A tibble: 53,940 × 10
+##    carat cut       color clarity depth table price     x     y     z
+##    &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+##  2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+##  3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+##  4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+##  5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+##  6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+##  7  0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+##  8  0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+##  9  0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+## 10  0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
+## # ℹ 53,930 more rows
+```
+]
+
+---
+count: false
+ 
+### Example 2: do your own aggregations
+.panel1-count_yourself-auto[
+
+```r
+ggplot2::diamonds %&gt;%
+* count(cut)
+```
+]
+ 
+.panel2-count_yourself-auto[
+
+```
+## # A tibble: 5 × 2
+##   cut           n
+##   &lt;ord&gt;     &lt;int&gt;
+## 1 Fair       1610
+## 2 Good       4906
+## 3 Very Good 12082
+## 4 Premium   13791
+## 5 Ideal     21551
+```
+]
+
+---
+count: false
+ 
+### Example 2: do your own aggregations
+.panel1-count_yourself-auto[
+
+```r
+ggplot2::diamonds %&gt;%
+  count(cut) %&gt;%
+* ggplot()
+```
+]
+ 
+.panel2-count_yourself-auto[
+![](ggwedge-geom-pie_files/figure-html/count_yourself_auto_03_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 2: do your own aggregations
+.panel1-count_yourself-auto[
+
+```r
+ggplot2::diamonds %&gt;%
+  count(cut) %&gt;%
+  ggplot() +
+* aes(fill = cut, weight = n)
+```
+]
+ 
+.panel2-count_yourself-auto[
+![](ggwedge-geom-pie_files/figure-html/count_yourself_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 2: do your own aggregations
+.panel1-count_yourself-auto[
+
+```r
+ggplot2::diamonds %&gt;%
+  count(cut) %&gt;%
+  ggplot() +
+  aes(fill = cut, weight = n) +
+* ggwedge:::geom_pie()
+```
+]
+ 
+.panel2-count_yourself-auto[
+![](ggwedge-geom-pie_files/figure-html/count_yourself_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 2: do your own aggregations
+.panel1-count_yourself-auto[
+
+```r
+ggplot2::diamonds %&gt;%
+  count(cut) %&gt;%
+  ggplot() +
+  aes(fill = cut, weight = n) +
+  ggwedge:::geom_pie() +
+* coord_polar()
+```
+]
+ 
+.panel2-count_yourself-auto[
+![](ggwedge-geom-pie_files/figure-html/count_yourself_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+### Example 2: do your own aggregations
+.panel1-count_yourself-auto[
+
+```r
+ggplot2::diamonds %&gt;%
+  count(cut) %&gt;%
+  ggplot() +
+  aes(fill = cut, weight = n) +
+  ggwedge:::geom_pie() +
+  coord_polar() +
+* ggwedge:::geom_pie_label(
+*   aes(label = after_stat(weight),
+*       angle = after_stat(c(85,0,0,0,0))),
+*   r_prop = .7,
+*   color = "oldlace")
+```
+]
+ 
+.panel2-count_yourself-auto[
+![](ggwedge-geom-pie_files/figure-html/count_yourself_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-count_yourself-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-count_yourself-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-count_yourself-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+
+
+---
+
+# to do...
+
+- look at coord_radial and that interaction
+- make geom_wedge which is cartesian coordinates (naive (?) crossing approach that works in 'step 0' base ggplot2 build, fails in stat creation.)
+- make geom_pie_label variants helpers...; where stat calculates label based on some specification geom_pie_label(type = c("count", "percent", "count (percent)", "percent (count)", "fill", etc)...
+
+
+---
+
+## 'Real world' application: TidyTuesday Rladies
 
 
 ```r
@@ -43,7 +644,7 @@ rladies_chapters &lt;- readr::read_csv('https://raw.githubusercontent.com/rforda
 
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -58,7 +659,7 @@ count: false
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -74,7 +675,7 @@ library(tidyverse)
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -107,7 +708,7 @@ library(ggwedge)
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -141,7 +742,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -160,7 +761,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -169,7 +770,8 @@ library(ggwedge)
 rladies_chapters  %&gt;%
   filter(year == 2020) %&gt;%
   ggplot() +
-* aes(fill = location)
+* ggwedge:::geom_pie(color = "snow",
+*                    linewidth = .25)
 ```
 ]
  
@@ -180,7 +782,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -189,8 +791,9 @@ library(ggwedge)
 rladies_chapters  %&gt;%
   filter(year == 2020) %&gt;%
   ggplot() +
-  aes(fill = location) +
-* ggwedge:::geom_pie(color = "snow", linewidth = .25)
+  ggwedge:::geom_pie(color = "snow",
+                     linewidth = .25) +
+* aes(fill = location)
 ```
 ]
  
@@ -201,7 +804,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -210,11 +813,10 @@ library(ggwedge)
 rladies_chapters  %&gt;%
   filter(year == 2020) %&gt;%
   ggplot() +
+  ggwedge:::geom_pie(color = "snow",
+                     linewidth = .25) +
   aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-* ggwedge:::geom_pie_label(r_prop = 1.2,
-*                          color = "gray20",
-*                          size = 2)
+* coord_polar(clip = "on")
 ```
 ]
  
@@ -225,7 +827,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -234,12 +836,11 @@ library(ggwedge)
 rladies_chapters  %&gt;%
   filter(year == 2020) %&gt;%
   ggplot() +
+  ggwedge:::geom_pie(color = "snow",
+                     linewidth = .25) +
   aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-* coord_polar()
+  coord_polar(clip = "on") +
+* theme(axis.text.x = element_blank())
 ```
 ]
  
@@ -250,7 +851,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -259,14 +860,14 @@ library(ggwedge)
 rladies_chapters  %&gt;%
   filter(year == 2020) %&gt;%
   ggplot() +
+  ggwedge:::geom_pie(color = "snow",
+                     linewidth = .25) +
   aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-* facet_wrap(~month(date, label = T, abbr = T),
-*            nrow = 2)
+  coord_polar(clip = "on") +
+  theme(axis.text.x = element_blank()) +
+* ggwedge:::geom_pie_label(r_prop = 1.2,
+*                          color = "gray20",
+*                          size = 2)
 ```
 ]
  
@@ -277,7 +878,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -286,16 +887,16 @@ library(ggwedge)
 rladies_chapters  %&gt;%
   filter(year == 2020) %&gt;%
   ggplot() +
+  ggwedge:::geom_pie(color = "snow",
+                     linewidth = .25) +
   aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
+  coord_polar(clip = "on") +
+  theme(axis.text.x = element_blank()) +
   ggwedge:::geom_pie_label(r_prop = 1.2,
                            color = "gray20",
                            size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-* theme(legend.position = "none",
-*       legend.justification = 0)
+* facet_wrap(~month(date, label = T, abbr = T),
+*            nrow = 3)
 ```
 ]
  
@@ -306,7 +907,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -315,17 +916,17 @@ library(ggwedge)
 rladies_chapters  %&gt;%
   filter(year == 2020) %&gt;%
   ggplot() +
+  ggwedge:::geom_pie(color = "snow",
+                     linewidth = .25) +
   aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
+  coord_polar(clip = "on") +
+  theme(axis.text.x = element_blank()) +
   ggwedge:::geom_pie_label(r_prop = 1.2,
                            color = "gray20",
                            size = 2) +
-  coord_polar() +
   facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-* aes(r = 1)
+             nrow = 3) +
+* scale_fill_manual(values = c("Plum3", "Magenta"))
 ```
 ]
  
@@ -336,7 +937,7 @@ rladies_chapters  %&gt;%
 ---
 count: false
  
-
+## Make pies for RLadies attendance
 .panel1-feature-auto[
 
 ```r
@@ -345,359 +946,23 @@ library(ggwedge)
 rladies_chapters  %&gt;%
   filter(year == 2020) %&gt;%
   ggplot() +
+  ggwedge:::geom_pie(color = "snow",
+                     linewidth = .25) +
   aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
+  coord_polar(clip = "on") +
+  theme(axis.text.x = element_blank()) +
   ggwedge:::geom_pie_label(r_prop = 1.2,
                            color = "gray20",
                            size = 2) +
-  coord_polar() +
   facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-* aes(r = NULL)
+             nrow = 3) +
+  scale_fill_manual(values = c("Plum3", "Magenta")) -&gt;
+*a_nice_plot
 ```
 ]
  
 .panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_13_output-1.png)&lt;!-- --&gt;
-]
 
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-* scale_fill_manual(values = c("Plum3", "Magenta"))
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_14_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-  scale_fill_manual(values = c("Plum3", "Magenta")) +
-* labs(title = "RLadies moved from in person to mostly online in 2020")
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_15_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-  scale_fill_manual(values = c("Plum3", "Magenta")) +
-  labs(title = "RLadies moved from in person to mostly online in 2020") +
-* theme(plot.title.position = "plot")
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_16_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-  scale_fill_manual(values = c("Plum3", "Magenta")) +
-  labs(title = "RLadies moved from in person to mostly online in 2020") +
-  theme(plot.title.position = "plot") +
-* labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.")
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_17_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-  scale_fill_manual(values = c("Plum3", "Magenta")) +
-  labs(title = "RLadies moved from in person to mostly online in 2020") +
-  theme(plot.title.position = "plot") +
-  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
-* labs(subtitle = "There was also a drop in the number of April/May meetings.\n")
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_18_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-  scale_fill_manual(values = c("Plum3", "Magenta")) +
-  labs(title = "RLadies moved from in person to mostly online in 2020") +
-  theme(plot.title.position = "plot") +
-  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
-  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
-* theme_void()
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_19_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-  scale_fill_manual(values = c("Plum3", "Magenta")) +
-  labs(title = "RLadies moved from in person to mostly online in 2020") +
-  theme(plot.title.position = "plot") +
-  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
-  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
-  theme_void() +
-* theme(
-*   plot.title = ggtext::element_textbox_simple(
-*     size = 14, lineheight = 1, padding = margin(0, 0, 5, 0)
-*   )
-* )
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_20_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-  scale_fill_manual(values = c("Plum3", "Magenta")) +
-  labs(title = "RLadies moved from in person to mostly online in 2020") +
-  theme(plot.title.position = "plot") +
-  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
-  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
-  theme_void() +
-  theme(
-    plot.title = ggtext::element_textbox_simple(
-      size = 14, lineheight = 1, padding = margin(0, 0, 5, 0)
-    )
-  ) +
-* theme(text = element_text(color = "grey55"))
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_21_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-library(ggwedge)
-rladies_chapters  %&gt;%
-  filter(year == 2020) %&gt;%
-  ggplot() +
-  aes(fill = location) +
-  ggwedge:::geom_pie(color = "snow", linewidth = .25) +
-  ggwedge:::geom_pie_label(r_prop = 1.2,
-                           color = "gray20",
-                           size = 2) +
-  coord_polar() +
-  facet_wrap(~month(date, label = T, abbr = T),
-             nrow = 2) +
-  theme(legend.position = "none",
-        legend.justification = 0) +
-  aes(r = 1) +
-  aes(r = NULL) +
-  scale_fill_manual(values = c("Plum3", "Magenta")) +
-  labs(title = "RLadies moved from in person to mostly online in 2020") +
-  theme(plot.title.position = "plot") +
-  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
-  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
-  theme_void() +
-  theme(
-    plot.title = ggtext::element_textbox_simple(
-      size = 14, lineheight = 1, padding = margin(0, 0, 5, 0)
-    )
-  ) +
-  theme(text = element_text(color = "grey55")) +
-* theme(legend.position = "none")
-```
-]
- 
-.panel2-feature-auto[
-![](ggwedge-geom-pie_files/figure-html/feature_auto_22_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
@@ -729,7 +994,204 @@ rladies_chapters  %&gt;%
 
 
 
+
+
+
+
 ---
+
+
+count: false
+ 
+## Style plot
+.panel1-style-auto[
+
+```r
+*a_nice_plot
+```
+]
+ 
+.panel2-style-auto[
+![](ggwedge-geom-pie_files/figure-html/style_auto_01_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+## Style plot
+.panel1-style-auto[
+
+```r
+a_nice_plot +
+* theme(plot.title.position = "plot")
+```
+]
+ 
+.panel2-style-auto[
+![](ggwedge-geom-pie_files/figure-html/style_auto_02_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+## Style plot
+.panel1-style-auto[
+
+```r
+a_nice_plot +
+  theme(plot.title.position = "plot") +
+* labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.")
+```
+]
+ 
+.panel2-style-auto[
+![](ggwedge-geom-pie_files/figure-html/style_auto_03_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+## Style plot
+.panel1-style-auto[
+
+```r
+a_nice_plot +
+  theme(plot.title.position = "plot") +
+  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
+* labs(subtitle = "There was also a drop in the number of April/May meetings.\n")
+```
+]
+ 
+.panel2-style-auto[
+![](ggwedge-geom-pie_files/figure-html/style_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+## Style plot
+.panel1-style-auto[
+
+```r
+a_nice_plot +
+  theme(plot.title.position = "plot") +
+  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
+  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
+* theme_void()
+```
+]
+ 
+.panel2-style-auto[
+![](ggwedge-geom-pie_files/figure-html/style_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+## Style plot
+.panel1-style-auto[
+
+```r
+a_nice_plot +
+  theme(plot.title.position = "plot") +
+  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
+  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
+  theme_void() +
+* theme(
+*   plot.title = ggtext::element_textbox_simple(
+*     size = 14, lineheight = 1, padding = margin(0, 0, 5, 0)
+*   )
+* )
+```
+]
+ 
+.panel2-style-auto[
+![](ggwedge-geom-pie_files/figure-html/style_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+## Style plot
+.panel1-style-auto[
+
+```r
+a_nice_plot +
+  theme(plot.title.position = "plot") +
+  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
+  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
+  theme_void() +
+  theme(
+    plot.title = ggtext::element_textbox_simple(
+      size = 14, lineheight = 1, padding = margin(0, 0, 5, 0)
+    )
+  ) +
+* theme(text = element_text(color = "grey55"))
+```
+]
+ 
+.panel2-style-auto[
+![](ggwedge-geom-pie_files/figure-html/style_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+## Style plot
+.panel1-style-auto[
+
+```r
+a_nice_plot +
+  theme(plot.title.position = "plot") +
+  labs(title = "R-Ladies meetings in 2020 moved from mostly &lt;span style = 'color:Plum3;'&gt;in person&lt;/span&gt; to mostly &lt;span style = 'color:Magenta;'&gt;online&lt;/span&gt;.") +
+  labs(subtitle = "There was also a drop in the number of April/May meetings.\n") +
+  theme_void() +
+  theme(
+    plot.title = ggtext::element_textbox_simple(
+      size = 14, lineheight = 1, padding = margin(0, 0, 5, 0)
+    )
+  ) +
+  theme(text = element_text(color = "grey55")) +
+* theme(legend.position = "none")
+```
+]
+ 
+.panel2-style-auto[
+![](ggwedge-geom-pie_files/figure-html/style_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-style-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-style-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-style-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+![](ggwedge-geom-pie_files/figure-html/style-1.png)&lt;!-- --&gt;
 
 
 
@@ -744,9 +1206,15 @@ rladies_chapters  %&gt;%
 
 
 
-### Check out {packcircles} which does the computation in ggcirclepack
+### There are many other approaches to pies.  
 
-- https://github.com/mbedward/packcircles
+- base ggplot2: https://r-graph-gallery.com/piechart-ggplot2.html, aan be used on aggregates or raw data (stat_count is at work in the background)
+
+- ggforce https://ggforce.data-imaginist.com/reference/geom_arc_bar.html cartesian coords, highly flexible, requires many aesthetics, no auto label, requires pre-aggregation
+- ggpie #1 https://github.com/showteeth/ggpie  wrapping style ggplot2 extension ggpie (data, group_key, count_type, fill_color)
+- ggpie #2 https://github.com/Rkabacoff/ggpie wrapping style
+- ggpie #3 https://github.com/marcuslehr/ggpie not a package, just a little script in a repo on github
+- ggtricks https://github.com/AbdoulMa/ggtricks geom_pie cartesian, requires pre-aggregation
 
 ---
 
