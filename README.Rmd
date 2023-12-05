@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
  
 ```
 
-
+  
 # featurette git repo 
  
 <!-- badges: start -->
@@ -61,7 +61,7 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment(name = "rladies-on-a-wire")
+new_experiment(name = "nine-pies")
 
 
 
@@ -74,11 +74,11 @@ build_mp4 <- function(name){
   target_html <- webpages[grep(name, webpages)][1]
   
   # build mp4
-  xaringanBuilder::build_mp4(input = target_html)
+  xaringanBuilder::build_mp4(input = target_html, fps = 2)
   
 } 
 
-build_mp4("ggedgelist-gg-cran-extenders")
+build_mp4("nine-pies")
 
 ```
 

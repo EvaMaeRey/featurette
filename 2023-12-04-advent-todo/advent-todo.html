@@ -22,8 +22,8 @@ class: inverse, left, bottom
 background-image: url(https://images.unsplash.com/photo-1606482659485-8b5c3623a609?q=80&amp;w=1473&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
 # .Large[# An advent of code calendar]
-## .small[featuring experimental [{ggcalendar}](https://github.com/EvaMaeRey/ggcalendar)]
-#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Elena Mozhvilo, Upsplash]
+## .Small[featuring ... [{ggcalendar}](https://github.com/EvaMaeRey/ggcalendar)]
+#### .small[Gina Reynolds | 2023-12-04 |Image credit: Elena Mozhvilo, Upsplash]
 ???
 Title 
 
@@ -148,7 +148,7 @@ advent_df %&gt;%
   aes(date = date) +
 * geom_tile_calendar(color = "oldlace",
 *                    linewidth = .5,
-*                    fill = "darkolivegreen")
+*                    alpha = .75)
 ```
 ]
  
@@ -170,8 +170,8 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-* aes(alpha = date &lt; Sys.Date())
+                     alpha = .75) +
+* aes(fill = date &gt;= Sys.Date())
 ```
 ]
  
@@ -193,9 +193,10 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-* geom_text_calendar(alpha = .4)
+                     alpha = .75) +
+  aes(fill = date &gt;= Sys.Date()) +
+* scale_fill_manual(values = c("darkolivegreen", "goldenrod3"),
+*                   label = c("past", "future"))
 ```
 ]
  
@@ -217,10 +218,11 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-  geom_text_calendar(alpha = .4) +
-* aes(color = date &lt; Sys.Date())
+                     alpha = .75) +
+  aes(fill = date &gt;= Sys.Date()) +
+  scale_fill_manual(values = c("darkolivegreen", "goldenrod3"),
+                    label = c("past", "future")) +
+* geom_text_calendar(alpha = .2, size = 8)
 ```
 ]
  
@@ -242,12 +244,15 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-  geom_text_calendar(alpha = .4) +
-  aes(color = date &lt; Sys.Date()) +
-* scale_color_manual(values = c("grey30", "grey95"),
-*                    label = c("future", "past"))
+                     alpha = .75) +
+  aes(fill = date &gt;= Sys.Date()) +
+  scale_fill_manual(values = c("darkolivegreen", "goldenrod3"),
+                    label = c("past", "future")) +
+  geom_text_calendar(alpha = .2, size = 8) +
+* geom_text_calendar(
+*   aes(label = str_wrap(todo, 7)),
+*   lineheight = .7,
+*   alpha = .8)
 ```
 ]
  
@@ -269,13 +274,16 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-  geom_text_calendar(alpha = .4) +
-  aes(color = date &lt; Sys.Date()) +
-  scale_color_manual(values = c("grey30", "grey95"),
-                     label = c("future", "past")) +
-* scale_alpha_discrete(label = c("future", "past"))
+                     alpha = .75) +
+  aes(fill = date &gt;= Sys.Date()) +
+  scale_fill_manual(values = c("darkolivegreen", "goldenrod3"),
+                    label = c("past", "future")) +
+  geom_text_calendar(alpha = .2, size = 8) +
+  geom_text_calendar(
+    aes(label = str_wrap(todo, 7)),
+    lineheight = .7,
+    alpha = .8) +
+* theme(text = element_text(size = 20))
 ```
 ]
  
@@ -297,17 +305,17 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-  geom_text_calendar(alpha = .4) +
-  aes(color = date &lt; Sys.Date()) +
-  scale_color_manual(values = c("grey30", "grey95"),
-                     label = c("future", "past")) +
-  scale_alpha_discrete(label = c("future", "past")) +
-* geom_text_calendar(
-*   aes(label = str_wrap(todo, 7)),
-*   lineheight = .7,
-*   alpha = .8)
+                     alpha = .75) +
+  aes(fill = date &gt;= Sys.Date()) +
+  scale_fill_manual(values = c("darkolivegreen", "goldenrod3"),
+                    label = c("past", "future")) +
+  geom_text_calendar(alpha = .2, size = 8) +
+  geom_text_calendar(
+    aes(label = str_wrap(todo, 7)),
+    lineheight = .7,
+    alpha = .8) +
+  theme(text = element_text(size = 20)) +
+* labs(fill = NULL)
 ```
 ]
  
@@ -329,18 +337,18 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-  geom_text_calendar(alpha = .4) +
-  aes(color = date &lt; Sys.Date()) +
-  scale_color_manual(values = c("grey30", "grey95"),
-                     label = c("future", "past")) +
-  scale_alpha_discrete(label = c("future", "past")) +
+                     alpha = .75) +
+  aes(fill = date &gt;= Sys.Date()) +
+  scale_fill_manual(values = c("darkolivegreen", "goldenrod3"),
+                    label = c("past", "future")) +
+  geom_text_calendar(alpha = .2, size = 8) +
   geom_text_calendar(
     aes(label = str_wrap(todo, 7)),
     lineheight = .7,
     alpha = .8) +
-* theme(text = element_text(size = 20))
+  theme(text = element_text(size = 20)) +
+  labs(fill = NULL) +
+* labs(title = "'Advent of Code'")
 ```
 ]
  
@@ -362,19 +370,24 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-  geom_text_calendar(alpha = .4) +
-  aes(color = date &lt; Sys.Date()) +
-  scale_color_manual(values = c("grey30", "grey95"),
-                     label = c("future", "past")) +
-  scale_alpha_discrete(label = c("future", "past")) +
+                     alpha = .75) +
+  aes(fill = date &gt;= Sys.Date()) +
+  scale_fill_manual(values = c("darkolivegreen", "goldenrod3"),
+                    label = c("past", "future")) +
+  geom_text_calendar(alpha = .2, size = 8) +
   geom_text_calendar(
     aes(label = str_wrap(todo, 7)),
     lineheight = .7,
     alpha = .8) +
   theme(text = element_text(size = 20)) +
-* labs(alpha = NULL, color = NULL)
+  labs(fill = NULL) +
+  labs(title = "'Advent of Code'") +
+* geom_tile_calendar(data = . %&gt;%
+*                      filter(date == Sys.Date()),
+*                    fill = alpha("goldenrod2", .1),
+*                    color = "goldenrod3",
+*                    show.legend = F,
+*                    linewidth = 1.5)
 ```
 ]
  
@@ -396,66 +409,31 @@ advent_df %&gt;%
   aes(date = date) +
   geom_tile_calendar(color = "oldlace",
                      linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-  geom_text_calendar(alpha = .4) +
-  aes(color = date &lt; Sys.Date()) +
-  scale_color_manual(values = c("grey30", "grey95"),
-                     label = c("future", "past")) +
-  scale_alpha_discrete(label = c("future", "past")) +
+                     alpha = .75) +
+  aes(fill = date &gt;= Sys.Date()) +
+  scale_fill_manual(values = c("darkolivegreen", "goldenrod3"),
+                    label = c("past", "future")) +
+  geom_text_calendar(alpha = .2, size = 8) +
   geom_text_calendar(
     aes(label = str_wrap(todo, 7)),
     lineheight = .7,
     alpha = .8) +
   theme(text = element_text(size = 20)) +
-  labs(alpha = NULL, color = NULL) +
-* labs(title = "'Advent of Code'")
+  labs(fill = NULL) +
+  labs(title = "'Advent of Code'") +
+  geom_tile_calendar(data = . %&gt;%
+                       filter(date == Sys.Date()),
+                     fill = alpha("goldenrod2", .1),
+                     color = "goldenrod3",
+                     show.legend = F,
+                     linewidth = 1.5) +
+* theme(strip.background =
+*         element_rect(fill = alpha("darkseagreen4", .8)))
 ```
 ]
  
 .panel2-feature-auto[
 ![](advent-todo_files/figure-html/feature_auto_14_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(ggcalendar)
-
-advent_df %&gt;%
-  ggcalendar(dates_df = .) +
-  aes(date = date) +
-  geom_tile_calendar(color = "oldlace",
-                     linewidth = .5,
-                     fill = "darkolivegreen") +
-  aes(alpha = date &lt; Sys.Date()) +
-  geom_text_calendar(alpha = .4) +
-  aes(color = date &lt; Sys.Date()) +
-  scale_color_manual(values = c("grey30", "grey95"),
-                     label = c("future", "past")) +
-  scale_alpha_discrete(label = c("future", "past")) +
-  geom_text_calendar(
-    aes(label = str_wrap(todo, 7)),
-    lineheight = .7,
-    alpha = .8) +
-  theme(text = element_text(size = 20)) +
-  labs(alpha = NULL, color = NULL) +
-  labs(title = "'Advent of Code'") +
-* geom_tile_calendar(data = . %&gt;%
-*                      filter(date == Sys.Date()),
-*                    fill = alpha("goldenrod2", .1),
-*                    color = "goldenrod3",
-*                    show.legend = F,
-*                    linewidth = 1.5)
-```
-]
- 
-.panel2-feature-auto[
-![](advent-todo_files/figure-html/feature_auto_15_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;

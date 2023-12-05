@@ -1,0 +1,116 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1629228136815-0fedb1808520?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# Nine pies, Dec 5th ... ]
+## .small[featuring [{ggwedge}](https://github.com/everyday-analytics/ggwedge)]
+#### .tiny[Gina Reynolds |Image credit: Kelcie Herald, Upsplash]
+???
+Title 
+
+---
+
+
+```{r}
+library(tidyverse)
+
+Titanic %>% 
+  data.frame() %>% 
+  uncount(weights = Freq) ->
+titanic
+```
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+titanic %>% 
+  ggplot() + 
+  ggwedge:::geom_pie() + 
+  coord_polar() + # pie1
+  aes(fill = Survived) + # pie2
+  scale_fill_manual(
+    values = c("darkgrey", 
+               "cadetblue")) + # custom colors
+  facet_wrap(facets = vars(Sex)) + #pie3 
+  theme_void() + # little clean up
+  aes(r = 1) + #pie4
+  aes(r0 = .6) + #pie5
+  ggwedge:::geom_pie_label(r_nudge = .2) + #pie6
+  facet_grid(rows = vars(Sex), 
+             cols = vars(Class)) + #pie7
+  aes(label = after_stat(count)) + #pie8  
+  aes(alpha = Age) + 
+  scale_alpha_discrete(range = c(.6,1)) + #pie9
+  # bonuspie back to percentages
+  aes(label = after_stat(percent)) 
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 90%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+

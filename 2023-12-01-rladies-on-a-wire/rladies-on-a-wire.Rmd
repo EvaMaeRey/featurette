@@ -126,6 +126,39 @@ meetings_df %>%
 ```
 
 
+```{r}
+rladies_chapters_raw %>% 
+  ggplot() + 
+  aes(date) + 
+  geom_histogram(color = "white",
+                 fill = "plum4",
+                 linewidth = .2) +
+  aes(alpha = location) + 
+  scale_alpha_discrete(range = c(.9, .7)) + 
+  theme_minimal() + 
+  geom_vline(xintercept = as_date("2022-11-30"),
+             linetype = "dashed",
+             color = "grey40") + 
+  geom_vline(xintercept = as_date("2013-12-25" ) + 
+               years(0:10),
+             color = "magenta",
+             linetype = "dashed",
+             alpha = .2) +
+
+  geom_rug(alpha = .2,
+           color = "plum4") + 
+  labs(title = "") +
+    ggstamp::stamp_curve(x = as_date("2024-09-25" ), y = 320,
+                       xend = as_date("2022-11-30") + days(45), 
+                       yend = 260, size = .5, 
+                       curvature = -.2
+                        ) +
+  ggstamp::stamp_label(x = as_date("2025-09-25" ), y = 320,
+                       label = "ChatGPT is\nreleased",
+                       hjust = 1,
+                       size = 4) 
+```
+
 ---
 
 ### Contribute
