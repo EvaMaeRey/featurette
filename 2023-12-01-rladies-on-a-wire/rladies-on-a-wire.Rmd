@@ -1,0 +1,167 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, cache = T)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80&w=1548&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# My featurette]
+## .small[featuring [{}]() ...]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+---
+
+
+```{r}
+library(tidyverse)
+library(ggcirclepack)
+
+# tidytuesday data
+rladies_chapters_raw <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-21/rladies_chapters.csv') %>% 
+  mutate(chapter = str_remove(chapter, "rladies-") %>% 
+           str_replace_all("-", " ") %>% str_to_title() %>% str_remove("\\s+$")) 
+```
+
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+rladies_chapters_raw %>% 
+  group_by(chapter) %>% 
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %>% 
+  arrange(first_date) %>% 
+  mutate(chapter = fct_inorder(chapter)) ->
+rladies_chapter_df
+
+rladies_chapters_raw %>% 
+  mutate(chapter = 
+           factor(chapter,
+                     levels = 
+                    levels(rladies_chapter_df$chapter))) %>% 
+  group_by(chapter) %>% 
+  mutate(meeting_number = rank(date)) ->
+meetings_df
+
+make_ordinal <- function(x){
+
+  ifelse(x == 1, "1st",
+         ifelse(x == 2, "2nd",
+                ifelse(x == 3, "3rd", paste0(x,"th"))))
+
+}
+ 
+# test
+make_ordinal(x = 1:10)
+```
+
+
+---
+
+
+`r flipbookr::chunk_reveal("feature2", widths = c(1,1))`
+
+---
+
+```{r feature2, echo = F, fig.width=20, fig.height = 12}
+meetings_df %>% 
+  ggplot() + 
+  aes(y = as.numeric(chapter), x = date) + 
+  geom_point(alpha = .6) + 
+  aes(color = meeting_number) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = first_date-days(120), 
+                label = ifelse(chapter == "San Francisco", 
+                               "San         \nFrancisco",
+                               as.character(chapter))),
+            color = "grey20",
+            hjust = 1,
+            size = 4.5, 
+            lineheight = .7) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = last_date, 
+                label = make_ordinal(tot_meetings)),
+            color = "grey20",
+            hjust = -.3,
+            size = 4.5) +
+  theme(axis.text.y = element_blank()) + 
+  scale_color_viridis_c(option = "magma", breaks = c(1, 50, 100), 
+                        labels = c("1st", "50th", "100th")) + 
+  facet_wrap( ~ cut_interval(
+    as.numeric(chapter), 
+    n = 4), 
+    scales = "free_y", 
+    ncol = 4) + 
+  labs(color = "Meeting\nnumber") + 
+  scale_x_date(expand = expansion(c(.3,.2)))
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+

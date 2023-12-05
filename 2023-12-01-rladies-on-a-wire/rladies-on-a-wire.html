@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>featurette</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <meta name="date" content="2023-12-04" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&amp;fit=crop&amp;q=80&amp;w=1548&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# My featurette]
+## .small[featuring [{}]() ...]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+---
+
+
+
+```r
+library(tidyverse)
+library(ggcirclepack)
+
+# tidytuesday data
+rladies_chapters_raw &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-21/rladies_chapters.csv') %&gt;% 
+  mutate(chapter = str_remove(chapter, "rladies-") %&gt;% 
+           str_replace_all("-", " ") %&gt;% str_to_title() %&gt;% str_remove("\\s+$")) 
+```
+
+
+---
+
+
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+*rladies_chapters_raw
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 4,268 × 6
+##           id chapter   title                           date       location  year
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;                           &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+##  1 296275584 St Louis  "Save the date! Introduction t… 2023-11-30 online    2023
+##  2 296277517 Coventry  "An basic introduction: Python… 2023-11-30 online    2023
+##  3 295898711 Baltimore "Holiday graphics and animatio… 2023-11-28 inperson  2023
+##  4 296346610 Philly    "TidyTuesday with R-Ladies Phi… 2023-11-14 online    2023
+##  5 296275461 St Louis  "Save the date! Introduction t… 2023-11-08 online    2023
+##  6 296424871 Kathmandu "4 days workshop"               2023-11-01 inperson  2023
+##  7 296239571 Taipei    "旅遊服務銜接 AIGC 的各種坑"    2023-10-30 inperson  2023
+##  8 296559481 Montreal  "RLadies October Meetup - \"R-… 2023-10-30 inperson  2023
+##  9 296677321 Abuja     "R-Ladies Abuja and Abuja R us… 2023-10-28 inperson  2023
+## 10 296720878 Sao Paulo "Meetup R-Ladies São Paulo - I… 2023-10-28 inperson  2023
+## # ℹ 4,258 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+* group_by(chapter)
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 4,268 × 6
+## # Groups:   chapter [209]
+##           id chapter   title                           date       location  year
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;                           &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+##  1 296275584 St Louis  "Save the date! Introduction t… 2023-11-30 online    2023
+##  2 296277517 Coventry  "An basic introduction: Python… 2023-11-30 online    2023
+##  3 295898711 Baltimore "Holiday graphics and animatio… 2023-11-28 inperson  2023
+##  4 296346610 Philly    "TidyTuesday with R-Ladies Phi… 2023-11-14 online    2023
+##  5 296275461 St Louis  "Save the date! Introduction t… 2023-11-08 online    2023
+##  6 296424871 Kathmandu "4 days workshop"               2023-11-01 inperson  2023
+##  7 296239571 Taipei    "旅遊服務銜接 AIGC 的各種坑"    2023-10-30 inperson  2023
+##  8 296559481 Montreal  "RLadies October Meetup - \"R-… 2023-10-30 inperson  2023
+##  9 296677321 Abuja     "R-Ladies Abuja and Abuja R us… 2023-10-28 inperson  2023
+## 10 296720878 Sao Paulo "Meetup R-Ladies São Paulo - I… 2023-10-28 inperson  2023
+## # ℹ 4,258 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+* summarise(first_date = as.Date(min(date)),
+*           last_date = as.Date(max(date)),
+*           tot_meetings = n())
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 209 × 4
+##    chapter        first_date last_date  tot_meetings
+##    &lt;chr&gt;          &lt;date&gt;     &lt;date&gt;            &lt;int&gt;
+##  1 Aarhus         2021-06-16 2021-06-16            1
+##  2 Abuja          2020-03-21 2023-10-28           17
+##  3 Addis Ababa    2018-03-28 2021-03-09           26
+##  4 Adelaide       2017-03-08 2019-10-03            9
+##  5 Aguascalientes 2020-08-13 2020-11-24            5
+##  6 Algiers        2020-06-13 2020-11-24            3
+##  7 Ames           2016-12-15 2021-07-07           86
+##  8 Amsterdam      2018-04-12 2021-09-28           31
+##  9 Ankara         2019-10-12 2021-03-23           16
+## 10 Asuncion       2020-07-11 2020-07-11            1
+## # ℹ 199 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+* arrange(first_date)
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 209 × 4
+##    chapter       first_date last_date  tot_meetings
+##    &lt;chr&gt;         &lt;date&gt;     &lt;date&gt;            &lt;int&gt;
+##  1 San Francisco 2012-10-31 2021-09-09           64
+##  2 Tc            2015-04-26 2023-03-02           52
+##  3 London        2016-03-04 2022-10-26           61
+##  4 Rtp           2016-09-22 2023-08-22           74
+##  5 Istanbul      2016-10-01 2021-03-08           36
+##  6 Paris         2016-10-05 2023-10-19           25
+##  7 Boston        2016-10-13 2021-07-29           44
+##  8 La            2016-10-15 2020-07-29           32
+##  9 Melbourne     2016-10-18 2022-11-30           81
+## 10 Madrid        2016-10-24 2022-04-05           51
+## # ℹ 199 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+* mutate(chapter = fct_inorder(chapter))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 209 × 4
+##    chapter       first_date last_date  tot_meetings
+##    &lt;fct&gt;         &lt;date&gt;     &lt;date&gt;            &lt;int&gt;
+##  1 San Francisco 2012-10-31 2021-09-09           64
+##  2 Tc            2015-04-26 2023-03-02           52
+##  3 London        2016-03-04 2022-10-26           61
+##  4 Rtp           2016-09-22 2023-08-22           74
+##  5 Istanbul      2016-10-01 2021-03-08           36
+##  6 Paris         2016-10-05 2023-10-19           25
+##  7 Boston        2016-10-13 2021-07-29           44
+##  8 La            2016-10-15 2020-07-29           32
+##  9 Melbourne     2016-10-18 2022-11-30           81
+## 10 Madrid        2016-10-24 2022-04-05           51
+## # ℹ 199 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+  mutate(chapter = fct_inorder(chapter)) -&gt;
+*rladies_chapter_df
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+  mutate(chapter = fct_inorder(chapter)) -&gt;
+rladies_chapter_df
+
+*rladies_chapters_raw
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 4,268 × 6
+##           id chapter   title                           date       location  year
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;                           &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+##  1 296275584 St Louis  "Save the date! Introduction t… 2023-11-30 online    2023
+##  2 296277517 Coventry  "An basic introduction: Python… 2023-11-30 online    2023
+##  3 295898711 Baltimore "Holiday graphics and animatio… 2023-11-28 inperson  2023
+##  4 296346610 Philly    "TidyTuesday with R-Ladies Phi… 2023-11-14 online    2023
+##  5 296275461 St Louis  "Save the date! Introduction t… 2023-11-08 online    2023
+##  6 296424871 Kathmandu "4 days workshop"               2023-11-01 inperson  2023
+##  7 296239571 Taipei    "旅遊服務銜接 AIGC 的各種坑"    2023-10-30 inperson  2023
+##  8 296559481 Montreal  "RLadies October Meetup - \"R-… 2023-10-30 inperson  2023
+##  9 296677321 Abuja     "R-Ladies Abuja and Abuja R us… 2023-10-28 inperson  2023
+## 10 296720878 Sao Paulo "Meetup R-Ladies São Paulo - I… 2023-10-28 inperson  2023
+## # ℹ 4,258 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+  mutate(chapter = fct_inorder(chapter)) -&gt;
+rladies_chapter_df
+
+rladies_chapters_raw %&gt;%
+* mutate(chapter =
+*          factor(chapter,
+*                    levels =
+*                   levels(rladies_chapter_df$chapter)))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 4,268 × 6
+##           id chapter   title                           date       location  year
+##        &lt;dbl&gt; &lt;fct&gt;     &lt;chr&gt;                           &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+##  1 296275584 St Louis  "Save the date! Introduction t… 2023-11-30 online    2023
+##  2 296277517 Coventry  "An basic introduction: Python… 2023-11-30 online    2023
+##  3 295898711 Baltimore "Holiday graphics and animatio… 2023-11-28 inperson  2023
+##  4 296346610 Philly    "TidyTuesday with R-Ladies Phi… 2023-11-14 online    2023
+##  5 296275461 St Louis  "Save the date! Introduction t… 2023-11-08 online    2023
+##  6 296424871 Kathmandu "4 days workshop"               2023-11-01 inperson  2023
+##  7 296239571 Taipei    "旅遊服務銜接 AIGC 的各種坑"    2023-10-30 inperson  2023
+##  8 296559481 Montreal  "RLadies October Meetup - \"R-… 2023-10-30 inperson  2023
+##  9 296677321 Abuja     "R-Ladies Abuja and Abuja R us… 2023-10-28 inperson  2023
+## 10 296720878 Sao Paulo "Meetup R-Ladies São Paulo - I… 2023-10-28 inperson  2023
+## # ℹ 4,258 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+  mutate(chapter = fct_inorder(chapter)) -&gt;
+rladies_chapter_df
+
+rladies_chapters_raw %&gt;%
+  mutate(chapter =
+           factor(chapter,
+                     levels =
+                    levels(rladies_chapter_df$chapter))) %&gt;%
+* group_by(chapter)
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 4,268 × 6
+## # Groups:   chapter [209]
+##           id chapter   title                           date       location  year
+##        &lt;dbl&gt; &lt;fct&gt;     &lt;chr&gt;                           &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;
+##  1 296275584 St Louis  "Save the date! Introduction t… 2023-11-30 online    2023
+##  2 296277517 Coventry  "An basic introduction: Python… 2023-11-30 online    2023
+##  3 295898711 Baltimore "Holiday graphics and animatio… 2023-11-28 inperson  2023
+##  4 296346610 Philly    "TidyTuesday with R-Ladies Phi… 2023-11-14 online    2023
+##  5 296275461 St Louis  "Save the date! Introduction t… 2023-11-08 online    2023
+##  6 296424871 Kathmandu "4 days workshop"               2023-11-01 inperson  2023
+##  7 296239571 Taipei    "旅遊服務銜接 AIGC 的各種坑"    2023-10-30 inperson  2023
+##  8 296559481 Montreal  "RLadies October Meetup - \"R-… 2023-10-30 inperson  2023
+##  9 296677321 Abuja     "R-Ladies Abuja and Abuja R us… 2023-10-28 inperson  2023
+## 10 296720878 Sao Paulo "Meetup R-Ladies São Paulo - I… 2023-10-28 inperson  2023
+## # ℹ 4,258 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+  mutate(chapter = fct_inorder(chapter)) -&gt;
+rladies_chapter_df
+
+rladies_chapters_raw %&gt;%
+  mutate(chapter =
+           factor(chapter,
+                     levels =
+                    levels(rladies_chapter_df$chapter))) %&gt;%
+  group_by(chapter) %&gt;%
+* mutate(meeting_number = rank(date))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## # A tibble: 4,268 × 7
+## # Groups:   chapter [209]
+##           id chapter   title            date       location  year meeting_number
+##        &lt;dbl&gt; &lt;fct&gt;     &lt;chr&gt;            &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;          &lt;dbl&gt;
+##  1 296275584 St Louis  "Save the date!… 2023-11-30 online    2023             41
+##  2 296277517 Coventry  "An basic intro… 2023-11-30 online    2023             15
+##  3 295898711 Baltimore "Holiday graphi… 2023-11-28 inperson  2023             34
+##  4 296346610 Philly    "TidyTuesday wi… 2023-11-14 online    2023             83
+##  5 296275461 St Louis  "Save the date!… 2023-11-08 online    2023             40
+##  6 296424871 Kathmandu "4 days worksho… 2023-11-01 inperson  2023              6
+##  7 296239571 Taipei    "旅遊服務銜接 A… 2023-10-30 inperson  2023             65
+##  8 296559481 Montreal  "RLadies Octobe… 2023-10-30 inperson  2023             88
+##  9 296677321 Abuja     "R-Ladies Abuja… 2023-10-28 inperson  2023             17
+## 10 296720878 Sao Paulo "Meetup R-Ladie… 2023-10-28 inperson  2023             26
+## # ℹ 4,258 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+  mutate(chapter = fct_inorder(chapter)) -&gt;
+rladies_chapter_df
+
+rladies_chapters_raw %&gt;%
+  mutate(chapter =
+           factor(chapter,
+                     levels =
+                    levels(rladies_chapter_df$chapter))) %&gt;%
+  group_by(chapter) %&gt;%
+  mutate(meeting_number = rank(date)) -&gt;
+*meetings_df
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+  mutate(chapter = fct_inorder(chapter)) -&gt;
+rladies_chapter_df
+
+rladies_chapters_raw %&gt;%
+  mutate(chapter =
+           factor(chapter,
+                     levels =
+                    levels(rladies_chapter_df$chapter))) %&gt;%
+  group_by(chapter) %&gt;%
+  mutate(meeting_number = rank(date)) -&gt;
+meetings_df
+
+*make_ordinal &lt;- function(x){
+
+* ifelse(x == 1, "1st",
+*        ifelse(x == 2, "2nd",
+*               ifelse(x == 3, "3rd", paste0(x,"th"))))
+
+*} 
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+rladies_chapters_raw %&gt;%
+  group_by(chapter) %&gt;%
+  summarise(first_date = as.Date(min(date)),
+            last_date = as.Date(max(date)),
+            tot_meetings = n()) %&gt;%
+  arrange(first_date) %&gt;%
+  mutate(chapter = fct_inorder(chapter)) -&gt;
+rladies_chapter_df
+
+rladies_chapters_raw %&gt;%
+  mutate(chapter =
+           factor(chapter,
+                     levels =
+                    levels(rladies_chapter_df$chapter))) %&gt;%
+  group_by(chapter) %&gt;%
+  mutate(meeting_number = rank(date)) -&gt;
+meetings_df
+
+make_ordinal &lt;- function(x){
+
+  ifelse(x == 1, "1st",
+         ifelse(x == 2, "2nd",
+                ifelse(x == 3, "3rd", paste0(x,"th"))))
+
+}
+
+# test
+*make_ordinal(x = 1:10)
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+##  [1] "1st"  "2nd"  "3rd"  "4th"  "5th"  "6th"  "7th"  "8th"  "9th"  "10th"
+```
+]
+
+&lt;style&gt;
+.panel1-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-feature-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+
+---
+
+
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+*meetings_df
+```
+]
+ 
+.panel2-feature2-auto[
+
+```
+## # A tibble: 4,268 × 7
+## # Groups:   chapter [209]
+##           id chapter   title            date       location  year meeting_number
+##        &lt;dbl&gt; &lt;fct&gt;     &lt;chr&gt;            &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;          &lt;dbl&gt;
+##  1 296275584 St Louis  "Save the date!… 2023-11-30 online    2023             41
+##  2 296277517 Coventry  "An basic intro… 2023-11-30 online    2023             15
+##  3 295898711 Baltimore "Holiday graphi… 2023-11-28 inperson  2023             34
+##  4 296346610 Philly    "TidyTuesday wi… 2023-11-14 online    2023             83
+##  5 296275461 St Louis  "Save the date!… 2023-11-08 online    2023             40
+##  6 296424871 Kathmandu "4 days worksho… 2023-11-01 inperson  2023              6
+##  7 296239571 Taipei    "旅遊服務銜接 A… 2023-10-30 inperson  2023             65
+##  8 296559481 Montreal  "RLadies Octobe… 2023-10-30 inperson  2023             88
+##  9 296677321 Abuja     "R-Ladies Abuja… 2023-10-28 inperson  2023             17
+## 10 296720878 Sao Paulo "Meetup R-Ladie… 2023-10-28 inperson  2023             26
+## # ℹ 4,258 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+* ggplot()
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_02_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+* aes(y = as.numeric(chapter), x = date)
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_03_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+* geom_point(alpha = .6)
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+  geom_point(alpha = .6) +
+* aes(color = meeting_number)
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+  geom_point(alpha = .6) +
+  aes(color = meeting_number) +
+* geom_text(data = rladies_chapter_df,
+*           aes(x = first_date-days(120),
+*               label = ifelse(chapter == "San Francisco",
+*                              "San         \nFrancisco",
+*                              as.character(chapter))),
+*           color = "grey20",
+*           hjust = 1,
+*           size = 4.5,
+*           lineheight = .7)
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+  geom_point(alpha = .6) +
+  aes(color = meeting_number) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = first_date-days(120),
+                label = ifelse(chapter == "San Francisco",
+                               "San         \nFrancisco",
+                               as.character(chapter))),
+            color = "grey20",
+            hjust = 1,
+            size = 4.5,
+            lineheight = .7) +
+* geom_text(data = rladies_chapter_df,
+*           aes(x = last_date,
+*               label = make_ordinal(tot_meetings)),
+*           color = "grey20",
+*           hjust = -.3,
+*           size = 4.5)
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+  geom_point(alpha = .6) +
+  aes(color = meeting_number) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = first_date-days(120),
+                label = ifelse(chapter == "San Francisco",
+                               "San         \nFrancisco",
+                               as.character(chapter))),
+            color = "grey20",
+            hjust = 1,
+            size = 4.5,
+            lineheight = .7) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = last_date,
+                label = make_ordinal(tot_meetings)),
+            color = "grey20",
+            hjust = -.3,
+            size = 4.5) +
+* theme(axis.text.y = element_blank())
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+  geom_point(alpha = .6) +
+  aes(color = meeting_number) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = first_date-days(120),
+                label = ifelse(chapter == "San Francisco",
+                               "San         \nFrancisco",
+                               as.character(chapter))),
+            color = "grey20",
+            hjust = 1,
+            size = 4.5,
+            lineheight = .7) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = last_date,
+                label = make_ordinal(tot_meetings)),
+            color = "grey20",
+            hjust = -.3,
+            size = 4.5) +
+  theme(axis.text.y = element_blank()) +
+* scale_color_viridis_c(option = "magma", breaks = c(1, 50, 100),
+*                       labels = c("1st", "50th", "100th"))
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_09_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+  geom_point(alpha = .6) +
+  aes(color = meeting_number) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = first_date-days(120),
+                label = ifelse(chapter == "San Francisco",
+                               "San         \nFrancisco",
+                               as.character(chapter))),
+            color = "grey20",
+            hjust = 1,
+            size = 4.5,
+            lineheight = .7) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = last_date,
+                label = make_ordinal(tot_meetings)),
+            color = "grey20",
+            hjust = -.3,
+            size = 4.5) +
+  theme(axis.text.y = element_blank()) +
+  scale_color_viridis_c(option = "magma", breaks = c(1, 50, 100),
+                        labels = c("1st", "50th", "100th")) +
+* facet_wrap( ~ cut_interval(
+*   as.numeric(chapter),
+*   n = 4),
+*   scales = "free_y",
+*   ncol = 4)
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_10_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+  geom_point(alpha = .6) +
+  aes(color = meeting_number) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = first_date-days(120),
+                label = ifelse(chapter == "San Francisco",
+                               "San         \nFrancisco",
+                               as.character(chapter))),
+            color = "grey20",
+            hjust = 1,
+            size = 4.5,
+            lineheight = .7) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = last_date,
+                label = make_ordinal(tot_meetings)),
+            color = "grey20",
+            hjust = -.3,
+            size = 4.5) +
+  theme(axis.text.y = element_blank()) +
+  scale_color_viridis_c(option = "magma", breaks = c(1, 50, 100),
+                        labels = c("1st", "50th", "100th")) +
+  facet_wrap( ~ cut_interval(
+    as.numeric(chapter),
+    n = 4),
+    scales = "free_y",
+    ncol = 4) +
+* labs(color = "Meeting\nnumber")
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_11_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+meetings_df %&gt;%
+  ggplot() +
+  aes(y = as.numeric(chapter), x = date) +
+  geom_point(alpha = .6) +
+  aes(color = meeting_number) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = first_date-days(120),
+                label = ifelse(chapter == "San Francisco",
+                               "San         \nFrancisco",
+                               as.character(chapter))),
+            color = "grey20",
+            hjust = 1,
+            size = 4.5,
+            lineheight = .7) +
+  geom_text(data = rladies_chapter_df,
+            aes(x = last_date,
+                label = make_ordinal(tot_meetings)),
+            color = "grey20",
+            hjust = -.3,
+            size = 4.5) +
+  theme(axis.text.y = element_blank()) +
+  scale_color_viridis_c(option = "magma", breaks = c(1, 50, 100),
+                        labels = c("1st", "50th", "100th")) +
+  facet_wrap( ~ cut_interval(
+    as.numeric(chapter),
+    n = 4),
+    scales = "free_y",
+    ncol = 4) +
+  labs(color = "Meeting\nnumber") +
+* scale_x_date(expand = expansion(c(.3,.2)))
+```
+]
+ 
+.panel2-feature2-auto[
+![](rladies-on-a-wire_files/figure-html/feature2_auto_12_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-feature2-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-feature2-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-feature2-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+![](rladies-on-a-wire_files/figure-html/feature2-1.png)&lt;!-- --&gt;
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+&lt;/style&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

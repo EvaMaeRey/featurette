@@ -111,7 +111,7 @@ ggplot2::diamonds %>%
 
 ## 'Real world' application: TidyTuesday Rladies
 
-```{r}
+```{r, fig.height=6, fig.width=10}
 # tidytuesday data
 rladies_chapters <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-21/rladies_chapters.csv')
 ```

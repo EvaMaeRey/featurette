@@ -1,0 +1,120 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1606482659485-8b5c3623a609?q=80&w=1473&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# An advent of code calendar]
+## .small[featuring experimental [{ggcalendar}](https://github.com/EvaMaeRey/ggcalendar)]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Elena Mozhvilo, Upsplash]
+???
+Title 
+
+---
+
+## Build dates data frame
+
+```{r}
+library(tidyverse)
+"2023-12-01" %>% 
+  as_date() +
+  days(0:30) ->
+december_vec
+
+c(NA, NA, NA, "make calendar", "make 9 pies", "circle pack counting",
+  "pivot w OOP", "RUGS check", "smoothfit", "slice", "nc w sf", "org extenders", "sample") %>% 
+  c(., rep(NA,31-length(.))) %>% 
+  tibble(todo = .) %>% 
+  mutate(date = december_vec) ->
+advent_df
+
+```
+
+
+---
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+library(ggcalendar)
+
+advent_df %>% 
+  ggcalendar(dates_df = .) + 
+  aes(date = date) + 
+  geom_tile_calendar(color = "oldlace", 
+                     linewidth = .5,
+                     fill = "darkolivegreen") + 
+  aes(alpha = date < Sys.Date()) +
+  geom_text_calendar(alpha = .4) + 
+  aes(color = date < Sys.Date()) + 
+  scale_color_manual(values = c("grey30", "grey95"),
+                     label = c("future", "past")) +
+  scale_alpha_discrete(label = c("future", "past")) +
+  geom_text_calendar(
+    aes(label = str_wrap(todo, 7)),
+    lineheight = .7,
+    alpha = .8) + 
+  theme(text = element_text(size = 20)) + 
+  labs(alpha = NULL, color = NULL) + 
+  labs(title = "'Advent of Code'") +
+  geom_tile_calendar(data = . %>% 
+                       filter(date == Sys.Date()),
+                     fill = alpha("goldenrod2", .1),
+                     color = "goldenrod3", 
+                     show.legend = F,
+                     linewidth = 1.5)
+```
+
+
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 80%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+
