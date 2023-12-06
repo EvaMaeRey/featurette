@@ -60,11 +60,11 @@ titanic %>%
   scale_fill_manual(
     values = c("darkgrey", 
                "cadetblue")) + # custom colors
-  facet_wrap(facets = vars(Sex)) + #pie3 
   theme_void() + # little clean up
-  aes(r = 1) + #pie4
-  aes(r0 = .6) + #pie5
-  ggwedge:::geom_pie_label(r_nudge = .2) + #pie6
+  ggwedge:::geom_pie_label(r_prop = 1.1) + #pie3
+  facet_wrap(facets = vars(Sex)) + #pie4
+  aes(r = 1) + #pie5
+  aes(r0 = .6) + #pie6
   facet_grid(rows = vars(Sex), 
              cols = vars(Class)) + #pie7
   aes(label = after_stat(count)) + #pie8  
@@ -73,6 +73,8 @@ titanic %>%
   # bonuspie back to percentages
   aes(label = after_stat(percent)) 
 ```
+
+
 
 
 ---

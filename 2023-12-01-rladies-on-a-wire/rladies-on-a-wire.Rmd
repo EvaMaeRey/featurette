@@ -144,7 +144,6 @@ rladies_chapters_raw %>%
              color = "magenta",
              linetype = "dashed",
              alpha = .2) +
-
   geom_rug(alpha = .2,
            color = "plum4") + 
   labs(title = "") +

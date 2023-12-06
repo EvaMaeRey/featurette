@@ -61,7 +61,7 @@ new_experiment <- function(name){
   
 } 
 
-new_experiment(name = "nine-pies")
+new_experiment(name = "ggsample")
 
 
 
@@ -78,7 +78,7 @@ build_mp4 <- function(name){
   
 } 
 
-build_mp4("nine-pies")
+build_mp4("ggsample")
 
 ```
 
