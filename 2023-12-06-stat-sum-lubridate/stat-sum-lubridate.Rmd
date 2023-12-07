@@ -1,0 +1,136 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80&w=1548&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# My featurette]
+## .small[featuring [{}]() ...]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+---
+
+```{r}
+library(tidyverse)
+library(ggcirclepack)
+
+# tidytuesday data
+rladies_chapters_raw <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-21/rladies_chapters.csv') %>% 
+  mutate(chapter = str_remove(chapter, "rladies-") %>% 
+           str_replace_all("-", " ") %>% str_to_title() %>% str_remove("\\s+$")) 
+```
+
+
+
+
+---
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+rladies_chapters_raw %>% 
+  ggplot() + 
+  aes(x = "all", y = "all") + 
+  stat_bin_2d(alpha = .85) +
+  stat_bin_2d(geom = "text", 
+           aes(label = after_stat(count)), 
+           color = "oldlace",
+           size = 3) +
+  aes(y = wday(date, label = T, 
+               week_start = "Monday") |> fct_rev()) + 
+  scale_fill_viridis_c(option = "magma", end = .75) +
+  aes(y = year(date) |> as.character() |> fct_rev()) + 
+  aes(y = month(date, label = T)|> fct_rev()) +
+  aes(x = year(date) |> as.character()) +
+  aes(x = as.factor(day(date))) 
+```
+
+---
+
+```{r, fig.width=15, fig.height=3}
+ggwipe::last_plot_wipe_last() + # remove text layer, experimental
+  facet_wrap(~year(date), nrow = 1) + 
+  scale_x_discrete(breaks = as.character(1:31), # clean up x axis
+                   labels = c("1", rep("", 8), 
+                              "10", rep("", 9),
+                              "20", rep("", 10), "31")) + 
+  labs(x = "Day of Month") + 
+  theme(panel.background = element_rect(fill = "darkgrey"),
+        panel.grid = element_blank()) + 
+  guides(fill = "colorbar")
+```
+
+
+
+```{r}
+
+
+
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+

@@ -158,6 +158,50 @@ rladies_chapters_raw %>%
                        size = 4) 
 ```
 
+```{r}
+rladies_chapters_raw %>% 
+  filter(year(date) == 2022) %>% 
+  count(date) %>% 
+  ggcalendar::ggcalendar() + 
+  ggcalendar::geom_tile_calendar(data = ggcalendar::return_dates_year(2022), 
+                                 aes(fill = NULL)) +
+  ggcalendar::geom_tile_calendar() + 
+  ggcalendar::geom_text_calendar() +
+  aes(fill = n) + 
+  scale_fill_viridis_c(limits = c(0,10))
+
+
+rladies_chapters_raw %>% 
+  ggplot() + 
+  aes(x = "all", y = "all") +
+  stat_sum(geom = "tile", alpha = .85) + 
+  aes(fill = after_stat(n)) + 
+  scale_fill_viridis_c(option = "magma", end = .9) +
+  stat_sum(geom = "text",
+           aes(label = after_stat(n)),
+           color = "oldlace", 
+           size = 3) +
+  aes(y = year(date)) + 
+  aes(y = year(date) |> as.character()) + 
+  aes(x = month(date, label = T)) +
+  aes(y = "all") +
+  aes(x = as.factor(day(date))) + 
+  aes(y = month(date, label = T)) + 
+  aes(y = month(date, label = T) |> fct_rev())
+
+
+ggwipe::last_plot_wipe_last() +
+  facet_wrap(~year(date)) + 
+  scale_x_discrete(breaks = as.character(1:31),
+                   labels = c("1", rep("", 8), 
+                              "10", rep("", 9),
+                              "20", rep("", 10), "31"))
+  
+  
+  
+```
+
+
 ---
 
 ### Contribute
