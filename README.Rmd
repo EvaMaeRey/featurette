@@ -59,9 +59,9 @@ new_experiment <- function(name){
   readLines("template.Rmd") |>
     writeLines(con = paste0(dir,"/", name, ".Rmd"))
   
-} 
+}  
 
-new_experiment(name = "ggsample")
+new_experiment(name = "stat-sum-lubridate")
 
 
 
@@ -78,7 +78,7 @@ build_mp4 <- function(name){
   
 } 
 
-build_mp4("ggsample")
+build_mp4("stat-sum-lubridate")
 
 ```
 
