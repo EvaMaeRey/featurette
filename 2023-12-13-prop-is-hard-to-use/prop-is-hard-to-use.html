@@ -4,7 +4,7 @@
     <title>prop is hard to use</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <meta name="date" content="2023-12-13" />
+    <meta name="date" content="2023-12-14" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
@@ -36,6 +36,23 @@ count: false
 .panel1-feature-auto[
 
 ```r
+*to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 *library(tidyverse)
 ```
 ]
@@ -51,6 +68,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 *theme_set(theme_bw(base_size = 20))
 ```
@@ -67,6 +86,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 *Titanic
@@ -121,6 +142,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -174,31 +197,13 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
   data.frame() %&gt;%
 * ggplot(aes(x = Sex, fill = Survived, weight = Freq))
-```
-]
- 
-.panel2-feature-auto[
-![](prop-is-hard-to-use_files/figure-html/feature_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-library(tidyverse)
-theme_set(theme_bw(base_size = 20))
-Titanic %&gt;%
-  data.frame() %&gt;%
-  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
-* geom_bar(position = "dodge")
 ```
 ]
  
@@ -213,14 +218,14 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
   data.frame() %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
-  geom_bar(position = "dodge") +
-# Proportion per group
-* aes(y = after_stat(prop), group = Survived)
+* geom_bar(position = "dodge")
 ```
 ]
  
@@ -235,6 +240,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -242,8 +249,7 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
-* scale_y_continuous(labels = scales::percent_format())
+* aes(y     = after_stat(prop), group = Survived)
 ```
 ]
  
@@ -258,6 +264,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -265,9 +273,8 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
-  scale_y_continuous(labels = scales::percent_format()) +
-* aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") )
+  aes(y     = after_stat(prop), group = Survived) +
+* aes(label = to_percent(after_stat(prop)))
 ```
 ]
  
@@ -282,6 +289,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -289,10 +298,11 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
-  scale_y_continuous(labels = scales::percent_format()) +
-  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
-* stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single"))
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+* stat_count(geom = "text", size = 4,
+*            position =
+*              position_dodge2(width = .9, preserve = "single"))
 ```
 ]
  
@@ -307,6 +317,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -314,12 +326,12 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
-  scale_y_continuous(labels = scales::percent_format()) +
-  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
-  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
-# Proportion of total
-* aes(y = after_stat(count / sum(count)))
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
+* scale_y_continuous(labels = scales::percent_format())
 ```
 ]
  
@@ -334,6 +346,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -341,14 +355,14 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
   scale_y_continuous(labels = scales::percent_format()) +
-  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
-  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
 # Proportion of total
-  aes(y = after_stat(count / sum(count))) +
-# Proportion per x position
-* aes(y = after_stat(count / ave(count, x, FUN = sum)))
+* aes(y = after_stat(count / sum(count)))
 ```
 ]
  
@@ -363,6 +377,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -370,15 +386,15 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
   scale_y_continuous(labels = scales::percent_format()) +
-  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
-  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
 # Proportion of total
   aes(y = after_stat(count / sum(count))) +
-# Proportion per x position
-  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
-* facet_wrap(~ Class)
+* aes(label = to_percent(after_stat(count / sum(count))))
 ```
 ]
  
@@ -393,6 +409,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -400,17 +418,17 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
   scale_y_continuous(labels = scales::percent_format()) +
-  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
-  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
 # Proportion of total
   aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
 # Proportion per x position
-  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
-  facet_wrap(~ Class) +
-# Proportion per panel
-* aes(y = after_stat(count / ave(count, PANEL, FUN = sum)))
+* aes(y = after_stat(count / ave(count, x, FUN = sum)))
 ```
 ]
  
@@ -425,6 +443,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -432,19 +452,18 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
   scale_y_continuous(labels = scales::percent_format()) +
-  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
-  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
 # Proportion of total
   aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
 # Proportion per x position
   aes(y = after_stat(count / ave(count, x, FUN = sum))) +
-  facet_wrap(~ Class) +
-# Proportion per panel
-  aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
-# Proportion per panel and x position
-* aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum)))
+* aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum))))
 ```
 ]
  
@@ -459,6 +478,8 @@ count: false
 .panel1-feature-auto[
 
 ```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %&gt;%
@@ -466,26 +487,273 @@ Titanic %&gt;%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
 # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
   scale_y_continuous(labels = scales::percent_format()) +
-  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
-  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
 # Proportion of total
   aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
 # Proportion per x position
   aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum)))) +
+* facet_wrap(~ Class)
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_16_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
+  scale_y_continuous(labels = scales::percent_format()) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum)))) +
+  facet_wrap(~ Class) +
+# Proportion per panel
+* aes(y = after_stat(count / ave(count, PANEL, FUN = sum)))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_17_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
+  scale_y_continuous(labels = scales::percent_format()) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum)))) +
   facet_wrap(~ Class) +
 # Proportion per panel
   aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+* aes(label = to_percent(after_stat(count / ave(count, PANEL, FUN = sum))))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_18_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
+  scale_y_continuous(labels = scales::percent_format()) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum)))) +
+  facet_wrap(~ Class) +
+# Proportion per panel
+  aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, PANEL, FUN = sum)))) +
+# Proportion per panel and x position
+* aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum)))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_19_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
+  scale_y_continuous(labels = scales::percent_format()) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum)))) +
+  facet_wrap(~ Class) +
+# Proportion per panel
+  aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, PANEL, FUN = sum)))) +
 # Proportion per panel and x position
   aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum))) +
+* aes(label = to_percent(after_stat(count / ave(count, x, PANEL, FUN = sum))))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_20_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
+  scale_y_continuous(labels = scales::percent_format()) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum)))) +
+  facet_wrap(~ Class) +
+# Proportion per panel
+  aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, PANEL, FUN = sum)))) +
+# Proportion per panel and x position
+  aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, PANEL, FUN = sum)))) +
 # Proportion per panel and fill
 * aes(y = after_stat(count / ave(count, fill, PANEL, FUN = sum)))
 ```
 ]
  
 .panel2-feature-auto[
-![](prop-is-hard-to-use_files/figure-html/feature_auto_16_output-1.png)&lt;!-- --&gt;
+![](prop-is-hard-to-use_files/figure-html/feature_auto_21_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+to_percent = function(x){(100*x) %&gt;% round(1) %&gt;% paste("%")}
+
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) +
+  stat_count(geom = "text", size = 4,
+             position =
+               position_dodge2(width = .9, preserve = "single")) +
+  scale_y_continuous(labels = scales::percent_format()) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum)))) +
+  facet_wrap(~ Class) +
+# Proportion per panel
+  aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, PANEL, FUN = sum)))) +
+# Proportion per panel and x position
+  aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, PANEL, FUN = sum)))) +
+# Proportion per panel and fill
+  aes(y = after_stat(count / ave(count, fill, PANEL, FUN = sum))) +
+* aes(label = to_percent(after_stat(count / ave(count, fill, PANEL, FUN = sum))))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_22_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
@@ -560,19 +828,19 @@ layer_all_stages()
 ## 
 ## $before_geom
 ## # A tibble: 3 × 10
-##        y label  count   prop x          width flipped_aes group fill  PANEL
-##    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;mppd_dsc&gt; &lt;dbl&gt; &lt;lgl&gt;       &lt;int&gt; &lt;fct&gt; &lt;fct&gt;
-## 1 0.967  96.7 %   118 0.967  1            0.9 FALSE           1 No    1    
-## 2 0.0328 3.3 %      4 0.0328 2            0.9 FALSE           1 No    1    
-## 3 0.305  30.5 %    62 0.305  1            0.9 FALSE           2 Yes   1    
+##   label       y count   prop x          width flipped_aes group fill  PANEL
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;mppd_dsc&gt; &lt;dbl&gt; &lt;lgl&gt;       &lt;int&gt; &lt;fct&gt; &lt;fct&gt;
+## 1 96.7 % 0.967    118 0.967  1            0.9 FALSE           1 No    1    
+## 2 3.3 %  0.0328     4 0.0328 2            0.9 FALSE           1 No    1    
+## 3 30.5 % 0.305     62 0.305  1            0.9 FALSE           2 Yes   1    
 ## 
 ## $after_scale
 ## # A tibble: 3 × 17
-##   fill         y label  count   prop x      flipped_aes group PANEL  ymin   ymax
-##   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;mppd&gt; &lt;lgl&gt;       &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 #F8766D 0.967  96.7 %   118 0.967  0.775  FALSE           1 1         0 0.967 
-## 2 #F8766D 0.0328 3.3 %      4 0.0328 1.775  FALSE           1 1         0 0.0328
-## 3 #00BFC4 0.305  30.5 %    62 0.305  1.225  FALSE           2 1         0 0.305 
+##   fill    label       y count   prop x      flipped_aes group PANEL  ymin   ymax
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;mppd&gt; &lt;lgl&gt;       &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 #F8766D 96.7 % 0.967    118 0.967  0.775  FALSE           1 1         0 0.967 
+## 2 #F8766D 3.3 %  0.0328     4 0.0328 1.775  FALSE           1 1         0 0.0328
+## 3 #00BFC4 30.5 % 0.305     62 0.305  1.225  FALSE           2 1         0 0.305 
 ## # ℹ 6 more variables: xmin &lt;mppd_dsc&gt;, xmax &lt;mppd_dsc&gt;, colour &lt;lgl&gt;,
 ## #   linewidth &lt;dbl&gt;, linetype &lt;dbl&gt;, alpha &lt;lgl&gt;
 ```
@@ -631,7 +899,7 @@ ggplot(diamonds, aes(cut, fill = color)) +
 
 
 &lt;style type="text/css"&gt;
-.remark-code{line-height: 1.5; font-size: 100%}
+.remark-code{line-height: 1.5; font-size: 85%}
 @media print {
   .has-continuation {
     display: block;

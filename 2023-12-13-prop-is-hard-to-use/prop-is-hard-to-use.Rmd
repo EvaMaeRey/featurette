@@ -40,6 +40,8 @@ Title
 ---
 
 ```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+to_percent = function(x){(100*x) %>% round(1) %>% paste("%")}
+
 library(tidyverse)
 theme_set(theme_bw(base_size = 20))
 Titanic %>% 
@@ -47,21 +49,28 @@ Titanic %>%
   ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
   geom_bar(position = "dodge") +
   # Proportion per group
-  aes(y = after_stat(prop), group = Survived) +
+  aes(y     = after_stat(prop), group = Survived) +
+  aes(label = to_percent(after_stat(prop))) + 
+  stat_count(geom = "text", size = 4,
+             position = 
+               position_dodge2(width = .9, preserve = "single")) +
   scale_y_continuous(labels = scales::percent_format()) +
-  aes(label = (100*after_stat(prop)) %>% round(1) %>% paste("%") ) + 
-  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
   # Proportion of total
   aes(y = after_stat(count / sum(count))) +
+  aes(label = to_percent(after_stat(count / sum(count)))) +
   # Proportion per x position
   aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, FUN = sum)))) +
   facet_wrap(~ Class) +
   # Proportion per panel
   aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, PANEL, FUN = sum)))) +
   # Proportion per panel and x position
   aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, x, PANEL, FUN = sum)))) +
   # Proportion per panel and fill
-  aes(y = after_stat(count / ave(count, fill, PANEL, FUN = sum)))
+  aes(y = after_stat(count / ave(count, fill, PANEL, FUN = sum))) +
+  aes(label = to_percent(after_stat(count / ave(count, fill, PANEL, FUN = sum))))
 ```
 
 
@@ -136,7 +145,7 @@ ggplot(diamonds, aes(cut, fill = color)) +
 
 
 ```{css, eval = TRUE, echo = FALSE}
-.remark-code{line-height: 1.5; font-size: 100%}
+.remark-code{line-height: 1.5; font-size: 85%}
 @media print {
   .has-continuation {
     display: block;
