@@ -26,8 +26,8 @@ options(tidyverse.quiet = TRUE)
 class: inverse, left, bottom
 background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80&w=1548&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
-# .Large[# prop is hard to use]
-## .small[featuring [{}]() ...]
+# .Large[# [prop is hard to use](https://github.com/tidyverse/ggplot2/issues/5505)]
+## .small[featuring [ggplot2/issues/5505]() ...]
 #### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
 ???
 Title 
