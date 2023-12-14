@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>prop is hard to use</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <meta name="date" content="2023-12-13" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&amp;fit=crop&amp;q=80&amp;w=1548&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# prop is hard to use]
+## .small[featuring [{}]() ...]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+---
+
+
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+*library(tidyverse)
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+*theme_set(theme_bw(base_size = 20))
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+*Titanic
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## , , Age = Child, Survived = No
+## 
+##       Sex
+## Class  Male Female
+##   1st     0      0
+##   2nd     0      0
+##   3rd    35     17
+##   Crew    0      0
+## 
+## , , Age = Adult, Survived = No
+## 
+##       Sex
+## Class  Male Female
+##   1st   118      4
+##   2nd   154     13
+##   3rd   387     89
+##   Crew  670      3
+## 
+## , , Age = Child, Survived = Yes
+## 
+##       Sex
+## Class  Male Female
+##   1st     5      1
+##   2nd    11     13
+##   3rd    13     14
+##   Crew    0      0
+## 
+## , , Age = Adult, Survived = Yes
+## 
+##       Sex
+## Class  Male Female
+##   1st    57    140
+##   2nd    14     80
+##   3rd    75     76
+##   Crew  192     20
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+* data.frame()
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+##    Class    Sex   Age Survived Freq
+## 1    1st   Male Child       No    0
+## 2    2nd   Male Child       No    0
+## 3    3rd   Male Child       No   35
+## 4   Crew   Male Child       No    0
+## 5    1st Female Child       No    0
+## 6    2nd Female Child       No    0
+## 7    3rd Female Child       No   17
+## 8   Crew Female Child       No    0
+## 9    1st   Male Adult       No  118
+## 10   2nd   Male Adult       No  154
+## 11   3rd   Male Adult       No  387
+## 12  Crew   Male Adult       No  670
+## 13   1st Female Adult       No    4
+## 14   2nd Female Adult       No   13
+## 15   3rd Female Adult       No   89
+## 16  Crew Female Adult       No    3
+## 17   1st   Male Child      Yes    5
+## 18   2nd   Male Child      Yes   11
+## 19   3rd   Male Child      Yes   13
+## 20  Crew   Male Child      Yes    0
+## 21   1st Female Child      Yes    1
+## 22   2nd Female Child      Yes   13
+## 23   3rd Female Child      Yes   14
+## 24  Crew Female Child      Yes    0
+## 25   1st   Male Adult      Yes   57
+## 26   2nd   Male Adult      Yes   14
+## 27   3rd   Male Adult      Yes   75
+## 28  Crew   Male Adult      Yes  192
+## 29   1st Female Adult      Yes  140
+## 30   2nd Female Adult      Yes   80
+## 31   3rd Female Adult      Yes   76
+## 32  Crew Female Adult      Yes   20
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+* ggplot(aes(x = Sex, fill = Survived, weight = Freq))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+* geom_bar(position = "dodge")
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+* aes(y = after_stat(prop), group = Survived)
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+* scale_y_continuous(labels = scales::percent_format())
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+* aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") )
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_09_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
+* stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single"))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_10_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
+  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
+# Proportion of total
+* aes(y = after_stat(count / sum(count)))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_11_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
+  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+# Proportion per x position
+* aes(y = after_stat(count / ave(count, x, FUN = sum)))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_12_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
+  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+* facet_wrap(~ Class)
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_13_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
+  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  facet_wrap(~ Class) +
+# Proportion per panel
+* aes(y = after_stat(count / ave(count, PANEL, FUN = sum)))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_14_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
+  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  facet_wrap(~ Class) +
+# Proportion per panel
+  aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+# Proportion per panel and x position
+* aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum)))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_15_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %&gt;%
+  data.frame() %&gt;%
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+# Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  aes(label = (100*after_stat(prop)) %&gt;% round(1) %&gt;% paste("%") ) +
+  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
+# Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+# Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  facet_wrap(~ Class) +
+# Proportion per panel
+  aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+# Proportion per panel and x position
+  aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum))) +
+# Proportion per panel and fill
+* aes(y = after_stat(count / ave(count, fill, PANEL, FUN = sum)))
+```
+]
+ 
+.panel2-feature-auto[
+![](prop-is-hard-to-use_files/figure-html/feature_auto_16_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-feature-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+
+
+```r
+layer_all_stages &lt;- function(){
+
+a &lt;- ggtrace::layer_before_stat() %&gt;% head(3)
+b &lt;- ggtrace::layer_after_stat() %&gt;% head(3)
+c &lt;- ggtrace::layer_before_geom() %&gt;% head(3)
+d &lt;- ggtrace::layer_after_scale() %&gt;% head(3)
+
+list(before_stat = a, after_stat = b, 
+     before_geom = c, after_scale = d)
+
+}
+
+
+
+layer_all_stages()
+```
+
+```
+## $before_stat
+## # A tibble: 3 × 5
+##   group x          fill  weight PANEL
+##   &lt;int&gt; &lt;mppd_dsc&gt; &lt;fct&gt;  &lt;dbl&gt; &lt;fct&gt;
+## 1     1 1          No         0 1    
+## 2     1 1          No         0 2    
+## 3     1 1          No        35 3    
+## 
+## $after_stat
+## # A tibble: 3 × 8
+##   count   prop x          width flipped_aes group fill  PANEL
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;mppd_dsc&gt; &lt;dbl&gt; &lt;lgl&gt;       &lt;int&gt; &lt;fct&gt; &lt;fct&gt;
+## 1   118 0.967  1            0.9 FALSE           1 No    1    
+## 2     4 0.0328 2            0.9 FALSE           1 No    1    
+## 3    62 0.305  1            0.9 FALSE           2 Yes   1    
+## 
+## $before_geom
+## # A tibble: 3 × 10
+##        y label  count   prop x          width flipped_aes group fill  PANEL
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;mppd_dsc&gt; &lt;dbl&gt; &lt;lgl&gt;       &lt;int&gt; &lt;fct&gt; &lt;fct&gt;
+## 1 0.967  96.7 %   118 0.967  1            0.9 FALSE           1 No    1    
+## 2 0.0328 3.3 %      4 0.0328 2            0.9 FALSE           1 No    1    
+## 3 0.305  30.5 %    62 0.305  1            0.9 FALSE           2 Yes   1    
+## 
+## $after_scale
+## # A tibble: 3 × 17
+##   fill         y label  count   prop x      flipped_aes group PANEL  ymin   ymax
+##   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;mppd&gt; &lt;lgl&gt;       &lt;int&gt; &lt;fct&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 #F8766D 0.967  96.7 %   118 0.967  0.775  FALSE           1 1         0 0.967 
+## 2 #F8766D 0.0328 3.3 %      4 0.0328 1.775  FALSE           1 1         0 0.0328
+## 3 #00BFC4 0.305  30.5 %    62 0.305  1.225  FALSE           2 1         0 0.305 
+## # ℹ 6 more variables: xmin &lt;mppd_dsc&gt;, xmax &lt;mppd_dsc&gt;, colour &lt;lgl&gt;,
+## #   linewidth &lt;dbl&gt;, linetype &lt;dbl&gt;, alpha &lt;lgl&gt;
+```
+
+---
+
+
+
+```r
+prop_by &lt;- function(...) {
+  count &lt;- evalq(count, parent.frame())
+  if (length(list(...)) == 0) {
+    count / sum(count)
+  } else {
+    count / ave(count, ..., FUN = function(x) sum(abs(x)))
+  }
+}
+
+ggplot(diamonds, aes(cut, fill = color)) +
+  geom_bar(position = "dodge") + 
+  aes(y = after_stat(prop_by()))
+```
+
+![](prop-is-hard-to-use_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+&lt;/style&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

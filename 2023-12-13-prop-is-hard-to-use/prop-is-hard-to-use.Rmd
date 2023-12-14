@@ -1,0 +1,146 @@
+---
+title: "prop is hard to use"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80&w=1548&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# prop is hard to use]
+## .small[featuring [{}]() ...]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+library(tidyverse)
+theme_set(theme_bw(base_size = 20))
+Titanic %>% 
+  data.frame() %>% 
+  ggplot(aes(x = Sex, fill = Survived, weight = Freq)) +
+  geom_bar(position = "dodge") +
+  # Proportion per group
+  aes(y = after_stat(prop), group = Survived) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  aes(label = (100*after_stat(prop)) %>% round(1) %>% paste("%") ) + 
+  stat_count(geom = "text", position = position_dodge2(width = .9, preserve = "single")) +
+  # Proportion of total
+  aes(y = after_stat(count / sum(count))) +
+  # Proportion per x position
+  aes(y = after_stat(count / ave(count, x, FUN = sum))) +
+  facet_wrap(~ Class) +
+  # Proportion per panel
+  aes(y = after_stat(count / ave(count, PANEL, FUN = sum))) +
+  # Proportion per panel and x position
+  aes(y = after_stat(count / ave(count, x, PANEL, FUN = sum))) +
+  # Proportion per panel and fill
+  aes(y = after_stat(count / ave(count, fill, PANEL, FUN = sum)))
+```
+
+
+```{r}
+layer_all_stages <- function(){
+
+a <- ggtrace::layer_before_stat() %>% head(3)
+b <- ggtrace::layer_after_stat() %>% head(3)
+c <- ggtrace::layer_before_geom() %>% head(3)
+d <- ggtrace::layer_after_scale() %>% head(3)
+
+list(before_stat = a, after_stat = b, 
+     before_geom = c, after_scale = d)
+
+}
+
+
+
+layer_all_stages()
+
+```
+
+---
+
+
+```{r}
+prop_by <- function(...) {
+  count <- evalq(count, parent.frame())
+  if (length(list(...)) == 0) {
+    count / sum(count)
+  } else {
+    count / ave(count, ..., FUN = function(x) sum(abs(x)))
+  }
+}
+
+ggplot(diamonds, aes(cut, fill = color)) +
+  geom_bar(position = "dodge") + 
+  aes(y = after_stat(prop_by()))
+
+```
+
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+

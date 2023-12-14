@@ -61,7 +61,7 @@ new_experiment <- function(name){
   
 }  
 
-new_experiment(name = "stat-sum-lubridate")
+new_experiment(name = "prop-is-hard-to-use")
 
 
 
