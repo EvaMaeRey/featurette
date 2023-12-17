@@ -1,0 +1,137 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&q=80&w=1548&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# My featurette]
+## .small[featuring [{}]() ...]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+library(tidyverse)
+major = c("C", "G", "D", "A", "E", "B",
+            "F#/Gb","C#/Db", "G#/Ab", "Eb", "Bb", "F")
+minor = c("Am", "Em", "Bm", "F#m", "C#m", "G#m", "Ebm",
+            "Bbm", "Fm", "Cm", "Gm", "Dm")
+
+major_roman = c("I", "V", "II", "VI", "III", "VII", rep("",5), "IV")
+
+major %>% 
+  tibble(minor) %>% 
+  ggplot() + 
+  aes(fill = major) + 
+  ggwedge:::geom_pie(show.legend = F, 
+                     color = "black", 
+                     alpha = .4,
+                     linewidth = .1) +
+  aes(r = 1) +
+  coord_polar(start = -pi/12) +
+  ggwedge:::geom_pie_label(aes(label = after_stat(major)),
+                 r_prop = .85, size = 6) +
+  aes(angle = after_stat(angle_wedge -90+180/12)) + 
+  ggwedge:::geom_pie_label(aes(label = after_stat(minor)),
+                 r_prop = .5, size = 4.5) +
+  theme_void() +
+  geom_hline(yintercept = 1.2, alpha = 0) 
+```
+
+
+
+
+
+---
+
+
+`r flipbookr::chunk_reveal("feature2", widths = c(1,1))`
+
+```{r feature2, include = F}
+last_plot() + 
+  ggwedge:::geom_pie_label(show.legend = F, 
+           color = "black", r_prop = 1.1,
+           aes(label = after_stat(major_roman)),
+           linewidth = .1) + 
+  ggwedge:::geom_pie(alpha = 0, color = "grey",  
+                     aes(r0 = 1, r = 1.2, 
+                         lty = after_stat(ifelse(major_roman == "I", "a", 
+                                                       ifelse(major_roman %in% c("V", "IV"), "b", 
+                                                              ifelse(major %in% c("Bb", "D"), "c", "d")))))
+                     ) +
+  theme(legend.position = "none") ->
+p
+```
+
+
+
+
+---
+
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggcirclepack
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+
