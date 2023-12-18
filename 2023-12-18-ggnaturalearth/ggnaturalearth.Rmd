@@ -74,9 +74,10 @@ gapminder::gapminder |>
 
 
 
-### Check out {packcircles} which does the computation in ggcirclepack
+### Check out {rnaturalearth} which provides the underlying data
 
-- https://github.com/mbedward/packcircles
+- https://github.com/ropensci/rnaturalearth
+
 
 ---
 
