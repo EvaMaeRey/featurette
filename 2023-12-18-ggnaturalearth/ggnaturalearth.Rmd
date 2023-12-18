@@ -1,0 +1,105 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1669147849966-534dc594fc85?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# My featurette]
+## .small[featuring [{ggnaturalearth}](https://github.com/EvaMaeRey/ggnaturalearth) - which exists to test and refine ggnorthcarolina, a template repo, and which makes some promising choropleths!]
+#### .tiny[Gina Reynolds | 2023-12-18 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+library(tidyverse)
+library(ggnaturalearth)
+options(scipen = 10)
+gapminder::gapminder |>
+  filter(year == 2002) %>% 
+  ggplot() +
+  aes(country_name = country) +
+  geom_country() + 
+  aes(fill = pop/1000000) + 
+  labs(fill = "Pop (millions)") +
+  scale_fill_viridis_c(trans = "log10") +
+  aes(label = country) +
+  geom_country_label(size = 1.5,
+                     check_overlap = T) + 
+  geom_country(keep_country = 
+                 c("Portugal", "Germany"), 
+               color = "darkred", 
+               linewidth = .5,
+               alpha = 0) +
+  coord_sf(xlim = c(-25, 35), ylim = c(30, 80)) + 
+  ggstamp::theme_void_fill("aliceblue")
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggnorthcarolina
+
+---
+
+
+
+### Check out {packcircles} which does the computation in ggcirclepack
+
+- https://github.com/mbedward/packcircles
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+
