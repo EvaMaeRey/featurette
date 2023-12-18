@@ -14,43 +14,47 @@ Repo: <https://github.com/EvaMaeRey/featurette>
 
 0.  [template.html](https://evamaerey.github.io/featurette/template.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/template.Rmd)**
-1.  [2023-12-15-wedge-circle-of-5ths/wedge-circle-of-5ths.html](https://evamaerey.github.io/featurette/2023-12-15-wedge-circle-of-5ths/wedge-circle-of-5ths.html)
+1.  [2023-12-18-ggsmoothfit/ggsmoothfit.html](https://evamaerey.github.io/featurette/2023-12-18-ggsmoothfit/ggsmoothfit.html)
+    **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-18-ggsmoothfit/ggsmoothfit.Rmd)**
+2.  [2023-12-18-ggnaturalearth/ggnaturalearth.html](https://evamaerey.github.io/featurette/2023-12-18-ggnaturalearth/ggnaturalearth.html)
+    **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-18-ggnaturalearth/ggnaturalearth.Rmd)**
+3.  [2023-12-15-wedge-circle-of-5ths/wedge-circle-of-5ths.html](https://evamaerey.github.io/featurette/2023-12-15-wedge-circle-of-5ths/wedge-circle-of-5ths.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-15-wedge-circle-of-5ths/wedge-circle-of-5ths.Rmd)**
-2.  [2023-12-13-prop-is-hard-to-use/prop-is-hard-to-use.html](https://evamaerey.github.io/featurette/2023-12-13-prop-is-hard-to-use/prop-is-hard-to-use.html)
+4.  [2023-12-13-prop-is-hard-to-use/prop-is-hard-to-use.html](https://evamaerey.github.io/featurette/2023-12-13-prop-is-hard-to-use/prop-is-hard-to-use.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-13-prop-is-hard-to-use/prop-is-hard-to-use.Rmd)**
-3.  [2023-12-06-stat-sum-lubridate/stat-sum-lubridate.html](https://evamaerey.github.io/featurette/2023-12-06-stat-sum-lubridate/stat-sum-lubridate.html)
+5.  [2023-12-06-stat-sum-lubridate/stat-sum-lubridate.html](https://evamaerey.github.io/featurette/2023-12-06-stat-sum-lubridate/stat-sum-lubridate.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-06-stat-sum-lubridate/stat-sum-lubridate.Rmd)**
-4.  [2023-12-06-ggsample/ggsample.html](https://evamaerey.github.io/featurette/2023-12-06-ggsample/ggsample.html)
+6.  [2023-12-06-ggsample/ggsample.html](https://evamaerey.github.io/featurette/2023-12-06-ggsample/ggsample.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-06-ggsample/ggsample.Rmd)**
-5.  [2023-12-05-nine-pies/nine-pies.html](https://evamaerey.github.io/featurette/2023-12-05-nine-pies/nine-pies.html)
+7.  [2023-12-05-nine-pies/nine-pies.html](https://evamaerey.github.io/featurette/2023-12-05-nine-pies/nine-pies.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-05-nine-pies/nine-pies.Rmd)**
-6.  [2023-12-04-advent-todo/advent-todo.html](https://evamaerey.github.io/featurette/2023-12-04-advent-todo/advent-todo.html)
+8.  [2023-12-04-advent-todo/advent-todo.html](https://evamaerey.github.io/featurette/2023-12-04-advent-todo/advent-todo.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-04-advent-todo/advent-todo.Rmd)**
-7.  [2023-12-01-rladies-on-a-wire/rladies-on-a-wire.html](https://evamaerey.github.io/featurette/2023-12-01-rladies-on-a-wire/rladies-on-a-wire.html)
+9.  [2023-12-01-rladies-on-a-wire/rladies-on-a-wire.html](https://evamaerey.github.io/featurette/2023-12-01-rladies-on-a-wire/rladies-on-a-wire.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-12-01-rladies-on-a-wire/rladies-on-a-wire.Rmd)**
-8.  [2023-11-28-ggwedge-geom-pie/ggwedge-geom-pie.html](https://evamaerey.github.io/featurette/2023-11-28-ggwedge-geom-pie/ggwedge-geom-pie.html)
+10. [2023-11-28-ggwedge-geom-pie/ggwedge-geom-pie.html](https://evamaerey.github.io/featurette/2023-11-28-ggwedge-geom-pie/ggwedge-geom-pie.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-11-28-ggwedge-geom-pie/ggwedge-geom-pie.Rmd)**
-9.  [2023-11-27-ggedgelist-gg-cran-extenders/ggedgelist-gg-cran-extenders.html](https://evamaerey.github.io/featurette/2023-11-27-ggedgelist-gg-cran-extenders/ggedgelist-gg-cran-extenders.html)
+11. [2023-11-27-ggedgelist-gg-cran-extenders/ggedgelist-gg-cran-extenders.html](https://evamaerey.github.io/featurette/2023-11-27-ggedgelist-gg-cran-extenders/ggedgelist-gg-cran-extenders.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-11-27-ggedgelist-gg-cran-extenders/ggedgelist-gg-cran-extenders.Rmd)**
-10. [2023-11-08-ggpie-titanic/ggpie-titanic.html](https://evamaerey.github.io/featurette/2023-11-08-ggpie-titanic/ggpie-titanic.html)
+12. [2023-11-08-ggpie-titanic/ggpie-titanic.html](https://evamaerey.github.io/featurette/2023-11-08-ggpie-titanic/ggpie-titanic.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-11-08-ggpie-titanic/ggpie-titanic.Rmd)**
-11. [2023-11-07-ggplot-pie-charts/ggplot-pie-charts.pdf](https://evamaerey.github.io/featurette/2023-11-07-ggplot-pie-charts/ggplot-pie-charts.pdf)
+13. [2023-11-07-ggplot-pie-charts/ggplot-pie-charts.pdf](https://evamaerey.github.io/featurette/2023-11-07-ggplot-pie-charts/ggplot-pie-charts.pdf)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-11-07-ggplot-pie-charts/ggplot-pie-charts.Rmd)**
-12. [2023-11-07-ggplot-pie-charts/ggplot-pie-charts.html](https://evamaerey.github.io/featurette/2023-11-07-ggplot-pie-charts/ggplot-pie-charts.html)
+14. [2023-11-07-ggplot-pie-charts/ggplot-pie-charts.html](https://evamaerey.github.io/featurette/2023-11-07-ggplot-pie-charts/ggplot-pie-charts.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-11-07-ggplot-pie-charts/ggplot-pie-charts.Rmd)**
-13. [2023-11-02-help-quote-mtcars/help-quote-mtcars.html](https://evamaerey.github.io/featurette/2023-11-02-help-quote-mtcars/help-quote-mtcars.html)
+15. [2023-11-02-help-quote-mtcars/help-quote-mtcars.html](https://evamaerey.github.io/featurette/2023-11-02-help-quote-mtcars/help-quote-mtcars.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-11-02-help-quote-mtcars/help-quote-mtcars.Rmd)**
-14. [2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.html](https://evamaerey.github.io/featurette/2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.html)
+16. [2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.html](https://evamaerey.github.io/featurette/2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.Rmd)**
-15. [2023-10-30-ggformula-penguins/ggformula-penguins.html](https://evamaerey.github.io/featurette/2023-10-30-ggformula-penguins/ggformula-penguins.html)
+17. [2023-10-30-ggformula-penguins/ggformula-penguins.html](https://evamaerey.github.io/featurette/2023-10-30-ggformula-penguins/ggformula-penguins.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-10-30-ggformula-penguins/ggformula-penguins.Rmd)**
-16. [2023-10-28-diamonds-barlabs/diamonds-barlabs.html](https://evamaerey.github.io/featurette/2023-10-28-diamonds-barlabs/diamonds-barlabs.html)
+18. [2023-10-28-diamonds-barlabs/diamonds-barlabs.html](https://evamaerey.github.io/featurette/2023-10-28-diamonds-barlabs/diamonds-barlabs.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-10-28-diamonds-barlabs/diamonds-barlabs.Rmd)**
-17. [2023-10-26-tswift-keys/tswift-keys.html](https://evamaerey.github.io/featurette/2023-10-26-tswift-keys/tswift-keys.html)
+19. [2023-10-26-tswift-keys/tswift-keys.html](https://evamaerey.github.io/featurette/2023-10-26-tswift-keys/tswift-keys.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-10-26-tswift-keys/tswift-keys.Rmd)**
-18. [2023-10-26-horror-articles/horror-articles.html](https://evamaerey.github.io/featurette/2023-10-26-horror-articles/horror-articles.html)
+20. [2023-10-26-horror-articles/horror-articles.html](https://evamaerey.github.io/featurette/2023-10-26-horror-articles/horror-articles.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-10-26-horror-articles/horror-articles.Rmd)**
-19. [2023-09-13-ggcirclepack-global-human-day/global\_human\_day.html](https://evamaerey.github.io/featurette/2023-09-13-ggcirclepack-global-human-day/global_human_day.html)
+21. [2023-09-13-ggcirclepack-global-human-day/global\_human\_day.html](https://evamaerey.github.io/featurette/2023-09-13-ggcirclepack-global-human-day/global_human_day.html)
     **[source](https://github.com/evamaerey/featurette/blob/master/2023-09-13-ggcirclepack-global-human-day/global_human_day.Rmd)**
 
 -----
@@ -68,7 +72,7 @@ new_experiment <- function(name){
   
 }  
 
-new_experiment(name = "wedge-circle-of-5ths")
+new_experiment(name = "ggsmootfit")
 
 
 
@@ -81,9 +85,9 @@ build_mp4 <- function(name){
   target_html <- webpages[grep(name, webpages)][1]
   
   # build mp4
-  xaringanBuilder::build_mp4(input = target_html, fps = 2)
+  xaringanBuilder::build_mp4(input = target_html, fps = 1)
   
 } 
 
-build_mp4("stat-sum-lubridate")
+build_mp4("ggsmoothfit")
 ```

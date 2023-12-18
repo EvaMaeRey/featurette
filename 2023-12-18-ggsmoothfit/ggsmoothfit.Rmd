@@ -1,0 +1,139 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+```
+
+class: left
+background-image: url(https://images.unsplash.com/photo-1533930086187-0fc58e5a92e2?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# Prediction with [{ggsmoothfit}](https://github.com/EvaMaeRey/ggsmoothfit)
+
+
+
+--
+
+### ggplot2's geom_smooth() shows prediction across a range of values. 
+--
+
+### stat_smooth()'s xseq specifies positions at which to make predict.  
+--
+
+### {ggsmoothfit} piggybacks on StatSmooth, to easily draw fitted values, residuals, and more. 
+
+<br><br><br><br><br>
+<br>
+
+--
+
+| Gina Reynolds | 2023-10-25 |Image credit: Elena Koycheva, Upsplash
+
+
+---
+
+
+```{r}
+library(tidyverse)
+mtcars %>% 
+  ggplot() + 
+  aes(wt, mpg) +
+  geom_point() +
+  geom_smooth(se = F, method = lm) ->
+a_ggplot2_plot
+```
+
+
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+---
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+a_ggplot2_plot +
+  ggsmoothfit:::geom_fit(method = lm) + 
+  ggsmoothfit:::geom_residuals(method = lm) 
+```
+
+---
+
+
+`r flipbookr::chunk_reveal("feature2", widths = c(1,1))`
+
+---
+
+```{r feature2, echo = F, out.width="70%", fig.align='center', include = F}
+a_ggplot2_plot + 
+  ggsmoothfit:::geom_smooth_predict(
+    xseq = 0, method = lm, size = 5) +
+  ggsmoothfit:::geom_smooth_predict(
+    xseq = 2, method = lm, size = 5) + 
+  ggsmoothfit:::geom_smooth_predict(
+    xseq = 3, method = lm, size = 5) +
+  ggsmoothfit:::geom_smooth_step(
+    xseq = 2:3, method = lm)
+```
+
+
+---
+
+### Contribute
+
+- https://github.com/EvaMaeRey/ggsmoothfit
+
+---
+
+
+
+### Check out stat_smooth() which does the computation in ggsmoothfit
+
+- https://ggplot2.tidyverse.org/reference/geom_smooth.html
+- examples with xseq, https://evamaerey.github.io/featurette/2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.html#10
+- xseq documentation discussion https://github.com/tidyverse/ggplot2/issues/5246
+
+---
+
+### Check out flipbookr, used to build this featurette
+
+- https://github.com/EvaMaeRey/flipbookr
+- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+

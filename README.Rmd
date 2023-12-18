@@ -61,7 +61,7 @@ new_experiment <- function(name){
   
 }  
 
-new_experiment(name = "wedge-circle-of-5ths")
+new_experiment(name = "ggsmootfit")
 
 
 
@@ -74,11 +74,11 @@ build_mp4 <- function(name){
   target_html <- webpages[grep(name, webpages)][1]
   
   # build mp4
-  xaringanBuilder::build_mp4(input = target_html, fps = 2)
+  xaringanBuilder::build_mp4(input = target_html, fps = 1)
   
 } 
 
-build_mp4("stat-sum-lubridate")
+build_mp4("ggsmoothfit")
 
 ```
 
