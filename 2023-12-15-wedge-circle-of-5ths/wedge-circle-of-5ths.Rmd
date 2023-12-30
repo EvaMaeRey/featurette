@@ -88,10 +88,19 @@ last_plot() +
                                                        ifelse(major_roman %in% c("V", "IV"), "b", 
                                                               ifelse(major %in% c("Bb", "D"), "c", "d")))))
                      ) +
-  theme(legend.position = "none") ->
-p
+  theme(legend.position = "none")
 ```
 
+
+---
+
+# Go black and white...
+
+```{r}
+ggwipe::last_plot_wipe(1) + 
+  ggwedge:::geom_pie(alpha = 0, 
+                     color = "grey35")
+```
 
 
 

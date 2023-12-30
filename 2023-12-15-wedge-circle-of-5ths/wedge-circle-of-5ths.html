@@ -4,7 +4,7 @@
     <title>featurette</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <meta name="date" content="2023-12-16" />
+    <meta name="date" content="2023-12-30" />
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
@@ -652,8 +652,18 @@ last_plot() +
 
 
 
+---
+
+# Go black and white...
 
 
+```r
+ggwipe::last_plot_wipe(1) + 
+  ggwedge:::geom_pie(alpha = 0, 
+                     color = "grey35")
+```
+
+![](wedge-circle-of-5ths_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
 
 
 
