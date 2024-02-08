@@ -18,99 +18,87 @@
 
 
 
+
 class: left
-background-image: url(https://images.unsplash.com/photo-1533930086187-0fc58e5a92e2?q=80&amp;w=1587&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-image: url(https://images.unsplash.com/photo-1528830639624-fc16697bb8e7?q=80&amp;w=1470&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
-# Prediction with [{ggsmoothfit}](https://github.com/EvaMaeRey/ggsmoothfit)
 
-Gina Reynolds | 2023-10-25 |Image credit: Elena Koycheva, Upsplash
-
-
-
-
-### stat_smooth()'s xseq argument specifies positions at which to make predictions
---
-
-### {ggsmoothfit} piggybacks on StatSmooth, to easily draw fitted values, residuals, and more. 
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
 &lt;br&gt;
 
+# &lt;span style="color:burlywood"&gt;faceting in ggplot2 with reference data layer&lt;/span&gt;
+
+### &lt;span style="color:burlywood"&gt;.tiny[Gina Reynolds | 2024-02-07 | Image credit: Georgi Petrov, Upsplash]&lt;/span&gt;
+
+
+
+---
+
+### &lt;span style="color:burlywood"&gt;Small multiples (facets) are a powerful tool.&lt;/span&gt;
 --
 
+### &lt;span style="color:burlywood"&gt;They break up and display data by category, so patterns within each category can be appreciated.&lt;/span&gt;
+--
+
+### &lt;span style="color:burlywood"&gt;But a simple facet means that comparison to the whole becomes more of an exercise in mental gymnastics.&lt;/span&gt;
+
+--
+
+### &lt;span style="color:burlywood"&gt;A solution is to present a reference layer of all the data beneath the featured category data.  Let's look at the syntax in ggplot2.&lt;/span&gt;
+
+
 
 
 ---
 
 
+count: false
+ 
+
+.panel1-feature-auto[
 
 ```r
-library(ggchalkboard)
+*library(tidyverse)
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
 library(tidyverse)
 
-
-
-theme_minimal &lt;- function(base_size = 11, 
-                          base_family = "", 
-                          base_line_size = base_size/22, 
-                          base_rect_size = base_size/22,
-                          board_color = "darkseagreen4", chalk_color = "lightyellow") {
-    theme_bw(
-      base_size = base_size, 
-      base_family = base_family, 
-      base_line_size = base_line_size, 
-      base_rect_size = base_rect_size
-    ) %+replace% 
-    theme(
-      rect = ggplot2::element_rect(fill = board_color),
-      text = ggplot2::element_text(color = chalk_color, face = "italic", size = 15),
-      panel.background = ggplot2::element_rect(fill = board_color),
-      panel.border = element_blank(),
-      legend.key = ggplot2::element_blank(),
-      legend.title = ggplot2::element_blank(),
-      axis.text = ggplot2::element_text(color = chalk_color),
-      axis.ticks = ggplot2::element_line(color = chalk_color),
-      panel.grid = ggplot2::element_blank(), 
-      complete = TRUE
-    )
-}
-
-theme_set(theme_minimal())
-
-
-
-
-color = "lightyellow"; fill = color
-
-    ggplot2::update_geom_defaults("point", list(colour = color, 
-        size = 2.5, alpha = 0.75))
-    ggplot2::update_geom_defaults("segment", list(colour = color, 
-        linewidth = 1.25, alpha = 0.75))
-    ggplot2::update_geom_defaults("rug", list(colour = color, 
-        size = 1, alpha = 0.75))
-    ggplot2::update_geom_defaults("rect", list(colour = color, 
-        size = 1, alpha = 0.75))
-    ggplot2::update_geom_defaults("label", list(fill = fill, 
-        color = "grey35", size = 5))
-```
-
-
-
----
-
-
-count: false
- 
-
-.panel1-feature-auto[
-
-```r
-*ggplot(mtcars) +  aes(wt, mpg)
+*palmerpenguins::penguins
 ```
 ]
  
 .panel2-feature-auto[
-![](ggsmoothfit_files/figure-html/feature_auto_01_output-1.png)&lt;!-- --&gt;
+
+```
+## # A tibble: 344 × 8
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           NA            NA                  NA          NA
+##  5 Adelie  Torgersen           36.7          19.3               193        3450
+##  6 Adelie  Torgersen           39.3          20.6               190        3650
+##  7 Adelie  Torgersen           38.9          17.8               181        3625
+##  8 Adelie  Torgersen           39.2          19.6               195        4675
+##  9 Adelie  Torgersen           34.1          18.1               193        3475
+## 10 Adelie  Torgersen           42            20.2               190        4250
+## # ℹ 334 more rows
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+```
 ]
 
 ---
@@ -120,13 +108,15 @@ count: false
 .panel1-feature-auto[
 
 ```r
-ggplot(mtcars) +  aes(wt, mpg) +
-* geom_point()
+library(tidyverse)
+
+palmerpenguins::penguins |&gt;
+* ggplot(aes(x = bill_length_mm, y = bill_depth_mm))
 ```
 ]
  
 .panel2-feature-auto[
-![](ggsmoothfit_files/figure-html/feature_auto_02_output-1.png)&lt;!-- --&gt;
+![](facet-ref-shadow_files/figure-html/feature_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -136,14 +126,16 @@ count: false
 .panel1-feature-auto[
 
 ```r
-ggplot(mtcars) +  aes(wt, mpg) +
-  geom_point() +
-* geom_smooth(se = F, method = lm)
+library(tidyverse)
+
+palmerpenguins::penguins |&gt;
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+* facet_wrap(~ species)
 ```
 ]
  
 .panel2-feature-auto[
-![](ggsmoothfit_files/figure-html/feature_auto_03_output-1.png)&lt;!-- --&gt;
+![](facet-ref-shadow_files/figure-html/feature_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -153,15 +145,17 @@ count: false
 .panel1-feature-auto[
 
 ```r
-ggplot(mtcars) +  aes(wt, mpg) +
-  geom_point() +
-  geom_smooth(se = F, method = lm) +
-* ggsmoothfit:::geom_fit(method = lm)
+library(tidyverse)
+
+palmerpenguins::penguins |&gt;
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+  facet_wrap(~ species) +
+* ggstamp::theme_void_fill("linen")
 ```
 ]
  
 .panel2-feature-auto[
-![](ggsmoothfit_files/figure-html/feature_auto_04_output-1.png)&lt;!-- --&gt;
+![](facet-ref-shadow_files/figure-html/feature_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -171,16 +165,52 @@ count: false
 .panel1-feature-auto[
 
 ```r
-ggplot(mtcars) +  aes(wt, mpg) +
-  geom_point() +
-  geom_smooth(se = F, method = lm) +
-  ggsmoothfit:::geom_fit(method = lm) +
-* ggsmoothfit:::geom_residuals(method = lm)
+library(tidyverse)
+
+palmerpenguins::penguins |&gt;
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+  facet_wrap(~ species) +
+  ggstamp::theme_void_fill("linen") +
+# plot all data in each species facet
+* geom_point(data =
+*              . %&gt;% select(-species),
+*            size = 3, shape = 21, stroke = .7,
+*            color = "burlywood4", fill= "white",
+*            alpha = .7)
 ```
 ]
  
 .panel2-feature-auto[
-![](ggsmoothfit_files/figure-html/feature_auto_05_output-1.png)&lt;!-- --&gt;
+![](facet-ref-shadow_files/figure-html/feature_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+library(tidyverse)
+
+palmerpenguins::penguins |&gt;
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+  facet_wrap(~ species) +
+  ggstamp::theme_void_fill("linen") +
+# plot all data in each species facet
+  geom_point(data =
+               . %&gt;% select(-species),
+             size = 3, shape = 21, stroke = .7,
+             color = "burlywood4", fill= "white",
+             alpha = .7) +
+# use global data and plot each species in its facet
+* geom_point(size = 3, shape = 21, stroke = .2,
+*            color = "white", fill = "burlywood4")
+```
+]
+ 
+.panel2-feature-auto[
+![](facet-ref-shadow_files/figure-html/feature_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
@@ -212,192 +242,52 @@ ggplot(mtcars) +  aes(wt, mpg) +
 
 
 
----
 
 
 
 ---
 
 
-count: false
- 
+class: center, middle
 
-.panel1-feature2-auto[
+# &lt;span style="color:burlywood"&gt;Discussion&lt;/span&gt;
+
+---
+
+
+### In the first layer, *all* data is displayed.  This is because we've facetted by species, a variable we've remove via . %&gt;% select(-species)
+
 
 ```r
-*ggplot(mtcars) +  aes(wt, mpg)
+  geom_point(
+*   data = . %&gt;% select(-species),
+    size = 3, shape = 21, stroke = .7,
+    color = "burlywood4", fill= "white",
+    alpha = .7
+    )
 ```
-]
- 
-.panel2-feature2-auto[
-![](ggsmoothfit_files/figure-html/feature2_auto_01_output-1.png)&lt;!-- --&gt;
-]
+
 
 ---
-count: false
- 
 
-.panel1-feature2-auto[
+### The second layer, shows the category of interest, because the data it uses is the *globally declared data*, which contains the species faceting variable.  
+
+### Colors selection draws our attention to this layer.  A point with shape = 21, is a circle with a perimiter so a fill color and boarder color may be specified.
+
 
 ```r
-ggplot(mtcars) +  aes(wt, mpg) +
-* geom_point() + geom_smooth(se = F, method = lm)
+  geom_point(
+    size = 3, shape = 21, stroke = .2,
+*   color = "white", fill = "burlywood4"
+  ) 
 ```
-]
- 
-.panel2-feature2-auto[
-![](ggsmoothfit_files/figure-html/feature2_auto_02_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature2-auto[
-
-```r
-ggplot(mtcars) +  aes(wt, mpg) +
-  geom_point() + geom_smooth(se = F, method = lm) +
-* ggsmoothfit:::geom_smooth_predict(
-*   xseq = 0, method = lm, size = 5)
-```
-]
- 
-.panel2-feature2-auto[
-![](ggsmoothfit_files/figure-html/feature2_auto_03_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature2-auto[
-
-```r
-ggplot(mtcars) +  aes(wt, mpg) +
-  geom_point() + geom_smooth(se = F, method = lm) +
-  ggsmoothfit:::geom_smooth_predict(
-    xseq = 0, method = lm, size = 5) +
-* ggsmoothfit:::geom_smooth_predict(
-*   xseq = 2, method = lm, size = 5)
-```
-]
- 
-.panel2-feature2-auto[
-![](ggsmoothfit_files/figure-html/feature2_auto_04_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature2-auto[
-
-```r
-ggplot(mtcars) +  aes(wt, mpg) +
-  geom_point() + geom_smooth(se = F, method = lm) +
-  ggsmoothfit:::geom_smooth_predict(
-    xseq = 0, method = lm, size = 5) +
-  ggsmoothfit:::geom_smooth_predict(
-    xseq = 2, method = lm, size = 5) +
-* ggsmoothfit:::geom_smooth_predict(
-*   xseq = 3, method = lm, size = 5)
-```
-]
- 
-.panel2-feature2-auto[
-![](ggsmoothfit_files/figure-html/feature2_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-feature2-auto[
-
-```r
-ggplot(mtcars) +  aes(wt, mpg) +
-  geom_point() + geom_smooth(se = F, method = lm) +
-  ggsmoothfit:::geom_smooth_predict(
-    xseq = 0, method = lm, size = 5) +
-  ggsmoothfit:::geom_smooth_predict(
-    xseq = 2, method = lm, size = 5) +
-  ggsmoothfit:::geom_smooth_predict(
-    xseq = 3, method = lm, size = 5) +
-* ggsmoothfit:::geom_smooth_step(
-*   xseq = 2:3, method = lm)
-```
-]
- 
-.panel2-feature2-auto[
-![](ggsmoothfit_files/figure-html/feature2_auto_06_output-1.png)&lt;!-- --&gt;
-]
-
-&lt;style&gt;
-.panel1-feature2-auto {
-  color: black;
-  width: 49%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-feature2-auto {
-  color: black;
-  width: 49%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-feature2-auto {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
 
 
 
 ---
 
 
-
-
----
-
-### Contribute
-
-- https://github.com/EvaMaeRey/ggsmoothfit
-
----
-
-
-
-### Check out stat_smooth() which does the computation in ggsmoothfit
-
-- https://ggplot2.tidyverse.org/reference/geom_smooth.html
-- examples with xseq, https://evamaerey.github.io/featurette/2023-10-30-stat-smooth-mtcars/stat-smooth-mtcars.html#10
-- xseq documentation discussion https://github.com/tidyverse/ggplot2/issues/5246
-
----
-
-### Check out flipbookr, used to build this featurette
-
-- https://github.com/EvaMaeRey/flipbookr
-- discussion: https://github.com/EvaMaeRey/flipbookr/blob/master/docs/draft_jasa_submission.pdf 
-
----
-
-### Check out more featurettes
-
-- https://EvaMaeRey.github.io/featurette
-
-
-
+&lt;img src="facet-ref-shadow_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 &lt;style type="text/css"&gt;
 .remark-code{line-height: 1.5; font-size: 100%}

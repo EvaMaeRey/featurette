@@ -1,0 +1,137 @@
+---
+title: "featurette"
+subtitle: ""
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    seal: false
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+options(tidyverse.quiet = TRUE)
+knitr::opts_chunk$set(fig.height = 4)
+```
+
+
+class: left
+background-image: url(https://images.unsplash.com/photo-1528830639624-fc16697bb8e7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+
+<br>
+<br>
+<br>
+
+# <span style="color:burlywood">faceting in ggplot2 with reference data layer</span>
+
+### <span style="color:burlywood">.tiny[Gina Reynolds | 2024-02-07 | Image credit: Georgi Petrov, Upsplash]</span>
+
+
+
+---
+
+### <span style="color:burlywood">Small multiples (facets) are a powerful tool.</span>
+--
+
+### <span style="color:burlywood">They break up and display data by category, so patterns within each category can be appreciated.</span>
+--
+
+### <span style="color:burlywood">But a simple facet means that comparison to the whole becomes more of an exercise in mental gymnastics.</span>
+
+--
+
+### <span style="color:burlywood">A solution is to present a reference layer of all the data beneath the featured category data.  Let's look at the syntax in ggplot2.</span>
+
+
+
+
+---
+
+
+`r flipbookr::chunk_reveal("feature", widths = c(1,1))`
+
+
+```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
+library(tidyverse)
+
+palmerpenguins::penguins |>
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) + 
+  facet_wrap(~ species) +
+  ggstamp::theme_void_fill("linen") +
+  # plot all data in each species facet
+  geom_point(data = 
+               . %>% select(-species),  
+             size = 3, shape = 21, stroke = .7,
+             color = "burlywood4", fill= "white",
+             alpha = .7) +
+  # use global data and plot each species in its facet
+  geom_point(size = 3, shape = 21, stroke = .2,
+             color = "white", fill = "burlywood4") 
+```
+
+---
+
+
+class: center, middle
+
+# <span style="color:burlywood">Discussion</span>
+
+---
+
+
+### In the first layer, *all* data is displayed.  This is because we've facetted by species, a variable we've remove via . %>% select(-species)
+
+```{r, eval = F}
+  geom_point(
+    data = . %>% select(-species),  #<<
+    size = 3, shape = 21, stroke = .7,
+    color = "burlywood4", fill= "white",
+    alpha = .7
+    )
+```
+
+
+---
+
+### The second layer, shows the category of interest, because the data it uses is the *globally declared data*, which contains the species faceting variable.  
+
+### Colors selection draws our attention to this layer.  A point with shape = 21, is a circle with a perimiter so a fill color and boarder color may be specified.
+
+```{r, eval = F}
+  geom_point(
+    size = 3, shape = 21, stroke = .2,
+    color = "white", fill = "burlywood4" #<<
+  ) 
+```
+
+
+
+---
+
+
+```{r, code = knitr::knit_code$get("feature"), echo = F, out.width="100%", fig.align = 'center', fig.retina = 3}
+
+
+
+```
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```
+

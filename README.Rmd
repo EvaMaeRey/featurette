@@ -61,7 +61,7 @@ new_experiment <- function(name){
   
 }  
 
-new_experiment(name = "ggsmootfit")
+new_experiment(name = "bounding-box-question")
 
 
 
@@ -74,11 +74,11 @@ build_mp4 <- function(name){
   target_html <- webpages[grep(name, webpages)][1]
   
   # build mp4
-  xaringanBuilder::build_mp4(input = target_html, fps = 1)
-  
+  xaringanBuilder::build_mp4(input = target_html, fps = 1.4)
+  # xaringanBuilder::build_pdf(input = target_html)
 } 
 
-build_mp4("ggsmoothfit")
+build_mp4("facet-ref-shadow")
 
 ```
 

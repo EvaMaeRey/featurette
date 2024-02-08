@@ -28,14 +28,12 @@ background-image: url(https://images.unsplash.com/photo-1533930086187-0fc58e5a92
 background-size: cover
 # Prediction with [{ggsmoothfit}](https://github.com/EvaMaeRey/ggsmoothfit)
 
+Gina Reynolds | 2023-10-25 |Image credit: Elena Koycheva, Upsplash
 
 
---
 
-### ggplot2's geom_smooth() shows prediction across a range of values. 
---
 
-### stat_smooth()'s xseq specifies positions at which to make predict.  
+### stat_smooth()'s xseq argument specifies positions at which to make predictions
 --
 
 ### {ggsmoothfit} piggybacks on StatSmooth, to easily draw fitted values, residuals, and more. 
@@ -45,20 +43,61 @@ background-size: cover
 
 --
 
-| Gina Reynolds | 2023-10-25 |Image credit: Elena Koycheva, Upsplash
 
 
 ---
 
 
 ```{r}
+library(ggchalkboard)
 library(tidyverse)
-mtcars %>% 
-  ggplot() + 
-  aes(wt, mpg) +
-  geom_point() +
-  geom_smooth(se = F, method = lm) ->
-a_ggplot2_plot
+
+
+
+theme_minimal <- function(base_size = 11, 
+                          base_family = "", 
+                          base_line_size = base_size/22, 
+                          base_rect_size = base_size/22,
+                          board_color = "darkseagreen4", chalk_color = "lightyellow") {
+    theme_bw(
+      base_size = base_size, 
+      base_family = base_family, 
+      base_line_size = base_line_size, 
+      base_rect_size = base_rect_size
+    ) %+replace% 
+    theme(
+      rect = ggplot2::element_rect(fill = board_color),
+      text = ggplot2::element_text(color = chalk_color, face = "italic", size = 15),
+      panel.background = ggplot2::element_rect(fill = board_color),
+      panel.border = element_blank(),
+      legend.key = ggplot2::element_blank(),
+      legend.title = ggplot2::element_blank(),
+      axis.text = ggplot2::element_text(color = chalk_color),
+      axis.ticks = ggplot2::element_line(color = chalk_color),
+      panel.grid = ggplot2::element_blank(), 
+      complete = TRUE
+    )
+}
+
+theme_set(theme_minimal())
+
+
+
+
+color = "lightyellow"; fill = color
+
+    ggplot2::update_geom_defaults("point", list(colour = color, 
+        size = 2.5, alpha = 0.75))
+    ggplot2::update_geom_defaults("segment", list(colour = color, 
+        linewidth = 1.25, alpha = 0.75))
+    ggplot2::update_geom_defaults("rug", list(colour = color, 
+        size = 1, alpha = 0.75))
+    ggplot2::update_geom_defaults("rect", list(colour = color, 
+        size = 1, alpha = 0.75))
+    ggplot2::update_geom_defaults("label", list(fill = fill, 
+        color = "grey35", size = 5))
+
+
 ```
 
 
@@ -71,7 +110,9 @@ a_ggplot2_plot
 ---
 
 ```{r feature, echo = F, out.width="70%", fig.align='center', include = F}
-a_ggplot2_plot +
+ggplot(mtcars) +  aes(wt, mpg) +
+  geom_point() + 
+  geom_smooth(se = F, method = lm) +
   ggsmoothfit:::geom_fit(method = lm) + 
   ggsmoothfit:::geom_residuals(method = lm) 
 ```
@@ -84,7 +125,8 @@ a_ggplot2_plot +
 ---
 
 ```{r feature2, echo = F, out.width="70%", fig.align='center', include = F}
-a_ggplot2_plot + 
+ggplot(mtcars) +  aes(wt, mpg) +
+  geom_point() + geom_smooth(se = F, method = lm) + 
   ggsmoothfit:::geom_smooth_predict(
     xseq = 0, method = lm, size = 5) +
   ggsmoothfit:::geom_smooth_predict(

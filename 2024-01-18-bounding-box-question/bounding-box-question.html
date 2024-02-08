@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>featurette</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <meta name="date" content="2024-01-18" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+class: inverse, left, bottom
+background-image: url(https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&amp;fit=crop&amp;q=80&amp;w=1548&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+background-size: cover
+# .Large[# My featurette]
+## .small[featuring [{}]() ...]
+#### .tiny[Gina Reynolds | 2023-10-25 |Image credit: Denise Jans, Upsplash]
+???
+Title 
+
+---
+
+
+
+```r
+nc &lt;- sf::st_read(system.file("shape/nc.shp", package="sf")) 
+```
+
+```
+## Reading layer `nc' from data source 
+##   `/Library/Frameworks/R.framework/Versions/4.2/Resources/library/sf/shape/nc.shp' 
+##   using driver `ESRI Shapefile'
+## Simple feature collection with 100 features and 14 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## Geodetic CRS:  NAD27
+```
+
+---
+
+
+```r
+library(ggplot2)
+sf::st_read(system.file("shape/nc.shp", package="sf")) |&gt;
+  ggplot() + 
+  geom_sf()
+```
+
+```
+## Reading layer `nc' from data source 
+##   `/Library/Frameworks/R.framework/Versions/4.2/Resources/library/sf/shape/nc.shp' 
+##   using driver `ESRI Shapefile'
+## Simple feature collection with 100 features and 14 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## Geodetic CRS:  NAD27
+```
+
+![](bounding-box-question_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+
+---
+
+
+```r
+layer_data()
+```
+
+```
+##                           geometry PANEL group      xmin      xmax     ymin
+## 1   MULTIPOLYGON (((-81.47276 3...     1    -1 -84.32385 -75.45698 33.88199
+## 2   MULTIPOLYGON (((-81.23989 3...     1    -1 -84.32385 -75.45698 33.88199
+## 3   MULTIPOLYGON (((-80.45634 3...     1    -1 -84.32385 -75.45698 33.88199
+## 4   MULTIPOLYGON (((-76.00897 3...     1    -1 -84.32385 -75.45698 33.88199
+## 5   MULTIPOLYGON (((-77.21767 3...     1    -1 -84.32385 -75.45698 33.88199
+## 6   MULTIPOLYGON (((-76.74506 3...     1    -1 -84.32385 -75.45698 33.88199
+## 7   MULTIPOLYGON (((-76.00897 3...     1    -1 -84.32385 -75.45698 33.88199
+## 8   MULTIPOLYGON (((-76.56251 3...     1    -1 -84.32385 -75.45698 33.88199
+## 9   MULTIPOLYGON (((-78.30876 3...     1    -1 -84.32385 -75.45698 33.88199
+## 10  MULTIPOLYGON (((-80.02567 3...     1    -1 -84.32385 -75.45698 33.88199
+## 11  MULTIPOLYGON (((-79.53051 3...     1    -1 -84.32385 -75.45698 33.88199
+## 12  MULTIPOLYGON (((-79.53051 3...     1    -1 -84.32385 -75.45698 33.88199
+## 13  MULTIPOLYGON (((-78.74912 3...     1    -1 -84.32385 -75.45698 33.88199
+## 14  MULTIPOLYGON (((-78.8068 36...     1    -1 -84.32385 -75.45698 33.88199
+## 15  MULTIPOLYGON (((-78.49252 3...     1    -1 -84.32385 -75.45698 33.88199
+## 16  MULTIPOLYGON (((-77.33221 3...     1    -1 -84.32385 -75.45698 33.88199
+## 17  MULTIPOLYGON (((-76.29893 3...     1    -1 -84.32385 -75.45698 33.88199
+## 18  MULTIPOLYGON (((-81.02057 3...     1    -1 -84.32385 -75.45698 33.88199
+## 19  MULTIPOLYGON (((-81.80622 3...     1    -1 -84.32385 -75.45698 33.88199
+## 20  MULTIPOLYGON (((-76.48053 3...     1    -1 -84.32385 -75.45698 33.88199
+## 21  MULTIPOLYGON (((-76.68874 3...     1    -1 -84.32385 -75.45698 33.88199
+## 22  MULTIPOLYGON (((-81.94135 3...     1    -1 -84.32385 -75.45698 33.88199
+## 23  MULTIPOLYGON (((-80.49554 3...     1    -1 -84.32385 -75.45698 33.88199
+## 24  MULTIPOLYGON (((-78.25455 3...     1    -1 -84.32385 -75.45698 33.88199
+## 25  MULTIPOLYGON (((-80.0381 36...     1    -1 -84.32385 -75.45698 33.88199
+## 26  MULTIPOLYGON (((-79.53782 3...     1    -1 -84.32385 -75.45698 33.88199
+## 27  MULTIPOLYGON (((-79.24619 3...     1    -1 -84.32385 -75.45698 33.88199
+## 28  MULTIPOLYGON (((-76.78307 3...     1    -1 -84.32385 -75.45698 33.88199
+## 29  MULTIPOLYGON (((-79.01814 3...     1    -1 -84.32385 -75.45698 33.88199
+## 30  MULTIPOLYGON (((-79.01814 3...     1    -1 -84.32385 -75.45698 33.88199
+## 31  MULTIPOLYGON (((-78.18693 3...     1    -1 -84.32385 -75.45698 33.88199
+## 32  MULTIPOLYGON (((-82.11885 3...     1    -1 -84.32385 -75.45698 33.88199
+## 33  MULTIPOLYGON (((-77.67122 3...     1    -1 -84.32385 -75.45698 33.88199
+## 34  MULTIPOLYGON (((-81.32813 3...     1    -1 -84.32385 -75.45698 33.88199
+## 35  MULTIPOLYGON (((-82.27921 3...     1    -1 -84.32385 -75.45698 33.88199
+## 36  MULTIPOLYGON (((-77.17846 3...     1    -1 -84.32385 -75.45698 33.88199
+## 37  MULTIPOLYGON (((-78.92107 3...     1    -1 -84.32385 -75.45698 33.88199
+## 38  MULTIPOLYGON (((-82.89597 3...     1    -1 -84.32385 -75.45698 33.88199
+## 39  MULTIPOLYGON (((-80.72652 3...     1    -1 -84.32385 -75.45698 33.88199
+## 40  MULTIPOLYGON (((-80.45677 3...     1    -1 -84.32385 -75.45698 33.88199
+## 41  MULTIPOLYGON (((-81.10889 3...     1    -1 -84.32385 -75.45698 33.88199
+## 42  MULTIPOLYGON (((-80.06441 3...     1    -1 -84.32385 -75.45698 33.88199
+## 43  MULTIPOLYGON (((-81.81628 3...     1    -1 -84.32385 -75.45698 33.88199
+## 44  MULTIPOLYGON (((-76.40843 3...     1    -1 -84.32385 -75.45698 33.88199
+## 45  MULTIPOLYGON (((-76.1673 35...     1    -1 -84.32385 -75.45698 33.88199
+## 46  MULTIPOLYGON (((-81.81628 3...     1    -1 -84.32385 -75.45698 33.88199
+## 47  MULTIPOLYGON (((-79.76499 3...     1    -1 -84.32385 -75.45698 33.88199
+## 48  MULTIPOLYGON (((-79.55536 3...     1    -1 -84.32385 -75.45698 33.88199
+## 49  MULTIPOLYGON (((-78.06533 3...     1    -1 -84.32385 -75.45698 33.88199
+## 50  MULTIPOLYGON (((-80.29824 3...     1    -1 -84.32385 -75.45698 33.88199
+## 51  MULTIPOLYGON (((-77.47388 3...     1    -1 -84.32385 -75.45698 33.88199
+## 52  MULTIPOLYGON (((-80.96143 3...     1    -1 -84.32385 -75.45698 33.88199
+## 53  MULTIPOLYGON (((-82.2581 35...     1    -1 -84.32385 -75.45698 33.88199
+## 54  MULTIPOLYGON (((-78.53874 3...     1    -1 -84.32385 -75.45698 33.88199
+## 55  MULTIPOLYGON (((-82.74389 3...     1    -1 -84.32385 -75.45698 33.88199
+## 56  MULTIPOLYGON (((-75.78317 3...     1    -1 -84.32385 -75.45698 33.88199
+## 57  MULTIPOLYGON (((-77.10377 3...     1    -1 -84.32385 -75.45698 33.88199
+## 58  MULTIPOLYGON (((-83.33182 3...     1    -1 -84.32385 -75.45698 33.88199
+## 59  MULTIPOLYGON (((-77.80518 3...     1    -1 -84.32385 -75.45698 33.88199
+## 60  MULTIPOLYGON (((-79.18244 3...     1    -1 -84.32385 -75.45698 33.88199
+## 61  MULTIPOLYGON (((-81.97144 3...     1    -1 -84.32385 -75.45698 33.88199
+## 62  MULTIPOLYGON (((-78.16319 3...     1    -1 -84.32385 -75.45698 33.88199
+## 63  MULTIPOLYGON (((-78.61274 3...     1    -1 -84.32385 -75.45698 33.88199
+## 64  MULTIPOLYGON (((-81.32282 3...     1    -1 -84.32385 -75.45698 33.88199
+## 65  MULTIPOLYGON (((-80.95677 3...     1    -1 -84.32385 -75.45698 33.88199
+## 66  MULTIPOLYGON (((-83.10629 3...     1    -1 -84.32385 -75.45698 33.88199
+## 67  MULTIPOLYGON (((-79.60747 3...     1    -1 -84.32385 -75.45698 33.88199
+## 68  MULTIPOLYGON (((-81.0493 35...     1    -1 -84.32385 -75.45698 33.88199
+## 69  MULTIPOLYGON (((-80.50294 3...     1    -1 -84.32385 -75.45698 33.88199
+## 70  MULTIPOLYGON (((-80.07141 3...     1    -1 -84.32385 -75.45698 33.88199
+## 71  MULTIPOLYGON (((-80.07141 3...     1    -1 -84.32385 -75.45698 33.88199
+## 72  MULTIPOLYGON (((-82.57003 3...     1    -1 -84.32385 -75.45698 33.88199
+## 73  MULTIPOLYGON (((-83.69563 3...     1    -1 -84.32385 -75.45698 33.88199
+## 74  MULTIPOLYGON (((-77.83658 3...     1    -1 -84.32385 -75.45698 33.88199
+## 75  MULTIPOLYGON (((-82.8877 35...     1    -1 -84.32385 -75.45698 33.88199
+## 76  MULTIPOLYGON (((-81.32282 3...     1    -1 -84.32385 -75.45698 33.88199
+## 77  MULTIPOLYGON (((-82.21017 3...     1    -1 -84.32385 -75.45698 33.88199
+## 78  MULTIPOLYGON (((-83.10629 3...     1    -1 -84.32385 -75.45698 33.88199
+## 79  MULTIPOLYGON (((-78.11377 3...     1    -1 -84.32385 -75.45698 33.88199
+## 80  MULTIPOLYGON (((-76.94324 3...     1    -1 -84.32385 -75.45698 33.88199
+## 81  MULTIPOLYGON (((-84.29104 3...     1    -1 -84.32385 -75.45698 33.88199
+## 82  MULTIPOLYGON (((-78.49929 3...     1    -1 -84.32385 -75.45698 33.88199
+## 83  MULTIPOLYGON (((-77.049 34....     1    -1 -84.32385 -75.45698 33.88199
+## 84  MULTIPOLYGON (((-80.84016 3...     1    -1 -84.32385 -75.45698 33.88199
+## 85  MULTIPOLYGON (((-79.91995 3...     1    -1 -84.32385 -75.45698 33.88199
+## 86  MULTIPOLYGON (((-79.3403 34...     1    -1 -84.32385 -75.45698 33.88199
+## 87  MULTIPOLYGON (((-76.51894 3...     1    -1 -84.32385 -75.45698 33.88199
+## 88  MULTIPOLYGON (((-77.68983 3...     1    -1 -84.32385 -75.45698 33.88199
+## 89  MULTIPOLYGON (((-79.68596 3...     1    -1 -84.32385 -75.45698 33.88199
+## 90  MULTIPOLYGON (((-83.938 34....     1    -1 -84.32385 -75.45698 33.88199
+## 91  MULTIPOLYGON (((-76.89761 3...     1    -1 -84.32385 -75.45698 33.88199
+## 92  MULTIPOLYGON (((-79.45597 3...     1    -1 -84.32385 -75.45698 33.88199
+## 93  MULTIPOLYGON (((-77.53864 3...     1    -1 -84.32385 -75.45698 33.88199
+## 94  MULTIPOLYGON (((-78.86451 3...     1    -1 -84.32385 -75.45698 33.88199
+## 95  MULTIPOLYGON (((-77.14896 3...     1    -1 -84.32385 -75.45698 33.88199
+## 96  MULTIPOLYGON (((-78.2615 34...     1    -1 -84.32385 -75.45698 33.88199
+## 97  MULTIPOLYGON (((-78.02592 3...     1    -1 -84.32385 -75.45698 33.88199
+## 98  MULTIPOLYGON (((-78.65572 3...     1    -1 -84.32385 -75.45698 33.88199
+## 99  MULTIPOLYGON (((-77.96073 3...     1    -1 -84.32385 -75.45698 33.88199
+## 100 MULTIPOLYGON (((-78.65572 3...     1    -1 -84.32385 -75.45698 33.88199
+##         ymax linetype alpha stroke
+## 1   36.58965        1    NA    0.5
+## 2   36.58965        1    NA    0.5
+## 3   36.58965        1    NA    0.5
+## 4   36.58965        1    NA    0.5
+## 5   36.58965        1    NA    0.5
+## 6   36.58965        1    NA    0.5
+## 7   36.58965        1    NA    0.5
+## 8   36.58965        1    NA    0.5
+## 9   36.58965        1    NA    0.5
+## 10  36.58965        1    NA    0.5
+## 11  36.58965        1    NA    0.5
+## 12  36.58965        1    NA    0.5
+## 13  36.58965        1    NA    0.5
+## 14  36.58965        1    NA    0.5
+## 15  36.58965        1    NA    0.5
+## 16  36.58965        1    NA    0.5
+## 17  36.58965        1    NA    0.5
+## 18  36.58965        1    NA    0.5
+## 19  36.58965        1    NA    0.5
+## 20  36.58965        1    NA    0.5
+## 21  36.58965        1    NA    0.5
+## 22  36.58965        1    NA    0.5
+## 23  36.58965        1    NA    0.5
+## 24  36.58965        1    NA    0.5
+## 25  36.58965        1    NA    0.5
+## 26  36.58965        1    NA    0.5
+## 27  36.58965        1    NA    0.5
+## 28  36.58965        1    NA    0.5
+## 29  36.58965        1    NA    0.5
+## 30  36.58965        1    NA    0.5
+## 31  36.58965        1    NA    0.5
+## 32  36.58965        1    NA    0.5
+## 33  36.58965        1    NA    0.5
+## 34  36.58965        1    NA    0.5
+## 35  36.58965        1    NA    0.5
+## 36  36.58965        1    NA    0.5
+## 37  36.58965        1    NA    0.5
+## 38  36.58965        1    NA    0.5
+## 39  36.58965        1    NA    0.5
+## 40  36.58965        1    NA    0.5
+## 41  36.58965        1    NA    0.5
+## 42  36.58965        1    NA    0.5
+## 43  36.58965        1    NA    0.5
+## 44  36.58965        1    NA    0.5
+## 45  36.58965        1    NA    0.5
+## 46  36.58965        1    NA    0.5
+## 47  36.58965        1    NA    0.5
+## 48  36.58965        1    NA    0.5
+## 49  36.58965        1    NA    0.5
+## 50  36.58965        1    NA    0.5
+## 51  36.58965        1    NA    0.5
+## 52  36.58965        1    NA    0.5
+## 53  36.58965        1    NA    0.5
+## 54  36.58965        1    NA    0.5
+## 55  36.58965        1    NA    0.5
+## 56  36.58965        1    NA    0.5
+## 57  36.58965        1    NA    0.5
+## 58  36.58965        1    NA    0.5
+## 59  36.58965        1    NA    0.5
+## 60  36.58965        1    NA    0.5
+## 61  36.58965        1    NA    0.5
+## 62  36.58965        1    NA    0.5
+## 63  36.58965        1    NA    0.5
+## 64  36.58965        1    NA    0.5
+## 65  36.58965        1    NA    0.5
+## 66  36.58965        1    NA    0.5
+## 67  36.58965        1    NA    0.5
+## 68  36.58965        1    NA    0.5
+## 69  36.58965        1    NA    0.5
+## 70  36.58965        1    NA    0.5
+## 71  36.58965        1    NA    0.5
+## 72  36.58965        1    NA    0.5
+## 73  36.58965        1    NA    0.5
+## 74  36.58965        1    NA    0.5
+## 75  36.58965        1    NA    0.5
+## 76  36.58965        1    NA    0.5
+## 77  36.58965        1    NA    0.5
+## 78  36.58965        1    NA    0.5
+## 79  36.58965        1    NA    0.5
+## 80  36.58965        1    NA    0.5
+## 81  36.58965        1    NA    0.5
+## 82  36.58965        1    NA    0.5
+## 83  36.58965        1    NA    0.5
+## 84  36.58965        1    NA    0.5
+## 85  36.58965        1    NA    0.5
+## 86  36.58965        1    NA    0.5
+## 87  36.58965        1    NA    0.5
+## 88  36.58965        1    NA    0.5
+## 89  36.58965        1    NA    0.5
+## 90  36.58965        1    NA    0.5
+## 91  36.58965        1    NA    0.5
+## 92  36.58965        1    NA    0.5
+## 93  36.58965        1    NA    0.5
+## 94  36.58965        1    NA    0.5
+## 95  36.58965        1    NA    0.5
+## 96  36.58965        1    NA    0.5
+## 97  36.58965        1    NA    0.5
+## 98  36.58965        1    NA    0.5
+## 99  36.58965        1    NA    0.5
+## 100 36.58965        1    NA    0.5
+```
+
+
+---
+
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+*nc
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+## Simple feature collection with 100 features and 14 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## Geodetic CRS:  NAD27
+## First 10 features:
+##     AREA PERIMETER CNTY_ CNTY_ID        NAME  FIPS FIPSNO CRESS_ID BIR74 SID74
+## 1  0.114     1.442  1825    1825        Ashe 37009  37009        5  1091     1
+## 2  0.061     1.231  1827    1827   Alleghany 37005  37005        3   487     0
+## 3  0.143     1.630  1828    1828       Surry 37171  37171       86  3188     5
+## 4  0.070     2.968  1831    1831   Currituck 37053  37053       27   508     1
+## 5  0.153     2.206  1832    1832 Northampton 37131  37131       66  1421     9
+## 6  0.097     1.670  1833    1833    Hertford 37091  37091       46  1452     7
+## 7  0.062     1.547  1834    1834      Camden 37029  37029       15   286     0
+## 8  0.091     1.284  1835    1835       Gates 37073  37073       37   420     0
+## 9  0.118     1.421  1836    1836      Warren 37185  37185       93   968     4
+## 10 0.124     1.428  1837    1837      Stokes 37169  37169       85  1612     1
+##    NWBIR74 BIR79 SID79 NWBIR79                       geometry
+## 1       10  1364     0      19 MULTIPOLYGON (((-81.47276 3...
+## 2       10   542     3      12 MULTIPOLYGON (((-81.23989 3...
+## 3      208  3616     6     260 MULTIPOLYGON (((-80.45634 3...
+## 4      123   830     2     145 MULTIPOLYGON (((-76.00897 3...
+## 5     1066  1606     3    1197 MULTIPOLYGON (((-77.21767 3...
+## 6      954  1838     5    1237 MULTIPOLYGON (((-76.74506 3...
+## 7      115   350     2     139 MULTIPOLYGON (((-76.00897 3...
+## 8      254   594     2     371 MULTIPOLYGON (((-76.56251 3...
+## 9      748  1190     2     844 MULTIPOLYGON (((-78.30876 3...
+## 10     160  2038     5     176 MULTIPOLYGON (((-80.02567 3...
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+nc |&gt;
+* ggnc::create_geometries_reference(
+*                           id_cols = c(NAME, FIPS))
+```
+]
+ 
+.panel2-feature-auto[
+
+```
+##             NAME  FIPS      xmin     ymin      xmax     ymax
+## 1           Ashe 37009 -81.74107 36.23436 -81.23989 36.58965
+## 2      Alleghany 37005 -81.34754 36.36536 -80.90344 36.57286
+## 3          Surry 37171 -80.96577 36.23388 -80.43531 36.56521
+## 4      Currituck 37053 -76.33025 36.07282 -75.77316 36.55716
+## 5    Northampton 37131 -77.90121 36.16277 -77.07531 36.55629
+## 6       Hertford 37091 -77.21767 36.23024 -76.70750 36.55629
+## 7         Camden 37029 -76.56358 36.16973 -75.95718 36.55606
+## 8          Gates 37073 -76.95367 36.29452 -76.46035 36.55525
+## 9         Warren 37185 -78.32125 36.19595 -77.89886 36.55294
+## 10        Stokes 37169 -80.45301 36.25023 -80.02406 36.55104
+## 11       Caswell 37033 -79.53051 36.23367 -79.14433 36.54978
+## 12    Rockingham 37157 -80.02567 36.23616 -79.51030 36.54789
+## 13     Granville 37077 -78.81036 36.01413 -78.45881 36.54607
+## 14        Person 37145 -79.15927 36.23158 -78.79670 36.54606
+## 15         Vance 37181 -78.51709 36.16217 -78.28293 36.54553
+## 16       Halifax 37083 -78.00629 35.99472 -77.24104 36.50989
+## 17    Pasquotank 37139 -76.50246 36.14769 -76.11271 36.50390
+## 18        Wilkes 37193 -81.54610 35.98933 -80.87086 36.43115
+## 19       Watauga 37189 -81.91116 36.10456 -81.45081 36.39178
+## 20    Perquimans 37143 -76.59449 36.07979 -76.27551 36.37390
+## 21        Chowan 37041 -76.72651 36.00717 -76.42043 36.34057
+## 22         Avery 37011 -82.07776 35.90564 -81.73227 36.29075
+## 23        Yadkin 37197 -80.87741 36.04327 -80.44081 36.27843
+## 24      Franklin 37069 -78.54803 35.81553 -78.00629 36.26004
+## 25       Forsyth 37067 -80.50825 35.96793 -80.02567 36.25709
+## 26      Guilford 37081 -80.04260 35.89097 -79.53058 36.25023
+## 27      Alamance 37001 -79.54099 35.83699 -79.23799 36.24614
+## 28        Bertie 37015 -77.33221 35.81418 -76.69376 36.24098
+## 29        Orange 37135 -79.27082 35.85394 -78.95108 36.23569
+## 30        Durham 37063 -79.01814 35.85786 -78.70415 36.23384
+## 31          Nash 37127 -78.25455 35.72511 -77.70051 36.19595
+## 32      Mitchell 37121 -82.40842 35.81848 -81.98335 36.14701
+## 33     Edgecombe 37065 -77.83015 35.67027 -77.34237 36.14660
+## 34      Caldwell 37027 -81.80622 35.75003 -81.32187 36.11759
+## 35        Yancey 37199 -82.50694 35.69756 -82.11885 36.07851
+## 36        Martin 37117 -77.40531 35.65013 -76.78307 36.06798
+## 37          Wake 37183 -78.99881 35.51994 -78.25455 36.06665
+## 38       Madison 37115 -82.96275 35.67356 -82.40582 36.05434
+## 39       Iredell 37097 -81.10889 35.50681 -80.68958 36.05335
+## 40         Davie 37059 -80.70597 35.74580 -80.36171 36.05019
+## 41     Alexander 37003 -81.33957 35.77190 -80.99535 36.03493
+## 42      Davidson 37057 -80.47942 35.50512 -80.03810 36.02155
+## 43         Burke 37023 -81.98560 35.55330 -81.37666 35.99465
+## 44    Washington 37187 -76.83831 35.69912 -76.35819 35.97747
+## 45       Tyrrell 37177 -76.40870 35.59467 -76.02605 35.97688
+## 46      McDowell 37111 -82.29067 35.51900 -81.81628 35.95498
+## 47      Randolph 37151 -80.06441 35.50570 -79.53782 35.91681
+## 48       Chatham 37037 -79.55536 35.51024 -78.90572 35.86815
+## 49        Wilson 37195 -78.18693 35.57426 -77.67122 35.85450
+## 50         Rowan 37159 -80.76612 35.49490 -80.18191 35.85166
+## 51          Pitt 37147 -77.69833 35.32355 -77.10377 35.82842
+## 52       Catawba 37035 -81.52364 35.54356 -80.93127 35.82332
+## 53      Buncombe 37021 -82.88111 35.41803 -82.17071 35.81640
+## 54      Johnston 37101 -78.70897 35.24908 -78.06533 35.81553
+## 55       Haywood 37087 -83.25912 35.29077 -82.74389 35.79185
+## 56          Dare 37055 -76.02121 35.18983 -75.45698 36.22926
+## 57      Beaufort 37013 -77.19552 35.21717 -76.49254 35.73678
+## 58         Swain 37173 -83.95470 35.27222 -83.15702 35.69101
+## 59        Greene 37079 -77.83058 35.33967 -77.47388 35.65400
+## 60           Lee 37105 -79.36249 35.30454 -78.97449 35.62461
+## 61    Rutherford 37161 -82.27872 35.18247 -81.68432 35.60171
+## 62         Wayne 37191 -78.31013 35.14418 -77.80411 35.59467
+## 63       Harnett 37085 -79.21665 35.18996 -78.53874 35.57886
+## 64     Cleveland 37045 -81.76536 35.16285 -81.31142 35.56544
+## 65       Lincoln 37109 -81.52364 35.39745 -80.94220 35.56126
+## 66       Jackson 37099 -83.36472 35.00028 -82.91911 35.51345
+## 67         Moore 37125 -79.76499 35.03736 -79.09589 35.51305
+## 68   Mecklenburg 37119 -81.06555 35.00202 -80.53964 35.50912
+## 69      Cabarrus 37025 -80.77623 35.18691 -80.29824 35.50757
+## 70    Montgomery 37123 -80.18191 35.13658 -79.60747 35.50594
+## 71        Stanly 37167 -80.50294 35.14973 -80.05075 35.50512
+## 72     Henderson 37089 -82.74389 35.14949 -82.25810 35.49516
+## 73        Graham 37075 -84.03086 35.21538 -83.58038 35.46203
+## 74        Lenoir 37107 -77.83658 35.00084 -77.38616 35.42153
+## 75  Transylvania 37175 -83.05209 35.02420 -82.57003 35.41803
+## 76        Gaston 37071 -81.44508 35.14903 -80.92628 35.41337
+## 77          Polk 37149 -82.35803 35.18419 -81.96452 35.39710
+## 78         Macon 37113 -83.73952 34.99202 -83.10629 35.31934
+## 79       Sampson 37163 -78.66641 34.55375 -78.11374 35.31512
+## 80       Pamlico 37137 -76.98989 34.98222 -76.50713 35.31208
+## 81      Cherokee 37039 -84.32385 34.98822 -83.69563 35.29252
+## 82    Cumberland 37051 -79.10684 34.82742 -78.49929 35.25998
+## 83         Jones 37103 -77.73193 34.77452 -77.04900 35.23970
+## 84         Union 37179 -80.84016 34.81476 -80.27512 35.20582
+## 85         Anson 37007 -80.32528 34.80792 -79.85371 35.20452
+## 86          Hoke 37093 -79.45536 34.83188 -79.03361 35.20321
+## 87          Hyde 37095 -76.63382 35.06944 -75.76370 35.70300
+## 88        Duplin 37061 -78.19545 34.71101 -77.65527 35.18648
+## 89      Richmond 37153 -80.06518 34.80526 -79.45536 35.17380
+## 90          Clay 37043 -83.98855 34.98907 -83.51301 35.14806
+## 91        Craven 37049 -77.47410 34.83043 -76.62562 35.42295
+## 92      Scotland 37165 -79.68596 34.63409 -79.32797 35.03736
+## 93        Onslow 37133 -77.68983 34.45701 -77.12939 34.98402
+## 94       Robeson 37155 -79.45597 34.30457 -78.80332 34.95382
+## 95      Carteret 37031 -77.16426 34.58783 -76.28770 35.01666
+## 96        Bladen 37017 -78.89626 34.36442 -78.16968 34.85511
+## 97        Pender 37141 -78.26241 34.30505 -77.53864 34.72893
+## 98      Columbus 37047 -79.07450 33.94867 -78.15479 34.47720
+## 99   New Hanover 37129 -78.02592 34.06203 -77.75053 34.38797
+## 100    Brunswick 37019 -78.65572 33.88199 -77.95853 34.36412
+##                           geometry
+## 1   MULTIPOLYGON (((-81.47276 3...
+## 2   MULTIPOLYGON (((-81.23989 3...
+## 3   MULTIPOLYGON (((-80.45634 3...
+## 4   MULTIPOLYGON (((-76.00897 3...
+## 5   MULTIPOLYGON (((-77.21767 3...
+## 6   MULTIPOLYGON (((-76.74506 3...
+## 7   MULTIPOLYGON (((-76.00897 3...
+## 8   MULTIPOLYGON (((-76.56251 3...
+## 9   MULTIPOLYGON (((-78.30876 3...
+## 10  MULTIPOLYGON (((-80.02567 3...
+## 11  MULTIPOLYGON (((-79.53051 3...
+## 12  MULTIPOLYGON (((-79.53051 3...
+## 13  MULTIPOLYGON (((-78.74912 3...
+## 14  MULTIPOLYGON (((-78.8068 36...
+## 15  MULTIPOLYGON (((-78.49252 3...
+## 16  MULTIPOLYGON (((-77.33221 3...
+## 17  MULTIPOLYGON (((-76.29893 3...
+## 18  MULTIPOLYGON (((-81.02057 3...
+## 19  MULTIPOLYGON (((-81.80622 3...
+## 20  MULTIPOLYGON (((-76.48053 3...
+## 21  MULTIPOLYGON (((-76.68874 3...
+## 22  MULTIPOLYGON (((-81.94135 3...
+## 23  MULTIPOLYGON (((-80.49554 3...
+## 24  MULTIPOLYGON (((-78.25455 3...
+## 25  MULTIPOLYGON (((-80.0381 36...
+## 26  MULTIPOLYGON (((-79.53782 3...
+## 27  MULTIPOLYGON (((-79.24619 3...
+## 28  MULTIPOLYGON (((-76.78307 3...
+## 29  MULTIPOLYGON (((-79.01814 3...
+## 30  MULTIPOLYGON (((-79.01814 3...
+## 31  MULTIPOLYGON (((-78.18693 3...
+## 32  MULTIPOLYGON (((-82.11885 3...
+## 33  MULTIPOLYGON (((-77.67122 3...
+## 34  MULTIPOLYGON (((-81.32813 3...
+## 35  MULTIPOLYGON (((-82.27921 3...
+## 36  MULTIPOLYGON (((-77.17846 3...
+## 37  MULTIPOLYGON (((-78.92107 3...
+## 38  MULTIPOLYGON (((-82.89597 3...
+## 39  MULTIPOLYGON (((-80.72652 3...
+## 40  MULTIPOLYGON (((-80.45677 3...
+## 41  MULTIPOLYGON (((-81.10889 3...
+## 42  MULTIPOLYGON (((-80.06441 3...
+## 43  MULTIPOLYGON (((-81.81628 3...
+## 44  MULTIPOLYGON (((-76.40843 3...
+## 45  MULTIPOLYGON (((-76.1673 35...
+## 46  MULTIPOLYGON (((-81.81628 3...
+## 47  MULTIPOLYGON (((-79.76499 3...
+## 48  MULTIPOLYGON (((-79.55536 3...
+## 49  MULTIPOLYGON (((-78.06533 3...
+## 50  MULTIPOLYGON (((-80.29824 3...
+## 51  MULTIPOLYGON (((-77.47388 3...
+## 52  MULTIPOLYGON (((-80.96143 3...
+## 53  MULTIPOLYGON (((-82.2581 35...
+## 54  MULTIPOLYGON (((-78.53874 3...
+## 55  MULTIPOLYGON (((-82.74389 3...
+## 56  MULTIPOLYGON (((-75.78317 3...
+## 57  MULTIPOLYGON (((-77.10377 3...
+## 58  MULTIPOLYGON (((-83.33182 3...
+## 59  MULTIPOLYGON (((-77.80518 3...
+## 60  MULTIPOLYGON (((-79.18244 3...
+## 61  MULTIPOLYGON (((-81.97144 3...
+## 62  MULTIPOLYGON (((-78.16319 3...
+## 63  MULTIPOLYGON (((-78.61274 3...
+## 64  MULTIPOLYGON (((-81.32282 3...
+## 65  MULTIPOLYGON (((-80.95677 3...
+## 66  MULTIPOLYGON (((-83.10629 3...
+## 67  MULTIPOLYGON (((-79.60747 3...
+## 68  MULTIPOLYGON (((-81.0493 35...
+## 69  MULTIPOLYGON (((-80.50294 3...
+## 70  MULTIPOLYGON (((-80.07141 3...
+## 71  MULTIPOLYGON (((-80.07141 3...
+## 72  MULTIPOLYGON (((-82.57003 3...
+## 73  MULTIPOLYGON (((-83.69563 3...
+## 74  MULTIPOLYGON (((-77.83658 3...
+## 75  MULTIPOLYGON (((-82.8877 35...
+## 76  MULTIPOLYGON (((-81.32282 3...
+## 77  MULTIPOLYGON (((-82.21017 3...
+## 78  MULTIPOLYGON (((-83.10629 3...
+## 79  MULTIPOLYGON (((-78.11377 3...
+## 80  MULTIPOLYGON (((-76.94324 3...
+## 81  MULTIPOLYGON (((-84.29104 3...
+## 82  MULTIPOLYGON (((-78.49929 3...
+## 83  MULTIPOLYGON (((-77.049 34....
+## 84  MULTIPOLYGON (((-80.84016 3...
+## 85  MULTIPOLYGON (((-79.91995 3...
+## 86  MULTIPOLYGON (((-79.3403 34...
+## 87  MULTIPOLYGON (((-76.51894 3...
+## 88  MULTIPOLYGON (((-77.68983 3...
+## 89  MULTIPOLYGON (((-79.68596 3...
+## 90  MULTIPOLYGON (((-83.938 34....
+## 91  MULTIPOLYGON (((-76.89761 3...
+## 92  MULTIPOLYGON (((-79.45597 3...
+## 93  MULTIPOLYGON (((-77.53864 3...
+## 94  MULTIPOLYGON (((-78.86451 3...
+## 95  MULTIPOLYGON (((-77.14896 3...
+## 96  MULTIPOLYGON (((-78.2615 34...
+## 97  MULTIPOLYGON (((-78.02592 3...
+## 98  MULTIPOLYGON (((-78.65572 3...
+## 99  MULTIPOLYGON (((-77.96073 3...
+## 100 MULTIPOLYGON (((-78.65572 3...
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature-auto[
+
+```r
+nc |&gt;
+  ggnc::create_geometries_reference(
+                            id_cols = c(NAME, FIPS)) -&gt;
+*a_data_frame_ill_use_later
+```
+]
+ 
+.panel2-feature-auto[
+
+]
+
+&lt;style&gt;
+.panel1-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-feature-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-feature-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+
+
+
+---
+
+
+```r
+ggnc::create_geometries_reference
+```
+
+```
+## function(sfdata = nc,
+##                                         id_cols = c(NAME, FIPS),
+##                                         geometry = geometry){
+## 
+##   sfdata %&gt;%
+##     add_row_bounding_box() %&gt;%
+##     dplyr::select({{id_cols}}, xmin, ymin, xmax, ymax, geometry)
+## 
+## }
+## &lt;bytecode: 0x7f93fc340008&gt;
+## &lt;environment: namespace:ggnc&gt;
+```
+
+```r
+ggnc::add_row_bounding_box
+```
+
+```
+## function(data = nc){
+## 
+##   for (i in 1:nrow(data)){
+## 
+##     if(i == 1){df &lt;- data[i,] %&gt;% sf::st_bbox() %&gt;% bbox_to_df() }else{
+## 
+##       dplyr::bind_rows(df,
+##                        data[i,] %&gt;% sf::st_bbox() %&gt;% bbox_to_df()) -&gt;
+##         df
+##     }
+## 
+##     df
+## 
+##   }
+## 
+##   dplyr::bind_cols(df, data)
+## 
+## }
+## &lt;bytecode: 0x7f93fc34c008&gt;
+## &lt;environment: namespace:ggnc&gt;
+```
+
+```r
+nc[1,] |&gt; sf::st_bbox()
+```
+
+```
+##      xmin      ymin      xmax      ymax 
+## -81.74107  36.23436 -81.23989  36.58965
+```
+
+
+---
+
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+*st_bbox_df &lt;- function(x){
+
+* data.frame(xmin = sf::st_bbox(x)[1],
+*           xmax = sf::st_bbox(x)[2],
+*           ymin = sf::st_bbox(x)[3],
+*           ymax = sf::st_bbox(x)[4])
+
+*} 
+```
+]
+ 
+.panel2-feature2-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+st_bbox_df &lt;- function(x){
+
+  data.frame(xmin = sf::st_bbox(x)[1],
+            xmax = sf::st_bbox(x)[2],
+            ymin = sf::st_bbox(x)[3],
+            ymax = sf::st_bbox(x)[4])
+
+}
+
+*library(tidyverse)
+```
+]
+ 
+.panel2-feature2-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+st_bbox_df &lt;- function(x){
+
+  data.frame(xmin = sf::st_bbox(x)[1],
+            xmax = sf::st_bbox(x)[2],
+            ymin = sf::st_bbox(x)[3],
+            ymax = sf::st_bbox(x)[4])
+
+}
+
+library(tidyverse)
+*nc
+```
+]
+ 
+.panel2-feature2-auto[
+
+```
+## Simple feature collection with 100 features and 14 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## Geodetic CRS:  NAD27
+## First 10 features:
+##     AREA PERIMETER CNTY_ CNTY_ID        NAME  FIPS FIPSNO CRESS_ID BIR74 SID74
+## 1  0.114     1.442  1825    1825        Ashe 37009  37009        5  1091     1
+## 2  0.061     1.231  1827    1827   Alleghany 37005  37005        3   487     0
+## 3  0.143     1.630  1828    1828       Surry 37171  37171       86  3188     5
+## 4  0.070     2.968  1831    1831   Currituck 37053  37053       27   508     1
+## 5  0.153     2.206  1832    1832 Northampton 37131  37131       66  1421     9
+## 6  0.097     1.670  1833    1833    Hertford 37091  37091       46  1452     7
+## 7  0.062     1.547  1834    1834      Camden 37029  37029       15   286     0
+## 8  0.091     1.284  1835    1835       Gates 37073  37073       37   420     0
+## 9  0.118     1.421  1836    1836      Warren 37185  37185       93   968     4
+## 10 0.124     1.428  1837    1837      Stokes 37169  37169       85  1612     1
+##    NWBIR74 BIR79 SID79 NWBIR79                       geometry
+## 1       10  1364     0      19 MULTIPOLYGON (((-81.47276 3...
+## 2       10   542     3      12 MULTIPOLYGON (((-81.23989 3...
+## 3      208  3616     6     260 MULTIPOLYGON (((-80.45634 3...
+## 4      123   830     2     145 MULTIPOLYGON (((-76.00897 3...
+## 5     1066  1606     3    1197 MULTIPOLYGON (((-77.21767 3...
+## 6      954  1838     5    1237 MULTIPOLYGON (((-76.74506 3...
+## 7      115   350     2     139 MULTIPOLYGON (((-76.00897 3...
+## 8      254   594     2     371 MULTIPOLYGON (((-76.56251 3...
+## 9      748  1190     2     844 MULTIPOLYGON (((-78.30876 3...
+## 10     160  2038     5     176 MULTIPOLYGON (((-80.02567 3...
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+st_bbox_df &lt;- function(x){
+
+  data.frame(xmin = sf::st_bbox(x)[1],
+            xmax = sf::st_bbox(x)[2],
+            ymin = sf::st_bbox(x)[3],
+            ymax = sf::st_bbox(x)[4])
+
+}
+
+library(tidyverse)
+nc |&gt;
+* dplyr::select(geometry)
+```
+]
+ 
+.panel2-feature2-auto[
+
+```
+## Simple feature collection with 100 features and 0 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## Geodetic CRS:  NAD27
+## First 10 features:
+##                          geometry
+## 1  MULTIPOLYGON (((-81.47276 3...
+## 2  MULTIPOLYGON (((-81.23989 3...
+## 3  MULTIPOLYGON (((-80.45634 3...
+## 4  MULTIPOLYGON (((-76.00897 3...
+## 5  MULTIPOLYGON (((-77.21767 3...
+## 6  MULTIPOLYGON (((-76.74506 3...
+## 7  MULTIPOLYGON (((-76.00897 3...
+## 8  MULTIPOLYGON (((-76.56251 3...
+## 9  MULTIPOLYGON (((-78.30876 3...
+## 10 MULTIPOLYGON (((-80.02567 3...
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+st_bbox_df &lt;- function(x){
+
+  data.frame(xmin = sf::st_bbox(x)[1],
+            xmax = sf::st_bbox(x)[2],
+            ymin = sf::st_bbox(x)[3],
+            ymax = sf::st_bbox(x)[4])
+
+}
+
+library(tidyverse)
+nc |&gt;
+  dplyr::select(geometry) |&gt;
+* dplyr::mutate(bb =
+*                 purrr::map(geometry, st_bbox_df))
+```
+]
+ 
+.panel2-feature2-auto[
+
+```
+## Simple feature collection with 100 features and 1 field
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## Geodetic CRS:  NAD27
+## First 10 features:
+##                          geometry                                       bb
+## 1  MULTIPOLYGON (((-81.47276 3... -81.74107, 36.23436, -81.23989, 36.58965
+## 2  MULTIPOLYGON (((-81.23989 3... -81.34754, 36.36536, -80.90344, 36.57286
+## 3  MULTIPOLYGON (((-80.45634 3... -80.96577, 36.23388, -80.43531, 36.56521
+## 4  MULTIPOLYGON (((-76.00897 3... -76.33025, 36.07282, -75.77316, 36.55716
+## 5  MULTIPOLYGON (((-77.21767 3... -77.90121, 36.16277, -77.07531, 36.55629
+## 6  MULTIPOLYGON (((-76.74506 3... -77.21767, 36.23024, -76.70750, 36.55629
+## 7  MULTIPOLYGON (((-76.00897 3... -76.56358, 36.16973, -75.95718, 36.55606
+## 8  MULTIPOLYGON (((-76.56251 3... -76.95367, 36.29452, -76.46035, 36.55525
+## 9  MULTIPOLYGON (((-78.30876 3... -78.32125, 36.19595, -77.89886, 36.55294
+## 10 MULTIPOLYGON (((-80.02567 3... -80.45301, 36.25023, -80.02406, 36.55104
+```
+]
+
+---
+count: false
+ 
+
+.panel1-feature2-auto[
+
+```r
+st_bbox_df &lt;- function(x){
+
+  data.frame(xmin = sf::st_bbox(x)[1],
+            xmax = sf::st_bbox(x)[2],
+            ymin = sf::st_bbox(x)[3],
+            ymax = sf::st_bbox(x)[4])
+
+}
+
+library(tidyverse)
+nc |&gt;
+  dplyr::select(geometry) |&gt;
+  dplyr::mutate(bb =
+                  purrr::map(geometry, st_bbox_df)) |&gt;
+* unnest()
+```
+]
+ 
+.panel2-feature2-auto[
+
+```
+## Simple feature collection with 100 features and 4 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## Geodetic CRS:  NAD27
+## # A tibble: 100 × 5
+##                                                 geometry  xmin  xmax  ymin  ymax
+##                                       &lt;MULTIPOLYGON [°]&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 (((-81.47276 36.23436, -81.54084 36.27251, -81.56198… -81.7  36.2 -81.2  36.6
+##  2 (((-81.23989 36.36536, -81.24069 36.37942, -81.26284… -81.3  36.4 -80.9  36.6
+##  3 (((-80.45634 36.24256, -80.47639 36.25473, -80.53688… -81.0  36.2 -80.4  36.6
+##  4 (((-76.00897 36.3196, -76.01735 36.33773, -76.03288 … -76.3  36.1 -75.8  36.6
+##  5 (((-77.21767 36.24098, -77.23461 36.2146, -77.29861 … -77.9  36.2 -77.1  36.6
+##  6 (((-76.74506 36.23392, -76.98069 36.23024, -76.99475… -77.2  36.2 -76.7  36.6
+##  7 (((-76.00897 36.3196, -75.95718 36.19377, -75.98134 … -76.6  36.2 -76.0  36.6
+##  8 (((-76.56251 36.34057, -76.60424 36.31498, -76.64822… -77.0  36.3 -76.5  36.6
+##  9 (((-78.30876 36.26004, -78.28293 36.29188, -78.32125… -78.3  36.2 -77.9  36.6
+## 10 (((-80.02567 36.25023, -80.45301 36.25709, -80.43531… -80.5  36.3 -80.0  36.6
+## # ℹ 90 more rows
+```
+]
+
+&lt;style&gt;
+.panel1-feature2-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-feature2-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-feature2-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+
+
+
+
+---
+
+### Check out more featurettes
+
+- https://EvaMaeRey.github.io/featurette
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-code{line-height: 1.5; font-size: 100%}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+&lt;/style&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
